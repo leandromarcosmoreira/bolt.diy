@@ -89,7 +89,7 @@ export const ModelSelector = ({
       >
         {modelLoading == 'all' || modelLoading == provider?.name ? (
           <option key={0} value="">
-            Loading...
+            Carregando...
           </option>
         ) : (
           [...modelList]

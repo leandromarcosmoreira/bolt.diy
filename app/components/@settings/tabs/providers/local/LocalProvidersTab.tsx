@@ -27,9 +27,9 @@ const PROVIDER_ICONS: Record<ProviderName, IconType> = {
 
 // Update PROVIDER_DESCRIPTIONS to use the same type
 const PROVIDER_DESCRIPTIONS: Record<ProviderName, string> = {
-  Ollama: 'Run open-source models locally on your machine',
-  LMStudio: 'Local model inference with LM Studio',
-  OpenAILike: 'Connect to OpenAI-compatible API endpoints',
+  Ollama: 'Execute modelos de código aberto localmente na sua máquina',
+  LMStudio: 'Inferência de modelo local com o LM Studio',
+  OpenAILike: 'Conecte-se a endpoints de API compatíveis com o OpenAI',
 };
 
 // Add a constant for the Ollama API base URL
@@ -346,7 +346,7 @@ export default function LocalProvidersTab() {
         )}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        title="Update model"
+        title="Atualizar modelo"
       >
         {model.status === 'updating' ? (
           <div className="flex items-center gap-2">
@@ -369,7 +369,7 @@ export default function LocalProvidersTab() {
         )}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        title="Delete model"
+        title="Excluir modelo"
       >
         <div className="i-ph:trash text-lg" />
       </motion.button>
@@ -406,14 +406,16 @@ export default function LocalProvidersTab() {
             </motion.div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-lg font-semibold text-bolt-elements-textPrimary">Local AI Models</h2>
+                <h2 className="text-lg font-semibold text-bolt-elements-textPrimary">Modelos de IA Locais</h2>
               </div>
-              <p className="text-sm text-bolt-elements-textSecondary">Configure and manage your local AI providers</p>
+              <p className="text-sm text-bolt-elements-textSecondary">
+                Configure e gerencie seus provedores de IA locais
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-sm text-bolt-elements-textSecondary">Enable All</span>
+            <span className="text-sm text-bolt-elements-textSecondary">Ativar Todos</span>
             <Switch
               checked={categoryEnabled}
               onCheckedChange={handleToggleCategory}
@@ -467,7 +469,7 @@ export default function LocalProvidersTab() {
                 <Switch
                   checked={provider.settings.enabled}
                   onCheckedChange={(checked) => handleToggleProvider(provider, checked)}
-                  aria-label={`Toggle ${provider.name} provider`}
+                  aria-label={`Alternar provedor ${provider.name}`}
                 />
               </div>
 
@@ -477,16 +479,16 @@ export default function LocalProvidersTab() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="i-ph:cube-duotone text-purple-500" />
-                      <h4 className="text-sm font-medium text-bolt-elements-textPrimary">Installed Models</h4>
+                      <h4 className="text-sm font-medium text-bolt-elements-textPrimary">Modelos Instalados</h4>
                     </div>
                     {isLoadingModels ? (
                       <div className="flex items-center gap-2">
                         <div className="i-ph:spinner-gap-bold animate-spin w-4 h-4" />
-                        <span className="text-sm text-bolt-elements-textSecondary">Loading models...</span>
+                        <span className="text-sm text-bolt-elements-textSecondary">Carregando modelos...</span>
                       </div>
                     ) : (
                       <span className="text-sm text-bolt-elements-textSecondary">
-                        {ollamaModels.length} models available
+                        {ollamaModels.length} modelos disponíveis
                       </span>
                     )}
                   </div>
@@ -504,8 +506,8 @@ export default function LocalProvidersTab() {
                     ) : ollamaModels.length === 0 ? (
                       <div className="text-center py-8 text-bolt-elements-textSecondary">
                         <div className="i-ph:cube-transparent text-4xl mx-auto mb-2" />
-                        <p>No models installed yet</p>
-                        <p className="text-sm">Install your first model below</p>
+                        <p>Nenhum modelo instalado ainda</p>
+                        <p className="text-sm">Instale seu primeiro modelo abaixo</p>
                       </div>
                     ) : (
                       ollamaModels.map((model) => (
@@ -531,7 +533,7 @@ export default function LocalProvidersTab() {
                               model={model}
                               onUpdate={() => handleUpdateOllamaModel(model.name)}
                               onDelete={() => {
-                                if (window.confirm(`Are you sure you want to delete ${model.name}?`)) {
+                                if (window.confirm(`Tem certeza de que deseja excluir ${model.name}?`)) {
                                   handleDeleteOllamaModel(model.name);
                                 }
                               }}
@@ -563,7 +565,7 @@ export default function LocalProvidersTab() {
 
         {/* Other Providers Section */}
         <div className="border-t border-bolt-elements-borderColor pt-6 mt-8">
-          <h3 className="text-lg font-semibold text-bolt-elements-textPrimary mb-4">Other Local Providers</h3>
+          <h3 className="text-lg font-semibold text-bolt-elements-textPrimary mb-4">Outros Provedores Locais</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredProviders
               .filter((provider) => provider.name !== 'Ollama')
@@ -606,7 +608,7 @@ export default function LocalProvidersTab() {
                             </span>
                             {URL_CONFIGURABLE_PROVIDERS.includes(provider.name) && (
                               <span className="px-2 py-0.5 text-xs rounded-full bg-purple-500/10 text-purple-500">
-                                Configurable
+                                Configurável
                               </span>
                             )}
                           </div>
@@ -619,7 +621,7 @@ export default function LocalProvidersTab() {
                     <Switch
                       checked={provider.settings.enabled}
                       onCheckedChange={(checked) => handleToggleProvider(provider, checked)}
-                      aria-label={`Toggle ${provider.name} provider`}
+                      aria-label={`Alternar provedor ${provider.name}`}
                     />
                   </div>
 
@@ -633,12 +635,12 @@ export default function LocalProvidersTab() {
                         className="mt-4"
                       >
                         <div className="flex flex-col gap-2">
-                          <label className="text-sm text-bolt-elements-textSecondary">API Endpoint</label>
+                          <label className="text-sm text-bolt-elements-textSecondary">Endpoint da API</label>
                           {editingProvider === provider.name ? (
                             <input
                               type="text"
                               defaultValue={provider.settings.baseUrl}
-                              placeholder={`Enter ${provider.name} base URL`}
+                              placeholder={`Digite a URL base do ${provider.name}`}
                               className={classNames(
                                 'w-full px-3 py-2 rounded-lg text-sm',
                                 'bg-bolt-elements-background-depth-3 border border-bolt-elements-borderColor',
@@ -668,7 +670,7 @@ export default function LocalProvidersTab() {
                             >
                               <div className="flex items-center gap-2 text-bolt-elements-textSecondary">
                                 <div className="i-ph:link text-sm" />
-                                <span>{provider.settings.baseUrl || 'Click to set base URL'}</span>
+                                <span>{provider.settings.baseUrl || 'Clique para definir a URL base'}</span>
                               </div>
                             </div>
                           )}

@@ -76,7 +76,7 @@ export const TabManagement = () => {
         userTabs: updatedTabs,
       });
 
-      toast.success(`Tab ${checked ? 'enabled' : 'disabled'} successfully`);
+      toast.success(`A guia ${checked ? 'ativada' : 'desativada'} com sucesso`);
 
       return;
     }
@@ -85,7 +85,7 @@ export const TabManagement = () => {
     const canBeEnabled = DEFAULT_USER_TABS.includes(tabId) || OPTIONAL_USER_TABS.includes(tabId);
 
     if (!canBeEnabled && checked) {
-      toast.error('This tab cannot be enabled in user mode');
+      toast.error('Esta guia não pode ser ativada no modo de usuário');
       return;
     }
 
@@ -105,7 +105,7 @@ export const TabManagement = () => {
     });
 
     // Show success message
-    toast.success(`Tab ${checked ? 'enabled' : 'disabled'} successfully`);
+    toast.success(`Guia ${checked ? 'ativada' : 'desativada'} com sucesso`);
   };
 
   // Create a map of existing tab configurations
@@ -161,7 +161,7 @@ export const TabManagement = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tabs..."
+              placeholder="Pesquisar guias..."
               className={classNames(
                 'w-full pl-10 pr-4 py-2 rounded-lg',
                 'bg-bolt-elements-background-depth-2',

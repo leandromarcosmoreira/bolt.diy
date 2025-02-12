@@ -58,11 +58,11 @@ function StatsDialog({ isOpen, onClose, onConfirm, stats, isLargeRepo }: StatsDi
                     <div className="space-y-2 text-sm text-[#111111] dark:text-white">
                       <div className="flex items-center gap-2">
                         <span className="i-ph:files text-purple-500 w-4 h-4" />
-                        <span>Total Files: {stats.totalFiles}</span>
+                        <span>Total de Arquivos: {stats.totalFiles}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="i-ph:database text-purple-500 w-4 h-4" />
-                        <span>Total Size: {formatSize(stats.totalSize)}</span>
+                        <span>Tamanho Total: {formatSize(stats.totalSize)}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="i-ph:code text-purple-500 w-4 h-4" />
@@ -78,13 +78,13 @@ function StatsDialog({ isOpen, onClose, onConfirm, stats, isLargeRepo }: StatsDi
                       {stats.hasPackageJson && (
                         <div className="flex items-center gap-2">
                           <span className="i-ph:package text-purple-500 w-4 h-4" />
-                          <span>Has package.json</span>
+                          <span>Possui package.json</span>
                         </div>
                       )}
                       {stats.hasDependencies && (
                         <div className="flex items-center gap-2">
                           <span className="i-ph:tree-structure text-purple-500 w-4 h-4" />
-                          <span>Has dependencies</span>
+                          <span>Possui dependências</span>
                         </div>
                       )}
                     </div>
@@ -93,8 +93,8 @@ function StatsDialog({ isOpen, onClose, onConfirm, stats, isLargeRepo }: StatsDi
                     <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-500/10 rounded-lg text-sm flex items-start gap-2">
                       <span className="i-ph:warning text-yellow-600 dark:text-yellow-500 w-4 h-4 flex-shrink-0 mt-0.5" />
                       <div className="text-yellow-800 dark:text-yellow-500">
-                        This repository is quite large ({formatSize(stats.totalSize)}). Importing it might take a while
-                        and could impact performance.
+                        Este repositório é bastante grande ({formatSize(stats.totalSize)}). A importação pode levar
+                        algum tempo e impactar o desempenho.
                       </div>
                     </div>
                   )}
@@ -105,7 +105,7 @@ function StatsDialog({ isOpen, onClose, onConfirm, stats, isLargeRepo }: StatsDi
                   onClick={onClose}
                   className="px-4 py-2 rounded-lg bg-[#F5F5F5] dark:bg-[#333333] text-[#666666] hover:text-[#111111] dark:text-[#999999] dark:hover:text-white transition-colors"
                 >
-                  Cancel
+                  Cancelar
                 </button>
                 <button
                   onClick={onConfirm}
@@ -150,7 +150,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
     const connection = getLocalStorage('github_connection');
 
     if (!connection?.token) {
-      toast.error('Please connect your GitHub account first');
+      toast.error('Por favor, conecte sua conta do GitHub primeiro');
       return;
     }
 
@@ -180,7 +180,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       }
     } catch (error) {
       console.error('Error fetching repos:', error);
-      toast.error('Failed to fetch your repositories');
+      toast.error('Falha ao buscar seus repositórios');
     } finally {
       setIsLoading(false);
     }
@@ -228,7 +228,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       }
     } catch (error) {
       console.error('Error searching repos:', error);
-      toast.error('Failed to search repositories');
+      toast.error('Falha ao pesquisar repositórios');
     } finally {
       setIsLoading(false);
     }
@@ -263,7 +263,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       }
     } catch (error) {
       console.error('Error fetching branches:', error);
-      toast.error('Failed to fetch branches');
+      toast.error('Falha ao buscar branches');
     } finally {
       setIsLoading(false);
     }
@@ -361,7 +361,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       return stats;
     } catch (error) {
       console.error('Error verifying repository:', error);
-      toast.error('Failed to verify repository');
+      toast.error('Falha ao verificar o repositório');
 
       return null;
     }
@@ -395,7 +395,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       setShowStatsDialog(true);
     } catch (error) {
       console.error('Error preparing repository:', error);
-      toast.error('Failed to prepare repository. Please try again.');
+      toast.error('Falha ao preparar o repositório. Por favor, tente novamente.');
     }
   };
 
@@ -441,7 +441,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
         <Dialog.Content className="fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[90vw] md:w-[600px] max-h-[85vh] overflow-hidden bg-white dark:bg-[#1A1A1A] rounded-xl shadow-xl z-[51] border border-[#E5E5E5] dark:border-[#333333]">
           <div className="p-4 border-b border-[#E5E5E5] dark:border-[#333333] flex items-center justify-between">
             <Dialog.Title className="text-lg font-semibold text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary-dark">
-              Import GitHub Repository
+              Importar Repositório do GitHub
             </Dialog.Title>
             <Dialog.Close
               onClick={handleClose}
@@ -462,11 +462,11 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
             <div className="flex gap-2 mb-4">
               <TabButton active={activeTab === 'my-repos'} onClick={() => setActiveTab('my-repos')}>
                 <span className="i-ph:book-bookmark" />
-                My Repos
+                Meus Repositórios
               </TabButton>
               <TabButton active={activeTab === 'search'} onClick={() => setActiveTab('search')}>
                 <span className="i-ph:magnifying-glass" />
-                Search
+                Pesquisar
               </TabButton>
               <TabButton active={activeTab === 'url'} onClick={() => setActiveTab('url')}>
                 <span className="i-ph:link" />
@@ -477,7 +477,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
             {activeTab === 'url' ? (
               <div className="space-y-4">
                 <Input
-                  placeholder="Enter repository URL"
+                  placeholder="Digite a URL do repositório"
                   value={customUrl}
                   onChange={(e) => setCustomUrl(e.target.value)}
                   className={classNames('w-full', {
@@ -489,7 +489,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
                   disabled={!customUrl}
                   className="w-full h-10 px-4 py-2 rounded-lg bg-purple-500 text-white hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 justify-center"
                 >
-                  Import Repository
+                  Importar Repositório
                 </button>
               </div>
             ) : (
@@ -499,7 +499,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
                     <div className="flex gap-2">
                       <input
                         type="text"
-                        placeholder="Search repositories..."
+                        placeholder="Pesquisar repositórios..."
                         value={searchQuery}
                         onChange={(e) => {
                           setSearchQuery(e.target.value);
@@ -517,7 +517,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
                     <div className="grid grid-cols-2 gap-2">
                       <input
                         type="text"
-                        placeholder="Filter by language..."
+                        placeholder="Filtrar por linguagem..."
                         value={filters.language || ''}
                         onChange={(e) => {
                           setFilters({ ...filters, language: e.target.value });
@@ -527,7 +527,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
                       />
                       <input
                         type="number"
-                        placeholder="Min stars..."
+                        placeholder="Mínimo de estrelas..."
                         value={filters.stars || ''}
                         onChange={(e) => handleFilterChange('stars', e.target.value)}
                         className="px-3 py-1.5 text-sm rounded-lg bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333333]"
@@ -535,7 +535,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
                     </div>
                     <input
                       type="number"
-                      placeholder="Min forks..."
+                      placeholder="Mínimo de forks..."
                       value={filters.forks || ''}
                       onChange={(e) => handleFilterChange('forks', e.target.value)}
                       className="px-3 py-1.5 text-sm rounded-lg bg-[#F5F5F5] dark:bg-[#252525] border border-[#E5E5E5] dark:border-[#333333]"
@@ -638,7 +638,7 @@ function RepositoryList({
     return (
       <div className="flex items-center justify-center py-8 text-bolt-elements-textSecondary">
         <span className="i-ph:spinner animate-spin mr-2" />
-        Loading repositories...
+        Carregando repositórios...
       </div>
     );
   }
@@ -647,7 +647,7 @@ function RepositoryList({
     return (
       <div className="flex flex-col items-center justify-center py-8 text-bolt-elements-textSecondary">
         <span className="i-ph:folder-simple-dashed w-12 h-12 mb-2 opacity-50" />
-        <p>{activeTab === 'my-repos' ? 'No repositories found' : 'Search for repositories'}</p>
+        <p>{activeTab === 'my-repos' ? 'Nenhum repositório encontrado' : 'Pesquise por repositórios'}</p>
       </div>
     );
   }
@@ -668,7 +668,7 @@ function RepositoryCard({ repo, onSelect }: { repo: GitHubRepoInfo; onSelect: ()
           className="px-4 py-2 h-10 rounded-lg bg-purple-500 text-white hover:bg-purple-600 transition-all duration-200 flex items-center gap-2 min-w-[120px] justify-center"
         >
           <span className="i-ph:download-simple w-4 h-4" />
-          Import
+          Importar
         </button>
       </div>
       {repo.description && <p className="text-sm text-bolt-elements-textSecondary mb-3">{repo.description}</p>}

@@ -41,14 +41,14 @@ export function CreateBranchDialog({ isOpen, onClose, onConfirm, repository, bra
           )}
         >
           <Dialog.Title className="text-lg font-medium text-bolt-elements-textPrimary mb-4">
-            Create New Branch
+            Criar Nova Branch
           </Dialog.Title>
 
           <form onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
                 <label htmlFor="branchName" className="block text-sm font-medium text-bolt-elements-textSecondary mb-2">
-                  Branch Name
+                  Nome da Branch
                 </label>
                 <input
                   id="branchName"
@@ -72,7 +72,7 @@ export function CreateBranchDialog({ isOpen, onClose, onConfirm, repository, bra
                   htmlFor="sourceBranch"
                   className="block text-sm font-medium text-bolt-elements-textSecondary mb-2"
                 >
-                  Source Branch
+                  Branch de Origem
                 </label>
                 <select
                   id="sourceBranch"
@@ -99,17 +99,16 @@ export function CreateBranchDialog({ isOpen, onClose, onConfirm, repository, bra
                 <ul className="space-y-2 text-sm text-bolt-elements-textSecondary">
                   <li className="flex items-center gap-2">
                     <GitBranch className="text-lg" />
-                    Repository: {repository.name}
+                    Repositório: {repository.name}
                   </li>
                   {branchName && (
                     <li className="flex items-center gap-2">
-                      <div className="i-ph:check-circle text-green-500" />
-                      New branch will be created as: {branchName}
+                      <div className="i-ph:check-circle text-green-500" />A nova branch será criada como: {branchName}
                     </li>
                   )}
                   <li className="flex items-center gap-2">
                     <div className="i-ph:check-circle text-green-500" />
-                    Based on: {sourceBranch}
+                    Baseado em: {sourceBranch}
                   </li>
                 </ul>
               </div>
@@ -128,7 +127,7 @@ export function CreateBranchDialog({ isOpen, onClose, onConfirm, repository, bra
                   'transition-colors',
                 )}
               >
-                Cancel
+                Cancelar
               </button>
               <button
                 type="submit"
@@ -139,7 +138,7 @@ export function CreateBranchDialog({ isOpen, onClose, onConfirm, repository, bra
                   'transition-colors',
                 )}
               >
-                Create Branch
+                Criar Branch
               </button>
             </div>
           </form>

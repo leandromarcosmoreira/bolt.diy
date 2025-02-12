@@ -103,7 +103,7 @@ ${escapeBoltTags(file.content)}
         }
       } catch (error) {
         console.error('Error during import:', error);
-        toast.error('Failed to import repository');
+        toast.error('Falha ao importar o repositório');
         setLoading(false);
         window.location.href = '/';
 
@@ -126,7 +126,7 @@ ${escapeBoltTags(file.content)}
 
     importRepo(url).catch((error) => {
       console.error('Error importing repo:', error);
-      toast.error('Failed to import repository');
+      toast.error('Falha ao importar o repositório');
       setLoading(false);
       window.location.href = '/';
     });

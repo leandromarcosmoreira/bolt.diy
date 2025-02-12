@@ -38,10 +38,10 @@ export default function DataTab() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      toast.success('Chats exported successfully');
+      toast.success('Chats exportados com sucesso');
     } catch (error) {
       console.error('Export error:', error);
-      toast.error('Failed to export chats');
+      toast.error('Falha ao exportar chats');
     }
   };
 
@@ -63,10 +63,10 @@ export default function DataTab() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      toast.success('Settings exported successfully');
+      toast.success('Configurações exportadas com sucesso');
     } catch (error) {
       console.error('Export error:', error);
-      toast.error('Failed to export settings');
+      toast.error('Falha ao exportar configurações');
     }
   };
 
@@ -90,10 +90,10 @@ export default function DataTab() {
       }
 
       window.location.reload(); // Reload to apply settings
-      toast.success('Settings imported successfully');
+      toast.success('Configurações importadas com sucesso');
     } catch (error) {
       console.error('Import error:', error);
-      toast.error('Failed to import settings');
+      toast.error('Falha ao importar configurações');
     }
   };
 
@@ -119,10 +119,10 @@ export default function DataTab() {
         localStorage.setItem(`bolt_${key.toLowerCase()}`, value);
       });
 
-      toast.success('API keys imported successfully');
+      toast.success('Chaves da API importadas com sucesso');
     } catch (error) {
       console.error('Error importing API keys:', error);
-      toast.error('Failed to import API keys');
+      toast.error('Falha ao importar chaves da API');
     } finally {
       setIsImportingKeys(false);
 
@@ -167,10 +167,10 @@ export default function DataTab() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      toast.success('Template downloaded successfully');
+      toast.success('Template baixado com sucesso');
     } catch (error) {
       console.error('Error downloading template:', error);
-      toast.error('Failed to download template');
+      toast.error('Falha ao baixar o template');
     } finally {
       setIsDownloadingTemplate(false);
     }
@@ -200,11 +200,11 @@ export default function DataTab() {
 
       // Then reload and show success message
       window.location.reload();
-      toast.success('Settings reset successfully');
+      toast.success('Configurações restauradas com sucesso');
     } catch (error) {
       console.error('Reset error:', error);
       setShowResetInlineConfirm(false);
-      toast.error('Failed to reset settings');
+      toast.error('Falha ao restaurar configurações');
     } finally {
       setIsResetting(false);
     }
@@ -231,11 +231,11 @@ export default function DataTab() {
       setShowDeleteInlineConfirm(false);
 
       // Then show the success message
-      toast.success('Chat history deleted successfully');
+      toast.success('Histórico de chat deletado com sucesso');
     } catch (error) {
       console.error('Delete error:', error);
       setShowDeleteInlineConfirm(false);
-      toast.error('Failed to delete chat history');
+      toast.error('Falha ao deletar o histórico de chat');
     } finally {
       setIsDeleting(false);
     }
@@ -250,15 +250,15 @@ export default function DataTab() {
           <div className="p-6">
             <div className="flex items-center gap-3">
               <div className="i-ph:warning-circle-fill w-5 h-5 text-yellow-500" />
-              <DialogTitle>Reset All Settings?</DialogTitle>
+              <DialogTitle>Restaurar Todas as Configurações?</DialogTitle>
             </div>
             <p className="text-sm text-bolt-elements-textSecondary mt-2">
-              This will reset all your settings to their default values. This action cannot be undone.
+              Isso restaurará todas as suas configurações para os valores padrão. Esta ação não pode ser desfeita.
             </p>
             <div className="flex justify-end items-center gap-3 mt-6">
               <DialogClose asChild>
                 <button className="px-4 py-2 rounded-lg text-sm bg-[#F5F5F5] dark:bg-[#1A1A1A] text-[#666666] dark:text-[#999999] hover:text-[#333333] dark:hover:text-white">
-                  Cancel
+                  Cancelar
                 </button>
               </DialogClose>
               <motion.button
@@ -273,7 +273,7 @@ export default function DataTab() {
                 ) : (
                   <div className="i-ph:arrow-counter-clockwise w-4 h-4" />
                 )}
-                Reset Settings
+                Restaurar Configurações
               </motion.button>
             </div>
           </div>
@@ -286,15 +286,15 @@ export default function DataTab() {
           <div className="p-6">
             <div className="flex items-center gap-3">
               <div className="i-ph:warning-circle-fill w-5 h-5 text-red-500" />
-              <DialogTitle>Delete All Chats?</DialogTitle>
+              <DialogTitle>Excluir Todos os Chats?</DialogTitle>
             </div>
             <p className="text-sm text-bolt-elements-textSecondary mt-2">
-              This will permanently delete all your chat history. This action cannot be undone.
+              Isso excluirá permanentemente todo o seu histórico de chat. Esta ação não pode ser desfeita.
             </p>
             <div className="flex justify-end items-center gap-3 mt-6">
               <DialogClose asChild>
                 <button className="px-4 py-2 rounded-lg text-sm bg-[#F5F5F5] dark:bg-[#1A1A1A] text-[#666666] dark:text-[#999999] hover:text-[#333333] dark:hover:text-white">
-                  Cancel
+                  Cancelar
                 </button>
               </DialogClose>
               <motion.button
@@ -309,7 +309,7 @@ export default function DataTab() {
                 ) : (
                   <div className="i-ph:trash w-4 h-4" />
                 )}
-                Delete All
+                Excluir Tudo
               </motion.button>
             </div>
           </div>
@@ -325,9 +325,9 @@ export default function DataTab() {
       >
         <div className="flex items-center gap-2 mb-2">
           <div className="i-ph:chat-circle-duotone w-5 h-5 text-purple-500" />
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Chat History</h3>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Histórico de Chat</h3>
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Export or delete all your chat history.</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Exporte ou exclua todo o seu histórico de chat.</p>
         <div className="flex gap-4">
           <motion.button
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500 text-white text-sm hover:bg-purple-600"
@@ -336,7 +336,7 @@ export default function DataTab() {
             onClick={handleExportAllChats}
           >
             <div className="i-ph:download-simple w-4 h-4" />
-            Export All Chats
+            Exportar Todos os Chats
           </motion.button>
           <motion.button
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-50 text-red-500 text-sm hover:bg-red-100 dark:bg-red-500/10 dark:hover:bg-red-500/20"
@@ -345,7 +345,7 @@ export default function DataTab() {
             onClick={() => setShowDeleteInlineConfirm(true)}
           >
             <div className="i-ph:trash w-4 h-4" />
-            Delete All Chats
+            Excluir Todos os Chats
           </motion.button>
         </div>
       </motion.div>
@@ -359,10 +359,11 @@ export default function DataTab() {
       >
         <div className="flex items-center gap-2 mb-2">
           <div className="i-ph:gear-duotone w-5 h-5 text-purple-500" />
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Settings Backup</h3>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Backup de Configurações</h3>
         </div>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Export your settings to a JSON file or import settings from a previously exported file.
+          Exporte suas configurações para um arquivo JSON ou importe configurações de um arquivo exportado
+          anteriormente.
         </p>
         <div className="flex gap-4">
           <motion.button
@@ -372,7 +373,7 @@ export default function DataTab() {
             onClick={handleExportSettings}
           >
             <div className="i-ph:download-simple w-4 h-4" />
-            Export Settings
+            Exportar Configurações
           </motion.button>
           <motion.button
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500 text-white text-sm hover:bg-purple-600"
@@ -381,7 +382,7 @@ export default function DataTab() {
             onClick={() => fileInputRef.current?.click()}
           >
             <div className="i-ph:upload-simple w-4 h-4" />
-            Import Settings
+            Importar Configurações
           </motion.button>
           <motion.button
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-50 text-yellow-600 text-sm hover:bg-yellow-100 dark:bg-yellow-500/10 dark:hover:bg-yellow-500/20 dark:text-yellow-500"
@@ -390,7 +391,7 @@ export default function DataTab() {
             onClick={() => setShowResetInlineConfirm(true)}
           >
             <div className="i-ph:arrow-counter-clockwise w-4 h-4" />
-            Reset Settings
+            Restaurar Configurações
           </motion.button>
         </div>
       </motion.div>
@@ -404,10 +405,10 @@ export default function DataTab() {
       >
         <div className="flex items-center gap-2 mb-2">
           <div className="i-ph:key-duotone w-5 h-5 text-purple-500" />
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">API Keys Management</h3>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white">Gerenciamento de Chaves da API</h3>
         </div>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          Import API keys from a JSON file or download a template to fill in your keys.
+          Importe chaves da API de um arquivo JSON ou baixe um modelo para preencher suas chaves.
         </p>
         <div className="flex gap-4">
           <input
@@ -429,7 +430,7 @@ export default function DataTab() {
             ) : (
               <div className="i-ph:download-simple w-4 h-4" />
             )}
-            Download Template
+            Baixar Modelo
           </motion.button>
           <motion.button
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500 text-white text-sm hover:bg-purple-600"
@@ -443,7 +444,7 @@ export default function DataTab() {
             ) : (
               <div className="i-ph:upload-simple w-4 h-4" />
             )}
-            Import API Keys
+            Importar Chaves da API
           </motion.button>
         </div>
       </motion.div>

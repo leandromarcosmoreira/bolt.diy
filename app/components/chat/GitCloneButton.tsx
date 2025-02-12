@@ -145,7 +145,7 @@ ${escapeBoltTags(file.content)}
       }
     } catch (error) {
       console.error('Error during import:', error);
-      toast.error('Failed to import repository');
+      toast.error('Falha ao importar o repositório');
     } finally {
       setLoading(false);
     }
@@ -155,7 +155,7 @@ ${escapeBoltTags(file.content)}
     <>
       <Button
         onClick={() => setIsDialogOpen(true)}
-        title="Clone a Git Repo"
+        title="Clonar Repositório Git"
         variant="outline"
         size="lg"
         className={classNames(
@@ -170,7 +170,7 @@ ${escapeBoltTags(file.content)}
         disabled={!ready || loading}
       >
         <span className="i-ph:git-branch w-4 h-4" />
-        Clone a Git Repo
+        Clonar Repositório Git
       </Button>
 
       <RepositorySelectionDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} onSelect={handleClone} />

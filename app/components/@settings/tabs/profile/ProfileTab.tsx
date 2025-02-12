@@ -25,19 +25,19 @@ export default function ProfileTab() {
         const base64String = reader.result as string;
         updateProfile({ avatar: base64String });
         setIsUploading(false);
-        toast.success('Profile picture updated');
+        toast.success('Foto de Profile atualizada');
       };
 
       reader.onerror = () => {
         console.error('Error reading file:', reader.error);
         setIsUploading(false);
-        toast.error('Failed to update profile picture');
+        toast.error('Falha na atualização da Foto de Profile');
       };
       reader.readAsDataURL(file);
     } catch (error) {
       console.error('Error uploading avatar:', error);
       setIsUploading(false);
-      toast.error('Failed to update profile picture');
+      toast.error('Falha ao carregar a Foto de Profile');
     }
   };
 
@@ -46,7 +46,7 @@ export default function ProfileTab() {
 
     // Only show toast for completed typing (after 1 second of no typing)
     const debounceToast = setTimeout(() => {
-      toast.success(`${field.charAt(0).toUpperCase() + field.slice(1)} updated`);
+      toast.success(`${field.charAt(0).toUpperCase() + field.slice(1)} atualizado`);
     }, 1000);
 
     return () => clearTimeout(debounceToast);
@@ -111,15 +111,15 @@ export default function ProfileTab() {
 
             <div className="flex-1 pt-1">
               <label className="block text-base font-medium text-gray-900 dark:text-gray-100 mb-1">
-                Profile Picture
+                Foto de Profile
               </label>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Upload a profile picture or avatar</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Upload a Foto de Profile or avatar</p>
             </div>
           </div>
 
-          {/* Username Input */}
+          {/* username Input */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">Username</label>
+            <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">username</label>
             <div className="relative group">
               <div className="absolute left-3.5 top-1/2 -translate-y-1/2">
                 <div className="i-ph:user-circle-fill w-5 h-5 text-gray-400 dark:text-gray-500 transition-colors group-focus-within:text-purple-500" />
@@ -137,7 +137,7 @@ export default function ProfileTab() {
                   'focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50',
                   'transition-all duration-300 ease-out',
                 )}
-                placeholder="Enter your username"
+                placeholder="Digite seu nome de usuário"
               />
             </div>
           </div>
@@ -163,7 +163,7 @@ export default function ProfileTab() {
                   'resize-none',
                   'h-32',
                 )}
-                placeholder="Tell us about yourself"
+                placeholder="Fale sobre você"
               />
             </div>
           </div>

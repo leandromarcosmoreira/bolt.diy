@@ -19,7 +19,7 @@ interface SelectOption {
 const logLevelOptions: SelectOption[] = [
   {
     value: 'all',
-    label: 'All Types',
+    label: 'Todos Tipos',
     icon: 'i-ph:funnel',
     color: '#9333ea',
   },
@@ -37,25 +37,25 @@ const logLevelOptions: SelectOption[] = [
   },
   {
     value: 'error',
-    label: 'Errors',
+    label: 'Erros',
     icon: 'i-ph:warning-circle',
     color: '#ef4444',
   },
   {
     value: 'warning',
-    label: 'Warnings',
+    label: 'Avisos',
     icon: 'i-ph:warning',
     color: '#f59e0b',
   },
   {
     value: 'info',
-    label: 'Info',
+    label: 'Informações',
     icon: 'i-ph:info',
     color: '#3b82f6',
   },
   {
     value: 'debug',
-    label: 'Debug',
+    label: 'Depuração',
     icon: 'i-ph:bug',
     color: '#6b7280',
   },
@@ -136,11 +136,11 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
       return (
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-            <span>Model: {details.model}</span>
+            <span>Modelo: {details.model}</span>
             <span>•</span>
             <span>Tokens: {details.totalTokens}</span>
             <span>•</span>
-            <span>Duration: {details.duration}ms</span>
+            <span>Duração: {details.duration}ms</span>
           </div>
           {details.prompt && (
             <div className="flex flex-col gap-1">
@@ -152,7 +152,7 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
           )}
           {details.response && (
             <div className="flex flex-col gap-1">
-              <div className="text-xs font-medium text-gray-700 dark:text-gray-300">Response:</div>
+              <div className="text-xs font-medium text-gray-700 dark:text-gray-300">Resposta:</div>
               <pre className="text-xs text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 rounded p-2 whitespace-pre-wrap">
                 {details.response}
               </pre>
@@ -175,7 +175,7 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
           <div className="text-xs text-gray-600 dark:text-gray-400 break-all">{details.url}</div>
           {details.request && (
             <div className="flex flex-col gap-1">
-              <div className="text-xs font-medium text-gray-700 dark:text-gray-300">Request:</div>
+              <div className="text-xs font-medium text-gray-700 dark:text-gray-300">Solicitação:</div>
               <pre className="text-xs text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 rounded p-2 whitespace-pre-wrap">
                 {JSON.stringify(details.request, null, 2)}
               </pre>
@@ -183,7 +183,7 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
           )}
           {details.response && (
             <div className="flex flex-col gap-1">
-              <div className="text-xs font-medium text-gray-700 dark:text-gray-300">Response:</div>
+              <div className="text-xs font-medium text-gray-700 dark:text-gray-300">Resposta:</div>
               <pre className="text-xs text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 rounded p-2 whitespace-pre-wrap">
                 {JSON.stringify(details.response, null, 2)}
               </pre>
@@ -191,7 +191,7 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
           )}
           {details.error && (
             <div className="flex flex-col gap-1">
-              <div className="text-xs font-medium text-red-500">Error:</div>
+              <div className="text-xs font-medium text-red-500">Erro:</div>
               <pre className="text-xs text-red-400 bg-red-50 dark:bg-red-500/10 rounded p-2 whitespace-pre-wrap">
                 {JSON.stringify(details.error, null, 2)}
               </pre>
@@ -296,7 +296,7 @@ export function EventLogsTab() {
 
     logStore.logInfo('Event Logs tab mounted', {
       type: 'component_mount',
-      message: 'Event Logs tab component mounted',
+      message: 'Componente da aba de Logs de Eventos montado',
       component: 'EventLogsTab',
     });
 
@@ -311,7 +311,7 @@ export function EventLogsTab() {
     (newLevel: string) => {
       logStore.logInfo('Log level filter changed', {
         type: 'filter_change',
-        message: `Log level filter changed from ${selectedLevel} to ${newLevel}`,
+        message: `Filtro de nível de log alterado de ${selectedLevel} para ${newLevel}`,
         component: 'EventLogsTab',
         previousLevel: selectedLevel,
         newLevel,
@@ -328,7 +328,7 @@ export function EventLogsTab() {
       if (searchQuery) {
         logStore.logInfo('Log search performed', {
           type: 'search',
-          message: `Search performed with query "${searchQuery}" (${filteredLogs.length} results)`,
+          message: `Busca realizada com a consulta "${searchQuery}" (${filteredLogs.length} resultados)`,
           component: 'EventLogsTab',
           query: searchQuery,
           resultsCount: filteredLogs.length,
@@ -351,7 +351,7 @@ export function EventLogsTab() {
 
       logStore.logSuccess('Logs refreshed successfully', {
         type: 'refresh',
-        message: `Successfully refreshed ${Object.keys(logs).length} logs`,
+        message: `Logs ${Object.keys(logs).length} atualizados com sucesso`,
         component: 'EventLogsTab',
         duration,
         logsCount: Object.keys(logs).length,
@@ -359,7 +359,7 @@ export function EventLogsTab() {
     } catch (error) {
       logStore.logError('Failed to refresh logs', error, {
         type: 'refresh_error',
-        message: 'Failed to refresh logs',
+        message: 'Falha ao atualizar os logs',
         component: 'EventLogsTab',
       });
     } finally {
@@ -371,7 +371,7 @@ export function EventLogsTab() {
   const handlePreferenceChange = useCallback((type: string, value: boolean) => {
     logStore.logInfo('Log preference changed', {
       type: 'preference_change',
-      message: `Log preference "${type}" changed to ${value}`,
+      message: `Preferência de log "${type}" alterada para ${value}`,
       component: 'EventLogsTab',
       preference: type,
       value,
@@ -433,10 +433,10 @@ export function EventLogsTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Event logs exported successfully as JSON');
+      toast.success('Logs de eventos exportados com sucesso como JSON');
     } catch (error) {
       console.error('Failed to export JSON:', error);
-      toast.error('Failed to export event logs as JSON');
+      toast.error('Falha ao exportar logs de eventos como JSON');
     }
   };
 
@@ -467,10 +467,10 @@ export function EventLogsTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Event logs exported successfully as CSV');
+      toast.success('Logs de eventos exportados com sucesso como CSV');
     } catch (error) {
       console.error('Failed to export CSV:', error);
-      toast.error('Failed to export event logs as CSV');
+      toast.error('Falha ao exportar logs de eventos como CSV');
     }
   };
 
@@ -512,7 +512,7 @@ export function EventLogsTab() {
       // Add subtitle with bolt.diy
       doc.setFontSize(12);
       doc.setFont('helvetica', 'normal');
-      doc.text('bolt.diy - AI Development Platform', margin, 45);
+      doc.text('bolt.diy - Plataforma de Desenvolvimento de IA', margin, 45);
       yPos = 70;
 
       // Add report summary section
@@ -523,11 +523,11 @@ export function EventLogsTab() {
       doc.setTextColor('#374151');
 
       const summaryItems = [
-        { label: 'Generated', value: new Date().toLocaleString() },
-        { label: 'Total Logs', value: filteredLogs.length.toString() },
-        { label: 'Filter Applied', value: selectedLevel === 'all' ? 'All Types' : selectedLevel },
-        { label: 'Search Query', value: searchQuery || 'None' },
-        { label: 'Time Format', value: use24Hour ? '24-hour' : '12-hour' },
+        { label: 'Gerado', value: new Date().toLocaleString() },
+        { label: 'Total de Logs', value: filteredLogs.length.toString() },
+        { label: 'Filtro Aplicado', value: selectedLevel === 'all' ? 'Todos os Tipos' : selectedLevel },
+        { label: 'Consulta de Pesquisa', value: searchQuery || 'Nenhuma' },
+        { label: 'Formato de Hora', value: use24Hour ? '24 horas' : '12 horas' },
       ];
 
       summaryItems.forEach((item) => {
@@ -555,15 +555,15 @@ export function EventLogsTab() {
 
       // Create two columns for statistics
       const leftStats = [
-        { label: 'Error Logs', value: stats.error, color: '#DC2626' },
-        { label: 'Warning Logs', value: stats.warning, color: '#F59E0B' },
-        { label: 'Info Logs', value: stats.info, color: '#3B82F6' },
+        { label: 'Logs de Erro', value: stats.error, color: '#DC2626' },
+        { label: 'Logs de Aviso', value: stats.warning, color: '#F59E0B' },
+        { label: 'Logs de Informações', value: stats.info, color: '#3B82F6' },
       ];
 
       const rightStats = [
-        { label: 'Debug Logs', value: stats.debug, color: '#6B7280' },
-        { label: 'LLM Logs', value: stats.provider, color: '#10B981' },
-        { label: 'API Logs', value: stats.api, color: '#3B82F6' },
+        { label: 'Logs de Depuração', value: stats.debug, color: '#6B7280' },
+        { label: 'Logs de LLM', value: stats.provider, color: '#10B981' },
+        { label: 'Logs de API', value: stats.api, color: '#3B82F6' },
       ];
 
       const colWidth = (pageWidth - 2 * margin) / 2;
@@ -704,12 +704,12 @@ export function EventLogsTab() {
         doc.setTextColor('#9CA3AF');
 
         // Add page numbers
-        doc.text(`Page ${i} of ${totalPages}`, pageWidth / 2, doc.internal.pageSize.getHeight() - 10, {
+        doc.text(`Página ${i} de ${totalPages}`, pageWidth / 2, doc.internal.pageSize.getHeight() - 10, {
           align: 'center',
         });
 
         // Add footer text
-        doc.text('Generated by bolt.diy', margin, doc.internal.pageSize.getHeight() - 10);
+        doc.text('Gerado por bolt.diy', margin, doc.internal.pageSize.getHeight() - 10);
 
         const dateStr = new Date().toLocaleDateString();
         doc.text(dateStr, pageWidth - margin, doc.internal.pageSize.getHeight() - 10, { align: 'right' });
@@ -717,10 +717,10 @@ export function EventLogsTab() {
 
       // Save the PDF
       doc.save(`bolt-event-logs-${new Date().toISOString()}.pdf`);
-      toast.success('Event logs exported successfully as PDF');
+      toast.success('Logs de eventos exportados com sucesso como PDF');
     } catch (error) {
-      console.error('Failed to export PDF:', error);
-      toast.error('Failed to export event logs as PDF');
+      console.error('Falha ao exportar PDF:', error);
+      toast.error('Falha ao exportar logs de eventos como PDF');
     }
   };
 
@@ -732,11 +732,11 @@ export function EventLogsTab() {
           let content = `[${timestamp}] ${log.level.toUpperCase()}: ${log.message}\n`;
 
           if (log.category) {
-            content += `Category: ${log.category}\n`;
+            content += `Categoria: ${log.category}\n`;
           }
 
           if (log.details) {
-            content += `Details:\n${JSON.stringify(log.details, null, 2)}\n`;
+            content += `Detalhes:\n${JSON.stringify(log.details, null, 2)}\n`;
           }
 
           return content + '-'.repeat(80) + '\n';
@@ -752,35 +752,35 @@ export function EventLogsTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Event logs exported successfully as text file');
+      toast.success('Logs de eventos exportados com sucesso como arquivo de texto');
     } catch (error) {
       console.error('Failed to export text file:', error);
-      toast.error('Failed to export event logs as text file');
+      toast.error('Falha ao exportar logs de eventos como arquivo de texto');
     }
   };
 
   const exportFormats: ExportFormat[] = [
     {
       id: 'json',
-      label: 'Export as JSON',
+      label: 'Exportar como JSON',
       icon: 'i-ph:file-json',
       handler: exportAsJSON,
     },
     {
       id: 'csv',
-      label: 'Export as CSV',
+      label: 'Exportar como CSV',
       icon: 'i-ph:file-csv',
       handler: exportAsCSV,
     },
     {
       id: 'pdf',
-      label: 'Export as PDF',
+      label: 'Exportar como PDF',
       icon: 'i-ph:file-pdf',
       handler: exportAsPDF,
     },
     {
       id: 'txt',
-      label: 'Export as Text',
+      label: 'Exportar como Texto',
       icon: 'i-ph:file-text',
       handler: exportAsText,
     },
@@ -813,14 +813,14 @@ export function EventLogsTab() {
           )}
         >
           <span className="i-ph:download text-lg text-gray-500 dark:text-gray-400 group-hover:text-purple-500 transition-colors" />
-          Export
+          Exportar
         </button>
 
         <Dialog showCloseButton>
           <div className="p-6">
             <DialogTitle className="flex items-center gap-2">
               <div className="i-ph:download w-5 h-5" />
-              Export Event Logs
+              Exportar Logs de Eventos
             </DialogTitle>
 
             <div className="mt-4 flex flex-col gap-2">
@@ -841,10 +841,10 @@ export function EventLogsTab() {
                   <div>
                     <div className="font-medium">{format.label}</div>
                     <div className="text-xs text-bolt-elements-textSecondary mt-0.5">
-                      {format.id === 'json' && 'Export as a structured JSON file'}
-                      {format.id === 'csv' && 'Export as a CSV spreadsheet'}
-                      {format.id === 'pdf' && 'Export as a formatted PDF document'}
-                      {format.id === 'txt' && 'Export as a formatted text file'}
+                      {format.id === 'json' && 'Exportar como um arquivo JSON estruturado'}
+                      {format.id === 'csv' && 'Exportar como uma planilha CSV'}
+                      {format.id === 'pdf' && 'Exportar como um documento PDF formatado'}
+                      {format.id === 'txt' && 'Exportar como um arquivo de texto formatado'}
                     </div>
                   </div>
                 </button>
@@ -914,7 +914,7 @@ export function EventLogsTab() {
               onCheckedChange={(value) => handlePreferenceChange('timestamps', value)}
               className="data-[state=checked]:bg-purple-500"
             />
-            <span className="text-sm text-gray-500 dark:text-gray-400">Show Timestamps</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">Exibir Timestamps</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -923,7 +923,7 @@ export function EventLogsTab() {
               onCheckedChange={(value) => handlePreferenceChange('24hour', value)}
               className="data-[state=checked]:bg-purple-500"
             />
-            <span className="text-sm text-gray-500 dark:text-gray-400">24h Time</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">Hora 24h</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -932,7 +932,7 @@ export function EventLogsTab() {
               onCheckedChange={(value) => handlePreferenceChange('autoExpand', value)}
               className="data-[state=checked]:bg-purple-500"
             />
-            <span className="text-sm text-gray-500 dark:text-gray-400">Auto Expand</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">Expansão Automática</span>
           </div>
 
           <div className="w-px h-4 bg-gray-200 dark:bg-gray-700" />
@@ -951,7 +951,7 @@ export function EventLogsTab() {
             )}
           >
             <span className="i-ph:arrows-clockwise text-lg text-gray-500 dark:text-gray-400 group-hover:text-purple-500 transition-colors" />
-            Refresh
+            Atualizar
           </button>
 
           <ExportButton />
@@ -962,7 +962,7 @@ export function EventLogsTab() {
         <div className="relative">
           <input
             type="text"
-            placeholder="Search logs..."
+            placeholder="Pesquisar logs..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className={classNames(

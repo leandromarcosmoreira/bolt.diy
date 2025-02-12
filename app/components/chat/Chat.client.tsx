@@ -168,7 +168,7 @@ export const ChatImpl = memo(
           error: e.message,
         });
         toast.error(
-          'There was an error processing your request: ' + (e.message ? e.message : 'No details were returned'),
+          'Ocorreu um erro ao processar sua solicitação: ' + (e.message ? e.message : 'Nenhum detalhe foi retornado'),
         );
       },
       onFinish: (message, response) => {

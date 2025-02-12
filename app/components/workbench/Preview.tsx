@@ -297,32 +297,32 @@ export const Preview = memo(() => {
           <IconButton
             icon="i-ph:devices"
             onClick={toggleDeviceMode}
-            title={isDeviceModeOn ? 'Switch to Responsive Mode' : 'Switch to Device Mode'}
+            title={isDeviceModeOn ? 'Mudar para o Modo Responsivo' : 'Mudar para o Modo de Dispositivo'}
           />
 
           <IconButton
             icon="i-ph:layout-light"
             onClick={() => setIsPreviewOnly(!isPreviewOnly)}
-            title={isPreviewOnly ? 'Show Full Interface' : 'Show Preview Only'}
+            title={isPreviewOnly ? 'Mostrar Interface Completa' : 'Mostrar Apenas Pré-visualização'}
           />
 
           <IconButton
             icon={isFullscreen ? 'i-ph:arrows-in' : 'i-ph:arrows-out'}
             onClick={toggleFullscreen}
-            title={isFullscreen ? 'Exit Full Screen' : 'Full Screen'}
+            title={isFullscreen ? 'Sair do Modo Tela Cheia' : 'Modo Tela Cheia'}
           />
 
           <div className="flex items-center relative">
             <IconButton
               icon="i-ph:arrow-square-out"
               onClick={() => openInNewWindow(selectedWindowSize)}
-              title={`Open Preview in ${selectedWindowSize.name} Window`}
+              title={`Abrir Pré-visualização na Janela ${selectedWindowSize.name}`}
             />
             <IconButton
               icon="i-ph:caret-down"
               onClick={() => setIsWindowSizeDropdownOpen(!isWindowSizeDropdownOpen)}
               className="ml-1"
-              title="Select Window Size"
+              title="Selecionar Tamanho da Janela"
             />
 
             {isWindowSizeDropdownOpen && (
@@ -374,7 +374,7 @@ export const Preview = memo(() => {
             <>
               <iframe
                 ref={iframeRef}
-                title="preview"
+                title="pré-visualização"
                 className="border-none w-full h-full bg-bolt-elements-background-depth-1"
                 src={iframeUrl}
                 sandbox="allow-scripts allow-forms allow-popups allow-modals allow-storage-access-by-user-activation allow-same-origin"
@@ -413,7 +413,7 @@ export const Preview = memo(() => {
                 }}
                 onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.5)')}
                 onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.2)')}
-                title="Drag to resize width"
+                title="Arraste para redimensionar a largura"
               >
                 <GripIcon />
               </div>
@@ -437,7 +437,7 @@ export const Preview = memo(() => {
                 }}
                 onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.5)')}
                 onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,.2)')}
-                title="Drag to resize width"
+                title="Arraste para redimensionar a largura"
               >
                 <GripIcon />
               </div>

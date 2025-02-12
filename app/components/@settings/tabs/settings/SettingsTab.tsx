@@ -84,10 +84,10 @@ export default function SettingsTab() {
       };
 
       localStorage.setItem('bolt_user_profile', JSON.stringify(updatedProfile));
-      toast.success('Settings updated');
+      toast.success('Configurações atualizadas');
     } catch (error) {
       console.error('Error saving settings:', error);
-      toast.error('Failed to update settings');
+      toast.error('Falha ao atualizar as configurações');
     }
   }, [settings]);
 
@@ -204,7 +204,7 @@ export default function SettingsTab() {
                   }),
                 );
 
-                toast.success(`Notifications ${checked ? 'enabled' : 'disabled'}`);
+                toast.success(`Notificações ${checked ? 'ativadas' : 'desativadas'}`);
               }}
             />
           </div>

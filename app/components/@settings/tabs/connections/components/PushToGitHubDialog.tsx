@@ -61,7 +61,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
   const fetchRecentRepos = async (token: string) => {
     if (!token) {
       logStore.logError('No GitHub token available');
-      toast.error('GitHub authentication required');
+      toast.error('Autenticação do GitHub requerida');
 
       return;
     }
@@ -83,7 +83,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
         const errorData = await response.json().catch(() => ({}));
 
         if (response.status === 401) {
-          toast.error('GitHub token expired. Please reconnect your account.');
+          toast.error('Token do GitHub expirado. Por favor, reconecte sua conta.');
 
           // Clear invalid token
           const connection = getLocalStorage('github_connection');
@@ -98,7 +98,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
             statusText: response.statusText,
             error: errorData,
           });
-          toast.error(`Failed to fetch repositories: ${response.statusText}`);
+          toast.error(`Falha ao buscar repositórios: ${response.statusText}`);
         }
 
         return;
@@ -108,7 +108,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
       setRecentRepos(repos);
     } catch (error) {
       logStore.logError('Failed to fetch GitHub repositories', { error });
-      toast.error('Failed to fetch recent repositories');
+      toast.error('Falha ao buscar repositórios recentes');
     } finally {
       setIsFetchingRepos(false);
     }
@@ -120,12 +120,12 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
     const connection = getLocalStorage('github_connection');
 
     if (!connection?.token || !connection?.user) {
-      toast.error('Please connect your GitHub account in Settings > Connections first');
+      toast.error('Por favor, conecte sua conta do GitHub em Configurações > Conexões primeiro');
       return;
     }
 
     if (!repoName.trim()) {
-      toast.error('Repository name is required');
+      toast.error('O nome do repositório é obrigatório');
       return;
     }
 
@@ -143,7 +143,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
 
         // If we get here, the repo exists
         const confirmOverwrite = window.confirm(
-          `Repository "${repoName}" already exists. Do you want to update it? This will add or modify files in the repository.`,
+          `O repositório "${repoName}" já existe. Deseja atualizá-lo? Isso adicionará ou modificará arquivos no repositório.`,
         );
 
         if (!confirmOverwrite) {
@@ -173,7 +173,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
       setShowSuccessDialog(true);
     } catch (error) {
       console.error('Error pushing to GitHub:', error);
-      toast.error('Failed to push to GitHub. Please check your repository name and try again.');
+      toast.error('Falha ao enviar para o GitHub. Verifique o nome do repositório e tente novamente.');
     } finally {
       setIsLoading(false);
     }
@@ -218,7 +218,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
 
                   <div className="bg-bolt-elements-background-depth-2 dark:bg-bolt-elements-background-depth-3 rounded-lg p-3 text-left">
                     <p className="text-xs text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary-dark mb-2">
-                      Repository URL
+                      URL do Repositório
                     </p>
                     <div className="flex items-center gap-2">
                       <code className="flex-1 text-sm bg-bolt-elements-background dark:bg-bolt-elements-background-dark px-3 py-2 rounded border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor-dark text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary-dark font-mono">
@@ -227,7 +227,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                       <motion.button
                         onClick={() => {
                           navigator.clipboard.writeText(createdRepoUrl);
-                          toast.success('URL copied to clipboard');
+                          toast.success('URL copiada para a área de transferência');
                         }}
                         className="p-2 text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary dark:text-bolt-elements-textSecondary-dark dark:hover:text-bolt-elements-textPrimary-dark"
                         whileHover={{ scale: 1.1 }}
@@ -240,7 +240,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
 
                   <div className="bg-bolt-elements-background-depth-2 dark:bg-bolt-elements-background-depth-3 rounded-lg p-3">
                     <p className="text-xs text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary-dark mb-2">
-                      Pushed Files ({pushedFiles.length})
+                      Arquivos Enviados ({pushedFiles.length})
                     </p>
                     <div className="max-h-[200px] overflow-y-auto custom-scrollbar">
                       {pushedFiles.map((file) => (
@@ -267,19 +267,19 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                       whileTap={{ scale: 0.98 }}
                     >
                       <div className="i-ph:github-logo w-4 h-4" />
-                      View Repository
+                      Ver Repositório
                     </motion.a>
                     <motion.button
                       onClick={() => {
                         navigator.clipboard.writeText(createdRepoUrl);
-                        toast.success('URL copied to clipboard');
+                        toast.success('URL copiada para a área de transferência');
                       }}
                       className="px-4 py-2 rounded-lg bg-[#F5F5F5] dark:bg-[#1A1A1A] text-gray-600 dark:text-gray-400 hover:bg-[#E5E5E5] dark:hover:bg-[#252525] text-sm inline-flex items-center gap-2"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       <div className="i-ph:copy w-4 h-4" />
-                      Copy URL
+                      Copiar URL
                     </motion.button>
                     <motion.button
                       onClick={handleClose}
@@ -287,7 +287,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      Close
+                      Fechar
                     </motion.button>
                   </div>
                 </div>
@@ -324,7 +324,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                   </motion.div>
                   <h3 className="text-lg font-medium text-gray-900 dark:text-white">GitHub Connection Required</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Please connect your GitHub account in Settings {'>'} Connections to push your code to GitHub.
+                    Conecte sua conta do GitHub em Configurações {'>'} Conexões para enviar seu código para o GitHub.
                   </p>
                   <motion.button
                     className="px-4 py-2 rounded-lg bg-purple-500 text-white text-sm hover:bg-purple-600 inline-flex items-center gap-2"
@@ -333,7 +333,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                     onClick={handleClose}
                   >
                     <div className="i-ph:x-circle" />
-                    Close
+                    Fechar
                   </motion.button>
                 </div>
               </Dialog.Content>
@@ -369,10 +369,10 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                   </motion.div>
                   <div>
                     <Dialog.Title className="text-lg font-medium text-gray-900 dark:text-white">
-                      Push to GitHub
+                      Enviar para o GitHub
                     </Dialog.Title>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Push your code to a new or existing GitHub repository
+                      Envie seu código para um repositório novo ou existente no GitHub
                     </p>
                   </div>
                   <Dialog.Close
@@ -394,7 +394,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
                     <label htmlFor="repoName" className="text-sm text-gray-600 dark:text-gray-400">
-                      Repository Name
+                      Nome do Repositório
                     </label>
                     <input
                       id="repoName"
@@ -429,7 +429,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                               </div>
                               {repo.private && (
                                 <span className="text-xs px-2 py-1 rounded-full bg-purple-500/10 text-purple-500">
-                                  Private
+                                  Privado
                                 </span>
                               )}
                             </div>
@@ -467,7 +467,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                   {isFetchingRepos && (
                     <div className="flex items-center justify-center py-4 text-gray-500 dark:text-gray-400">
                       <div className="i-ph:spinner-gap-bold animate-spin w-4 h-4 mr-2" />
-                      Loading repositories...
+                      Carregando repositórios...
                     </div>
                   )}
 
@@ -480,7 +480,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                       className="rounded border-[#E5E5E5] dark:border-[#1A1A1A] text-purple-500 focus:ring-purple-500 dark:bg-[#0A0A0A]"
                     />
                     <label htmlFor="private" className="text-sm text-gray-600 dark:text-gray-400">
-                      Make repository private
+                      Tornar repositório privado
                     </label>
                   </div>
 
@@ -492,7 +492,7 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      Cancel
+                      Cancelar
                     </motion.button>
                     <motion.button
                       type="submit"
@@ -507,12 +507,12 @@ export function PushToGitHubDialog({ isOpen, onClose, onPush }: PushToGitHubDial
                       {isLoading ? (
                         <>
                           <div className="i-ph:spinner-gap-bold animate-spin w-4 h-4" />
-                          Pushing...
+                          Enviando...
                         </>
                       ) : (
                         <>
                           <div className="i-ph:git-branch w-4 h-4" />
-                          Push to GitHub
+                          Enviar para o GitHub
                         </>
                       )}
                     </motion.button>

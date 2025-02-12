@@ -35,14 +35,14 @@ export const Messages = forwardRef<HTMLDivElement, MessagesProps>(
     const handleFork = async (messageId: string) => {
       try {
         if (!db || !chatId.get()) {
-          toast.error('Chat persistence is not available');
+          toast.error('A persistência de chat não está disponível');
           return;
         }
 
         const urlId = await forkChat(db, chatId.get()!, messageId);
         window.location.href = `/chat/${urlId}`;
       } catch (error) {
-        toast.error('Failed to fork chat: ' + (error as Error).message);
+        toast.error('Falha ao bifurcar o chat: ' + (error as Error).message);
       }
     };
 

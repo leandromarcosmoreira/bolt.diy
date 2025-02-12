@@ -420,7 +420,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
                 'focus:outline-none focus:ring-2 focus:ring-purple-500/30',
                 'transition-all duration-200',
               )}
-              placeholder="Search models or enter custom model name..."
+              placeholder="Pesquisar modelos ou digitar o nome do modelo personalizado..."
               value={searchQuery || modelString}
               onChange={(e) => {
                 const value = e.target.value;

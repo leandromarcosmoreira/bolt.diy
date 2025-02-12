@@ -52,8 +52,8 @@ const PROVIDER_ICONS: Record<ProviderName, IconType> = {
 
 // Update PROVIDER_DESCRIPTIONS to use the same type
 const PROVIDER_DESCRIPTIONS: Partial<Record<ProviderName, string>> = {
-  Anthropic: 'Access Claude and other Anthropic models',
-  OpenAI: 'Use GPT-4, GPT-3.5, and other OpenAI models',
+  Anthropic: 'Acesse Claude e outros modelos da Anthropic',
+  OpenAI: 'Use GPT-4, GPT-3.5 e outros modelos da OpenAI',
 };
 
 const CloudProvidersTab = () => {
@@ -92,7 +92,7 @@ const CloudProvidersTab = () => {
       });
 
       setCategoryEnabled(enabled);
-      toast.success(enabled ? 'All cloud providers enabled' : 'All cloud providers disabled');
+      toast.success(enabled ? 'Todos os provedores de nuvem ativados' : 'Todos os provedores de nuvem desativados');
     },
     [filteredProviders, settings],
   );
@@ -104,10 +104,10 @@ const CloudProvidersTab = () => {
 
       if (enabled) {
         logStore.logProvider(`Provider ${provider.name} enabled`, { provider: provider.name });
-        toast.success(`${provider.name} enabled`);
+        toast.success(`${provider.name} ativado`);
       } else {
         logStore.logProvider(`Provider ${provider.name} disabled`, { provider: provider.name });
-        toast.success(`${provider.name} disabled`);
+        toast.success(`${provider.name} desativado`);
       }
     },
     [settings],
@@ -124,7 +124,7 @@ const CloudProvidersTab = () => {
         provider: provider.name,
         baseUrl: newBaseUrl,
       });
-      toast.success(`${provider.name} base URL updated`);
+      toast.success(`${provider.name} URL base atualizada`);
       setEditingProvider(null);
     },
     [settings],
@@ -150,13 +150,15 @@ const CloudProvidersTab = () => {
               <TbCloudComputing className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-md font-medium text-bolt-elements-textPrimary">Cloud Providers</h4>
-              <p className="text-sm text-bolt-elements-textSecondary">Connect to cloud-based AI models and services</p>
+              <h4 className="text-md font-medium text-bolt-elements-textPrimary">Provedores de Nuvem</h4>
+              <p className="text-sm text-bolt-elements-textSecondary">
+                Conecte-se a modelos e serviços de IA baseados em nuvem
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-sm text-bolt-elements-textSecondary">Enable All Cloud</span>
+            <span className="text-sm text-bolt-elements-textSecondary">Ativar Todos os Provedores de Nuvem</span>
             <Switch checked={categoryEnabled} onCheckedChange={handleToggleCategory} />
           </div>
         </div>
@@ -185,7 +187,7 @@ const CloudProvidersTab = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    Configurable
+                    Configurável
                   </motion.span>
                 )}
               </div>
@@ -218,8 +220,8 @@ const CloudProvidersTab = () => {
                       <p className="text-xs text-bolt-elements-textSecondary mt-0.5">
                         {PROVIDER_DESCRIPTIONS[provider.name as keyof typeof PROVIDER_DESCRIPTIONS] ||
                           (URL_CONFIGURABLE_PROVIDERS.includes(provider.name)
-                            ? 'Configure custom endpoint for this provider'
-                            : 'Standard AI provider integration')}
+                            ? 'Configure o endpoint personalizado para este provedor'
+                            : 'Integração padrão com provedor de IA')}
                       </p>
                     </div>
                     <Switch
@@ -240,7 +242,7 @@ const CloudProvidersTab = () => {
                           <input
                             type="text"
                             defaultValue={provider.settings.baseUrl}
-                            placeholder={`Enter ${provider.name} base URL`}
+                            placeholder={`Digite a URL base do ${provider.name}`}
                             className={classNames(
                               'flex-1 px-3 py-1.5 rounded-lg text-sm',
                               'bg-bolt-elements-background-depth-3 border border-bolt-elements-borderColor',
@@ -266,7 +268,7 @@ const CloudProvidersTab = () => {
                             <div className="flex items-center gap-2 text-bolt-elements-textSecondary">
                               <div className="i-ph:link text-sm" />
                               <span className="group-hover/url:text-purple-500 transition-colors">
-                                {provider.settings.baseUrl || 'Click to set base URL'}
+                                {provider.settings.baseUrl || 'Clique para definir a URL base'}
                               </span>
                             </div>
                           </div>
@@ -277,7 +279,7 @@ const CloudProvidersTab = () => {
                         <div className="mt-2 text-xs text-green-500">
                           <div className="flex items-center gap-1">
                             <div className="i-ph:info" />
-                            <span>Environment URL set in .env file</span>
+                            <span>URL do ambiente definida no arquivo .env</span>
                           </div>
                         </div>
                       )}

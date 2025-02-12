@@ -197,7 +197,7 @@ const UpdateTab = () => {
 
               if (!progress.error) {
                 // Update check completed
-                toast.success('Update check completed');
+                toast.success('Verificação de atualização concluída');
 
                 // Show update dialog only if there are changes and auto-update is disabled
                 if (progress.details?.changedFiles?.length && progress.details.updateReady) {
@@ -267,11 +267,11 @@ const UpdateTab = () => {
 
             if (progress.error) {
               setError(progress.error);
-              toast.error('Update failed');
+              toast.error('Atualização falhou');
             }
 
             if (progress.stage === 'complete' && !progress.error) {
-              toast.success('Update completed successfully');
+              toast.success('Atualização concluída com sucesso');
             }
           } catch (e) {
             console.error('Error parsing update progress:', e);
@@ -280,7 +280,7 @@ const UpdateTab = () => {
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Unknown error occurred');
-      toast.error('Update failed');
+      toast.error('Atualização falhou');
     }
   };
 
@@ -613,7 +613,7 @@ const UpdateTab = () => {
           </DialogDescription>
           <div className="flex justify-end gap-2 mt-6">
             <DialogButton type="secondary" onClick={() => setShowUpdateDialog(false)}>
-              Cancel
+              Cancelar
             </DialogButton>
             <DialogButton type="primary" onClick={handleUpdate}>
               Update Now

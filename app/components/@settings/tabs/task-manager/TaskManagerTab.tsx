@@ -168,8 +168,8 @@ const ENERGY_COSTS = {
 // Default power profiles
 const POWER_PROFILES: PowerProfile[] = [
   {
-    name: 'Performance',
-    description: 'Maximum performance with frequent updates',
+    name: 'Desempenho',
+    description: 'Desempenho máximo com atualizações frequentes',
     settings: {
       updateInterval: UPDATE_INTERVALS.normal.metrics,
       enableAnimations: true,
@@ -178,8 +178,8 @@ const POWER_PROFILES: PowerProfile[] = [
     },
   },
   {
-    name: 'Balanced',
-    description: 'Optimal balance between performance and energy efficiency',
+    name: 'Equilibrado',
+    description: 'Equilíbrio ideal entre desempenho e eficiência energética',
     settings: {
       updateInterval: 2000,
       enableAnimations: true,
@@ -188,8 +188,8 @@ const POWER_PROFILES: PowerProfile[] = [
     },
   },
   {
-    name: 'Energy Saver',
-    description: 'Maximum energy efficiency with reduced updates',
+    name: 'Economia de Energia',
+    description: 'Máxima eficiência energética com atualizações reduzidas',
     settings: {
       updateInterval: UPDATE_INTERVALS.energySaver.metrics,
       enableAnimations: false,
@@ -469,14 +469,16 @@ const TaskManagerTab: React.FC = () => {
   const handleEnergySaverChange = (checked: boolean) => {
     setEnergySaverMode(checked);
     localStorage.setItem('energySaverMode', JSON.stringify(checked));
-    toast.success(checked ? 'Energy Saver mode enabled' : 'Energy Saver mode disabled');
+    toast.success(checked ? 'Modo Economizador de Energia ativado' : 'Modo Economizador de Energia desativado');
   };
 
   // Handle auto energy saver changes
   const handleAutoEnergySaverChange = (checked: boolean) => {
     setAutoEnergySaver(checked);
     localStorage.setItem('autoEnergySaver', JSON.stringify(checked));
-    toast.success(checked ? 'Auto Energy Saver enabled' : 'Auto Energy Saver disabled');
+    toast.success(
+      checked ? 'Economizador de Energia Automático ativado' : 'Economizador de Energia Automático desativado',
+    );
 
     if (!checked) {
       // When disabling auto mode, also disable energy saver mode
@@ -566,41 +568,41 @@ const TaskManagerTab: React.FC = () => {
     // CPU analysis
     if (currentMetrics.cpu.usage > PERFORMANCE_THRESHOLDS.cpu.critical) {
       score -= 30;
-      issues.push('Critical CPU usage');
-      suggestions.push('Consider closing resource-intensive applications');
+      issues.push('Uso crítico da CPU');
+      suggestions.push('Considere fechar aplicativos que consomem muitos recursos');
     } else if (currentMetrics.cpu.usage > PERFORMANCE_THRESHOLDS.cpu.warning) {
       score -= 15;
-      issues.push('High CPU usage');
-      suggestions.push('Monitor system processes for unusual activity');
+      issues.push('Uso alto da CPU');
+      suggestions.push('Monitore os processos do sistema para atividade incomum');
     }
 
     // Memory analysis
     if (currentMetrics.memory.percentage > PERFORMANCE_THRESHOLDS.memory.critical) {
       score -= 30;
-      issues.push('Critical memory usage');
-      suggestions.push('Close unused applications to free up memory');
+      issues.push('Uso crítico de memória');
+      suggestions.push('Feche aplicativos não utilizados para liberar memória');
     } else if (currentMetrics.memory.percentage > PERFORMANCE_THRESHOLDS.memory.warning) {
       score -= 15;
-      issues.push('High memory usage');
-      suggestions.push('Consider freeing up memory by closing background applications');
+      issues.push('Uso alto de memória');
+      suggestions.push('Considere liberar memória fechando aplicativos em segundo plano');
     }
 
     // Performance analysis
     if (currentMetrics.performance.fps < PERFORMANCE_THRESHOLDS.fps.critical) {
       score -= 20;
-      issues.push('Very low frame rate');
-      suggestions.push('Disable animations or switch to power saver mode');
+      issues.push('Taxa de quadros muito baixa');
+      suggestions.push('Desative animações ou ative o modo de economia de energia');
     } else if (currentMetrics.performance.fps < PERFORMANCE_THRESHOLDS.fps.warning) {
       score -= 10;
-      issues.push('Low frame rate');
-      suggestions.push('Consider reducing visual effects');
+      issues.push('Taxa de quadros baixa');
+      suggestions.push('Considere reduzir os efeitos visuais');
     }
 
     // Battery analysis
     if (currentMetrics.battery && !currentMetrics.battery.charging && currentMetrics.battery.level < 20) {
       score -= 10;
-      issues.push('Low battery');
-      suggestions.push('Connect to power source or enable power saver mode');
+      issues.push('Bateria baixa');
+      suggestions.push('Conecte à fonte de energia ou ative o modo de economia de energia');
     }
 
     return {
@@ -869,7 +871,7 @@ const TaskManagerTab: React.FC = () => {
     if (currentMetrics.cpu.usage > PERFORMANCE_THRESHOLDS.cpu.critical) {
       newAlerts.push({
         type: 'error',
-        message: 'Critical CPU usage detected',
+        message: 'Uso crítico de CPU detectado',
         timestamp: Date.now(),
         metric: 'cpu',
         threshold: PERFORMANCE_THRESHOLDS.cpu.critical,
@@ -881,7 +883,7 @@ const TaskManagerTab: React.FC = () => {
     if (currentMetrics.memory.percentage > PERFORMANCE_THRESHOLDS.memory.critical) {
       newAlerts.push({
         type: 'error',
-        message: 'Critical memory usage detected',
+        message: 'Uso crítico de memória detectado',
         timestamp: Date.now(),
         metric: 'memory',
         threshold: PERFORMANCE_THRESHOLDS.memory.critical,
@@ -893,7 +895,7 @@ const TaskManagerTab: React.FC = () => {
     if (currentMetrics.performance.fps < PERFORMANCE_THRESHOLDS.fps.critical) {
       newAlerts.push({
         type: 'warning',
-        message: 'Very low frame rate detected',
+        message: 'Taxa de quadros muito baixa detectada',
         timestamp: Date.now(),
         metric: 'fps',
         threshold: PERFORMANCE_THRESHOLDS.fps.critical,
@@ -911,10 +913,10 @@ const TaskManagerTab: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Power Profile Selection */}
+      {/* Seleção de Profile de Energia */}
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-base font-medium text-bolt-elements-textPrimary">Power Management</h3>
+          <h3 className="text-base font-medium text-bolt-elements-textPrimary">Gerenciamento de Energia</h3>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <input
@@ -926,7 +928,7 @@ const TaskManagerTab: React.FC = () => {
               />
               <div className="i-ph:gauge-duotone w-4 h-4 text-bolt-elements-textSecondary" />
               <label htmlFor="autoEnergySaver" className="text-sm text-bolt-elements-textSecondary">
-                Auto Energy Saver
+                Economia Automática de Energia
               </label>
             </div>
             <div className="flex items-center gap-2">
@@ -943,8 +945,8 @@ const TaskManagerTab: React.FC = () => {
                 htmlFor="energySaver"
                 className={classNames('text-sm text-bolt-elements-textSecondary', { 'opacity-50': autoEnergySaver })}
               >
-                Energy Saver
-                {energySaverMode && <span className="ml-2 text-xs text-bolt-elements-textSecondary">Active</span>}
+                Economia de Energia
+                {energySaverMode && <span className="ml-2 text-xs text-bolt-elements-textSecondary">Ativo</span>}
               </label>
             </div>
             <div className="relative">
@@ -955,7 +957,7 @@ const TaskManagerTab: React.FC = () => {
 
                   if (profile) {
                     setSelectedProfile(profile);
-                    toast.success(`Switched to ${profile.name} power profile`);
+                    toast.success(`Alterado para o Profile de energia ${profile.name}`);
                   }
                 }}
                 className="pl-8 pr-8 py-1.5 rounded-md bg-bolt-background-secondary dark:bg-[#1E1E1E] border border-bolt-border dark:border-bolt-borderDark text-sm text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimaryDark hover:border-bolt-action-primary dark:hover:border-bolt-action-primary focus:outline-none focus:ring-1 focus:ring-bolt-action-primary appearance-none min-w-[160px] cursor-pointer transition-colors duration-150"
@@ -989,13 +991,13 @@ const TaskManagerTab: React.FC = () => {
         <div className="text-sm text-bolt-elements-textSecondary">{selectedProfile.description}</div>
       </div>
 
-      {/* System Health Score */}
+      {/* Pontuação de Saúde do Sistema */}
       <div className="flex flex-col gap-4">
-        <h3 className="text-base font-medium text-bolt-elements-textPrimary">System Health</h3>
+        <h3 className="text-base font-medium text-bolt-elements-textPrimary">Saúde do Sistema</h3>
         <div className="grid grid-cols-1 gap-4">
           <div className="flex flex-col gap-2 rounded-lg bg-[#F8F8F8] dark:bg-[#141414] p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-bolt-elements-textSecondary">Health Score</span>
+              <span className="text-sm text-bolt-elements-textSecondary">Pontuação de Saúde</span>
               <span
                 className={classNames('text-lg font-medium', {
                   'text-green-500': metrics.health.score >= 80,
@@ -1008,7 +1010,7 @@ const TaskManagerTab: React.FC = () => {
             </div>
             {metrics.health.issues.length > 0 && (
               <div className="mt-2">
-                <div className="text-sm font-medium text-bolt-elements-textSecondary mb-1">Issues:</div>
+                <div className="text-sm font-medium text-bolt-elements-textSecondary mb-1">Problemas:</div>
                 <ul className="text-sm text-bolt-elements-textSecondary space-y-1">
                   {metrics.health.issues.map((issue, index) => (
                     <li key={index} className="flex items-center gap-2">
@@ -1021,7 +1023,7 @@ const TaskManagerTab: React.FC = () => {
             )}
             {metrics.health.suggestions.length > 0 && (
               <div className="mt-2">
-                <div className="text-sm font-medium text-bolt-elements-textSecondary mb-1">Suggestions:</div>
+                <div className="text-sm font-medium text-bolt-elements-textSecondary mb-1">Sugestões:</div>
                 <ul className="text-sm text-bolt-elements-textSecondary space-y-1">
                   {metrics.health.suggestions.map((suggestion, index) => (
                     <li key={index} className="flex items-center gap-2">
@@ -1036,14 +1038,14 @@ const TaskManagerTab: React.FC = () => {
         </div>
       </div>
 
-      {/* System Metrics */}
+      {/* Métricas do Sistema */}
       <div className="flex flex-col gap-4">
-        <h3 className="text-base font-medium text-bolt-elements-textPrimary">System Metrics</h3>
+        <h3 className="text-base font-medium text-bolt-elements-textPrimary">Métricas do Sistema</h3>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {/* CPU Usage */}
+          {/* Uso da CPU */}
           <div className="flex flex-col gap-2 rounded-lg bg-[#F8F8F8] dark:bg-[#141414] p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-bolt-elements-textSecondary">CPU Usage</span>
+              <span className="text-sm text-bolt-elements-textSecondary">Uso da CPU</span>
               <span className={classNames('text-sm font-medium', getUsageColor(metrics.cpu.usage))}>
                 {Math.round(metrics.cpu.usage)}%
               </span>
@@ -1051,27 +1053,27 @@ const TaskManagerTab: React.FC = () => {
             {renderUsageGraph(metricsHistory.cpu, 'CPU', '#9333ea')}
             {metrics.cpu.temperature && (
               <div className="text-xs text-bolt-elements-textSecondary mt-2">
-                Temperature: {metrics.cpu.temperature}°C
+                Temperatura: {metrics.cpu.temperature}°C
               </div>
             )}
             {metrics.cpu.frequency && (
               <div className="text-xs text-bolt-elements-textSecondary">
-                Frequency: {(metrics.cpu.frequency / 1000).toFixed(1)} GHz
+                Frequência: {(metrics.cpu.frequency / 1000).toFixed(1)} GHz
               </div>
             )}
           </div>
 
-          {/* Memory Usage */}
+          {/* Uso de Memória */}
           <div className="flex flex-col gap-2 rounded-lg bg-[#F8F8F8] dark:bg-[#141414] p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-bolt-elements-textSecondary">Memory Usage</span>
+              <span className="text-sm text-bolt-elements-textSecondary">Uso de Memória</span>
               <span className={classNames('text-sm font-medium', getUsageColor(metrics.memory.percentage))}>
                 {Math.round(metrics.memory.percentage)}%
               </span>
             </div>
             {renderUsageGraph(metricsHistory.memory, 'Memory', '#2563eb')}
             <div className="text-xs text-bolt-elements-textSecondary mt-2">
-              Used: {formatBytes(metrics.memory.used)}
+              Usado: {formatBytes(metrics.memory.used)}
             </div>
             <div className="text-xs text-bolt-elements-textSecondary">Total: {formatBytes(metrics.memory.total)}</div>
             <div className="text-xs text-bolt-elements-textSecondary">
@@ -1079,10 +1081,10 @@ const TaskManagerTab: React.FC = () => {
             </div>
           </div>
 
-          {/* Performance */}
+          {/* Desempenho */}
           <div className="flex flex-col gap-2 rounded-lg bg-[#F8F8F8] dark:bg-[#141414] p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-bolt-elements-textSecondary">Performance</span>
+              <span className="text-sm text-bolt-elements-textSecondary">Desempenho</span>
               <span
                 className={classNames('text-sm font-medium', {
                   'text-red-500': metrics.performance.fps < PERFORMANCE_THRESHOLDS.fps.critical,
@@ -1094,44 +1096,44 @@ const TaskManagerTab: React.FC = () => {
               </span>
             </div>
             <div className="text-xs text-bolt-elements-textSecondary mt-2">
-              Page Load: {(metrics.performance.pageLoad / 1000).toFixed(2)}s
+              Carregamento da Página: {(metrics.performance.pageLoad / 1000).toFixed(2)}s
             </div>
             <div className="text-xs text-bolt-elements-textSecondary">
-              DOM Ready: {(metrics.performance.domReady / 1000).toFixed(2)}s
+              DOM Pronto: {(metrics.performance.domReady / 1000).toFixed(2)}s
             </div>
             <div className="text-xs text-bolt-elements-textSecondary">
               TTFB: {(metrics.performance.timing.ttfb / 1000).toFixed(2)}s
             </div>
             <div className="text-xs text-bolt-elements-textSecondary">
-              Resources: {metrics.performance.resources.total} ({formatBytes(metrics.performance.resources.size)})
+              Recursos: {metrics.performance.resources.total} ({formatBytes(metrics.performance.resources.size)})
             </div>
           </div>
 
-          {/* Network */}
+          {/* Rede */}
           <div className="flex flex-col gap-2 rounded-lg bg-[#F8F8F8] dark:bg-[#141414] p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-bolt-elements-textSecondary">Network</span>
+              <span className="text-sm text-bolt-elements-textSecondary">Rede</span>
               <span className="text-sm font-medium text-bolt-elements-textPrimary">
                 {metrics.network.downlink.toFixed(1)} Mbps
               </span>
             </div>
             {renderUsageGraph(metricsHistory.network, 'Network', '#f59e0b')}
-            <div className="text-xs text-bolt-elements-textSecondary mt-2">Type: {metrics.network.type}</div>
-            <div className="text-xs text-bolt-elements-textSecondary">Latency: {metrics.network.latency}ms</div>
+            <div className="text-xs text-bolt-elements-textSecondary mt-2">Tipo: {metrics.network.type}</div>
+            <div className="text-xs text-bolt-elements-textSecondary">Latência: {metrics.network.latency}ms</div>
             <div className="text-xs text-bolt-elements-textSecondary">
-              Received: {formatBytes(metrics.network.bytesReceived)}
+              Recebido: {formatBytes(metrics.network.bytesReceived)}
             </div>
             <div className="text-xs text-bolt-elements-textSecondary">
-              Sent: {formatBytes(metrics.network.bytesSent)}
+              Enviado: {formatBytes(metrics.network.bytesSent)}
             </div>
           </div>
         </div>
 
-        {/* Battery Section */}
+        {/* Seção da Bateria */}
         {metrics.battery && (
           <div className="flex flex-col gap-2 rounded-lg bg-[#F8F8F8] dark:bg-[#141414] p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-bolt-elements-textSecondary">Battery</span>
+              <span className="text-sm text-bolt-elements-textSecondary">Bateria</span>
               <div className="flex items-center gap-2">
                 {metrics.battery.charging && <div className="i-ph:lightning-fill w-4 h-4 text-bolt-action-primary" />}
                 <span
@@ -1147,34 +1149,36 @@ const TaskManagerTab: React.FC = () => {
             {renderUsageGraph(metricsHistory.battery, 'Battery', '#22c55e')}
             {metrics.battery.timeRemaining && (
               <div className="text-xs text-bolt-elements-textSecondary mt-2">
-                {metrics.battery.charging ? 'Time to full: ' : 'Time remaining: '}
+                {metrics.battery.charging ? 'Tempo até o completo: ' : 'Tempo restante: '}
                 {formatTime(metrics.battery.timeRemaining)}
               </div>
             )}
             {metrics.battery.temperature && (
               <div className="text-xs text-bolt-elements-textSecondary">
-                Temperature: {metrics.battery.temperature}°C
+                Temperatura: {metrics.battery.temperature}°C
               </div>
             )}
             {metrics.battery.cycles && (
-              <div className="text-xs text-bolt-elements-textSecondary">Charge cycles: {metrics.battery.cycles}</div>
+              <div className="text-xs text-bolt-elements-textSecondary">Ciclos de carga: {metrics.battery.cycles}</div>
             )}
             {metrics.battery.health && (
-              <div className="text-xs text-bolt-elements-textSecondary">Battery health: {metrics.battery.health}%</div>
+              <div className="text-xs text-bolt-elements-textSecondary">
+                Saúde da Bateria: {metrics.battery.health}%
+              </div>
             )}
           </div>
         )}
 
-        {/* Performance Alerts */}
+        {/* Alertas de Desempenho */}
         {alerts.length > 0 && (
           <div className="flex flex-col gap-2 rounded-lg bg-[#F8F8F8] dark:bg-[#141414] p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-bolt-elements-textPrimary">Recent Alerts</span>
+              <span className="text-sm font-medium text-bolt-elements-textPrimary">Alertas Recentes</span>
               <button
                 onClick={() => setAlerts([])}
                 className="text-xs text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary"
               >
-                Clear All
+                Limpar Tudo
               </button>
             </div>
             <div className="space-y-2">
@@ -1204,23 +1208,23 @@ const TaskManagerTab: React.FC = () => {
           </div>
         )}
 
-        {/* Energy Savings */}
+        {/* Economia de Energia */}
         {energySaverMode && (
           <div className="flex flex-col gap-2 rounded-lg bg-[#F8F8F8] dark:bg-[#141414] p-4">
-            <h4 className="text-sm font-medium text-bolt-elements-textPrimary">Energy Savings</h4>
+            <h4 className="text-sm font-medium text-bolt-elements-textPrimary">Economia de Energia</h4>
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <span className="text-sm text-bolt-elements-textSecondary">Updates Reduced</span>
+                <span className="text-sm text-bolt-elements-textSecondary">Atualizações Reduzidas</span>
                 <p className="text-lg font-medium text-bolt-elements-textPrimary">{energySavings.updatesReduced}</p>
               </div>
               <div>
-                <span className="text-sm text-bolt-elements-textSecondary">Time in Saver Mode</span>
+                <span className="text-sm text-bolt-elements-textSecondary">Tempo no Modo de Economia</span>
                 <p className="text-lg font-medium text-bolt-elements-textPrimary">
                   {Math.floor(energySavings.timeInSaverMode / 60)}m {Math.floor(energySavings.timeInSaverMode % 60)}s
                 </p>
               </div>
               <div>
-                <span className="text-sm text-bolt-elements-textSecondary">Energy Saved</span>
+                <span className="text-sm text-bolt-elements-textSecondary">Energia Economizada</span>
                 <p className="text-lg font-medium text-bolt-elements-textPrimary">
                   {energySavings.estimatedEnergySaved.toFixed(2)} mWh
                 </p>

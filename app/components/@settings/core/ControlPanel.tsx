@@ -67,20 +67,20 @@ interface AnimatedSwitchProps {
 }
 
 const TAB_DESCRIPTIONS: Record<TabType, string> = {
-  profile: 'Manage your profile and account settings',
-  settings: 'Configure application preferences',
-  notifications: 'View and manage your notifications',
-  features: 'Explore new and upcoming features',
-  data: 'Manage your data and storage',
-  'cloud-providers': 'Configure cloud AI providers and models',
-  'local-providers': 'Configure local AI providers and models',
-  'service-status': 'Monitor cloud LLM service status',
-  connection: 'Check connection status and settings',
-  debug: 'Debug tools and system information',
-  'event-logs': 'View system events and logs',
-  update: 'Check for updates and release notes',
-  'task-manager': 'Monitor system resources and processes',
-  'tab-management': 'Configure visible tabs and their order',
+  profile: 'Gerencie seu Profile e configurações da conta',
+  settings: 'Configure as preferências do aplicativo',
+  notifications: 'Visualize e gerencie suas notificações',
+  features: 'Explore recursos novos e futuros',
+  data: 'Gerencie seus dados e armazenamento',
+  'cloud-providers': 'Configure provedores de IA em nuvem e modelos',
+  'local-providers': 'Configure provedores de IA locais e modelos',
+  'service-status': 'Monitore o status do serviço LLM em nuvem',
+  connection: 'Verifique o status e as configurações da conexão',
+  debug: 'Ferramentas de depuração e informações do system',
+  'event-logs': 'Visualize eventos e logs do system',
+  update: 'Verifique atualizações e notas de lançamento',
+  'task-manager': 'Monitore recursos e processos do system',
+  'tab-management': 'Configure abas visíveis e sua ordem',
 };
 
 // Beta status for experimental features
@@ -439,7 +439,7 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
                       </button>
                     )}
                     <DialogTitle className="text-xl font-semibold text-gray-900 dark:text-white">
-                      {showTabManagement ? 'Tab Management' : activeTab ? TAB_LABELS[activeTab] : 'Control Panel'}
+                      {showTabManagement ? 'Tab Management' : activeTab ? TAB_LABELS[activeTab] : 'Painel de Controle'}
                     </DialogTitle>
                   </div>
 
@@ -450,7 +450,7 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
                         id="developer-mode"
                         checked={developerMode}
                         onCheckedChange={handleDeveloperModeChange}
-                        label={developerMode ? 'Developer Mode' : 'User Mode'}
+                        label={developerMode ? 'Modo Desenvolvedor' : 'Modo Usuario'}
                       />
                     </div>
 

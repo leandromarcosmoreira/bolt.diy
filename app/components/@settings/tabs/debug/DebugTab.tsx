@@ -474,9 +474,9 @@ export default function DebugTab() {
       };
 
       setSystemInfo(systemInfo);
-      toast.success('System information updated');
+      toast.success('Informações do system atualizadas');
     } catch (error) {
-      toast.error('Failed to get system information');
+      toast.error('Falha ao obter informações do system');
       console.error('Failed to get system information:', error);
     } finally {
       setLoading((prev) => ({ ...prev, systemInfo: false }));
@@ -506,12 +506,12 @@ export default function DebugTab() {
         gitInfo: gitData,
       });
 
-      toast.success('WebApp information updated');
+      toast.success('Informações do WebApp atualizadas');
 
       return true;
     } catch (error) {
       console.error('Failed to fetch webapp info:', error);
-      toast.error('Failed to fetch webapp information');
+      toast.error('Falha ao buscar informações do WebApp');
       setWebAppInfo(null);
 
       return false;
@@ -597,7 +597,7 @@ export default function DebugTab() {
       }
 
       // Log all performance metrics
-      logStore.logSystem('Performance Metrics', {
+      logStore.logSystem('Métricas de Desempenho', {
         timing: timingMetrics,
         resources: resourceStats,
         memory: memoryMetrics,
@@ -609,9 +609,9 @@ export default function DebugTab() {
         },
       });
 
-      toast.success('Performance metrics logged');
+      toast.success('Métricas de desempenho registradas');
     } catch (error) {
-      toast.error('Failed to log performance metrics');
+      toast.error('Falha ao registrar métricas de desempenho');
       console.error('Failed to log performance metrics:', error);
     } finally {
       setLoading((prev) => ({ ...prev, performance: false }));
@@ -626,12 +626,12 @@ export default function DebugTab() {
       const storedErrors = errorLogs;
 
       if (storedErrors.length === 0) {
-        toast.success('No errors found');
+        toast.success('Nenhum erro encontrado');
       } else {
         toast.warning(`Found ${storedErrors.length} error(s)`);
       }
     } catch (error) {
-      toast.error('Failed to check errors');
+      toast.error('Falha ao verificar erros');
       console.error('Failed to check errors:', error);
     } finally {
       setLoading((prev) => ({ ...prev, errors: false }));
@@ -661,10 +661,10 @@ export default function DebugTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Debug information exported successfully');
+      toast.success('Informações de depuração exportadas com sucesso');
     } catch (error) {
       console.error('Failed to export debug info:', error);
-      toast.error('Failed to export debug information');
+      toast.error('Falha ao exportar informações de depuração');
     }
   };
 
@@ -704,10 +704,10 @@ export default function DebugTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Debug information exported as CSV');
+      toast.success('Informações de depuração exportadas como CSV');
     } catch (error) {
       console.error('Failed to export CSV:', error);
-      toast.error('Failed to export debug information as CSV');
+      toast.error('Falha ao exportar informações de depuração como CSV');
     }
   };
 
@@ -864,48 +864,48 @@ export default function DebugTab() {
 
       // System Information Section
       if (debugData.system) {
-        addSectionHeader('System Information');
+        addSectionHeader('Informações do Sistema');
 
         // OS and Architecture
-        addKeyValue('Operating System', debugData.system.os);
-        addKeyValue('Architecture', debugData.system.arch);
-        addKeyValue('Platform', debugData.system.platform);
-        addKeyValue('CPU Cores', debugData.system.cpus);
+        addKeyValue('Sistema Operacional', debugData.system.os);
+        addKeyValue('Arquitetura', debugData.system.arch);
+        addKeyValue('Plataforma', debugData.system.platform);
+        addKeyValue('Núcleos da CPU', debugData.system.cpus);
 
         // Memory
         const memory = debugData.system.memory;
-        addKeyValue('Memory', {
-          'Total Memory': memory.total,
-          'Used Memory': memory.used,
-          'Free Memory': memory.free,
-          Usage: memory.percentage + '%',
+        addKeyValue('Memória', {
+          'Possui Memória': memory.total,
+          'Memória Usada': memory.used,
+          'Memória Livre': memory.free,
+          Uso: memory.percentage + '%',
         });
 
         // Browser Information
         const browser = debugData.system.browser;
-        addKeyValue('Browser', {
-          Name: browser.name,
-          Version: browser.version,
-          Language: browser.language,
-          Platform: browser.platform,
-          'Cookies Enabled': browser.cookiesEnabled ? 'Yes' : 'No',
-          'Online Status': browser.online ? 'Online' : 'Offline',
+        addKeyValue('Navegador', {
+          Nome: browser.name,
+          Versão: browser.version,
+          Idioma: browser.language,
+          Plataforma: browser.platform,
+          'Cookies Ativados': browser.cookiesEnabled ? 'Sim' : 'Não',
+          'Status Online': browser.online ? 'Online' : 'Offline',
         });
 
         // Screen Information
         const screen = debugData.system.screen;
-        addKeyValue('Screen', {
-          Resolution: `${screen.width}x${screen.height}`,
-          'Color Depth': screen.colorDepth + ' bit',
-          'Pixel Ratio': screen.pixelRatio + 'x',
+        addKeyValue('Tela', {
+          Resolução: `${screen.width}x${screen.height}`,
+          'Profundidade de Cor': screen.colorDepth + ' bits',
+          'Proporção de Pixels': screen.pixelRatio + 'x',
         });
 
         // Time Information
         const time = debugData.system.time;
-        addKeyValue('Time Settings', {
-          Timezone: time.timezone,
-          'UTC Offset': time.offset / 60 + ' hours',
-          Locale: time.locale,
+        addKeyValue('Configurações de Hora', {
+          'Fuso Horário': time.timezone,
+          'Deslocamento UTC': time.offset / 60 + ' horas',
+          Localidade: time.locale,
         });
 
         addHorizontalLine();
@@ -916,32 +916,32 @@ export default function DebugTab() {
         addSectionHeader('Web App Information');
 
         // Basic Info
-        addKeyValue('Application', {
-          Name: debugData.webApp.name,
-          Version: debugData.webApp.version,
-          Environment: debugData.webApp.environment,
-          'Node Version': debugData.webApp.runtimeInfo.nodeVersion,
+        addKeyValue('Aplicação', {
+          Nome: debugData.webApp.name,
+          Versão: debugData.webApp.version,
+          Ambiente: debugData.webApp.environment,
+          'Versão do Node': debugData.webApp.runtimeInfo.nodeVersion,
         });
 
         // Git Information
         if (debugData.webApp.gitInfo) {
           const gitInfo = debugData.webApp.gitInfo.local;
-          addKeyValue('Git Information', {
+          addKeyValue('Informações do Git', {
             Branch: gitInfo.branch,
             Commit: gitInfo.commitHash,
-            Author: gitInfo.author,
-            'Commit Time': gitInfo.commitTime,
-            Repository: gitInfo.repoName,
+            Autor: gitInfo.author,
+            'Hora do Commit': gitInfo.commitTime,
+            Repositório: gitInfo.repoName,
           });
 
           if (debugData.webApp.gitInfo.github) {
             const githubInfo = debugData.webApp.gitInfo.github.currentRepo;
-            addKeyValue('GitHub Information', {
-              Repository: githubInfo.fullName,
-              'Default Branch': githubInfo.defaultBranch,
-              Stars: githubInfo.stars,
+            addKeyValue('Informações do GitHub', {
+              Repositório: githubInfo.fullName,
+              'Branch Padrão': githubInfo.defaultBranch,
+              Estrelas: githubInfo.stars,
               Forks: githubInfo.forks,
-              'Open Issues': githubInfo.openIssues || 0,
+              'Issues Abertas': githubInfo.openIssues || 0,
             });
           }
         }
@@ -951,7 +951,7 @@ export default function DebugTab() {
 
       // Performance Section
       if (debugData.performance) {
-        addSectionHeader('Performance Metrics');
+        addSectionHeader('Métricas de Desempenho');
 
         // Memory Usage
         const memory = debugData.performance.memory || {};
@@ -959,10 +959,10 @@ export default function DebugTab() {
         const usedHeap = memory.usedJSHeapSize || 0;
         const usagePercentage = memory.usagePercentage || 0;
 
-        addKeyValue('Memory Usage', {
-          'Total Heap Size': formatBytes(totalHeap),
-          'Used Heap Size': formatBytes(usedHeap),
-          Usage: usagePercentage.toFixed(1) + '%',
+        addKeyValue('Uso de Memória', {
+          'Tamanho Total do Heap': formatBytes(totalHeap),
+          'Tamanho do Heap Usado': formatBytes(usedHeap),
+          Uso: usagePercentage.toFixed(1) + '%',
         });
 
         // Timing Metrics
@@ -978,21 +978,21 @@ export default function DebugTab() {
           domContentLoadedEventEnd > navigationStart ? domContentLoadedEventEnd - navigationStart : 0;
         const requestTime = responseEnd > requestStart ? responseEnd - requestStart : 0;
 
-        addKeyValue('Page Load Metrics', {
-          'Total Load Time': (loadTime / 1000).toFixed(2) + ' seconds',
-          'DOM Ready Time': (domReadyTime / 1000).toFixed(2) + ' seconds',
-          'Request Time': (requestTime / 1000).toFixed(2) + ' seconds',
+        addKeyValue('Métricas de Carregamento da Página', {
+          'Tempo Total de Carregamento': (loadTime / 1000).toFixed(2) + ' segundos',
+          'Tempo para DOM Pronto': (domReadyTime / 1000).toFixed(2) + ' segundos',
+          'Tempo de Requisição': (requestTime / 1000).toFixed(2) + ' segundos',
         });
 
         // Network Information
         if (debugData.system?.network) {
           const network = debugData.system.network;
-          addKeyValue('Network Information', {
-            'Connection Type': network.type || 'Unknown',
-            'Effective Type': network.effectiveType || 'Unknown',
-            'Download Speed': (network.downlink || 0) + ' Mbps',
-            'Latency (RTT)': (network.rtt || 0) + ' ms',
-            'Data Saver': network.saveData ? 'Enabled' : 'Disabled',
+          addKeyValue('Informações de Rede', {
+            'Tipo de Conexão': network.type || 'Desconhecido',
+            'Tipo Efetivo': network.effectiveType || 'Desconhecido',
+            'Velocidade de Download': (network.downlink || 0) + ' Mbps',
+            'Latência (RTT)': (network.rtt || 0) + ' ms',
+            'Economia de Dados': network.saveData ? 'Ativada' : 'Desativada',
           });
         }
 
@@ -1012,14 +1012,14 @@ export default function DebugTab() {
 
           doc.setFont('helvetica', 'normal');
           doc.setTextColor('#6B7280');
-          addKeyValue('Message', error.message, 10);
+          addKeyValue('Mensagem', error.message, 10);
 
           if (error.stack) {
             addKeyValue('Stack', error.stack, 10);
           }
 
           if (error.source) {
-            addKeyValue('Source', error.source, 10);
+            addKeyValue('Fonte', error.source, 10);
           }
 
           yPos += lineHeight;
@@ -1031,10 +1031,10 @@ export default function DebugTab() {
 
       // Save the PDF
       doc.save(`bolt-debug-info-${new Date().toISOString()}.pdf`);
-      toast.success('Debug information exported as PDF');
+      toast.success('Informações de depuração exportadas como PDF');
     } catch (error) {
       console.error('Failed to export PDF:', error);
-      toast.error('Failed to export debug information as PDF');
+      toast.error('Falha ao exportar informações de depuração como PDF');
     }
   };
 
@@ -1066,10 +1066,10 @@ export default function DebugTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Debug information exported as text file');
+      toast.success('Informações de depuração exportadas como arquivo de texto');
     } catch (error) {
       console.error('Failed to export text file:', error);
-      toast.error('Failed to export debug information as text file');
+      toast.error('Falha ao exportar informações de depuração como arquivo de texto');
     }
   };
 
@@ -1199,10 +1199,10 @@ export default function DebugTab() {
                   <div>
                     <div className="font-medium">{format.label}</div>
                     <div className="text-xs text-bolt-elements-textSecondary mt-0.5">
-                      {format.id === 'json' && 'Export as a structured JSON file'}
-                      {format.id === 'csv' && 'Export as a CSV spreadsheet'}
-                      {format.id === 'pdf' && 'Export as a formatted PDF document'}
-                      {format.id === 'txt' && 'Export as a formatted text file'}
+                      {format.id === 'json' && 'Exportar como um arquivo JSON estruturado'}
+                      {format.id === 'csv' && 'Exportar como uma planilha CSV'}
+                      {format.id === 'pdf' && 'Exportar como um documento PDF formatado'}
+                      {format.id === 'txt' && 'Exportar como um arquivo de texto formatado'}
                     </div>
                   </div>
                 </button>
@@ -1239,20 +1239,20 @@ export default function DebugTab() {
 
     if (!ollamaStatus.isRunning) {
       return {
-        status: 'Not Running',
+        status: 'Não está em execução',
         color: 'text-red-500',
         bgColor: 'bg-red-500',
-        message: ollamaStatus.error || 'Ollama service is not running',
+        message: ollamaStatus.error || 'O serviço Ollama não está em execução',
       };
     }
 
     const modelCount = ollamaStatus.models?.length ?? 0;
 
     return {
-      status: 'Running',
+      status: 'Em execução',
       color: 'text-green-500',
       bgColor: 'bg-green-500',
-      message: `Ollama service is running with ${modelCount} installed models (Provider: Enabled)`,
+      message: `O serviço Ollama está em execução com ${modelCount} modelos instalados (Provedor: Ativado)`,
     };
   };
 
@@ -1284,17 +1284,17 @@ export default function DebugTab() {
               })}
             />
             <span className={classNames('text-sm font-medium flex items-center gap-1.5', status.color)}>
-              {status.status === 'Running' && <div className="i-ph:check-circle-fill w-3.5 h-3.5" />}
-              {status.status === 'Not Running' && <div className="i-ph:x-circle-fill w-3.5 h-3.5" />}
-              {status.status === 'Disabled' && <div className="i-ph:prohibit-fill w-3.5 h-3.5" />}
+              {status.status === 'Em execução' && <div className="i-ph:check-circle-fill w-3.5 h-3.5" />}
+              {status.status === 'Não está em execução' && <div className="i-ph:x-circle-fill w-3.5 h-3.5" />}
+              {status.status === 'Desativado' && <div className="i-ph:prohibit-fill w-3.5 h-3.5" />}
               {status.status}
             </span>
           </div>
           <div className="text-xs text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5">
             <div
               className={classNames('w-3.5 h-3.5', {
-                'i-ph:info text-green-500': status.status === 'Running',
-                'i-ph:warning text-red-500': status.status === 'Not Running' || status.status === 'Disabled',
+                'i-ph:info text-green-500': status.status === 'Em execução',
+                'i-ph:warning text-red-500': status.status === 'Não está em execução' || status.status === 'Desativado',
               })}
             />
             {status.message}
@@ -1303,7 +1303,7 @@ export default function DebugTab() {
             <div className="mt-3 space-y-1 border-t border-[#E5E5E5] dark:border-[#1A1A1A] pt-2">
               <div className="text-xs font-medium text-bolt-elements-textSecondary flex items-center gap-1.5">
                 <div className="i-ph:cube-duotone w-3.5 h-3.5 text-purple-500" />
-                Installed Models
+                Modelos Instalados
               </div>
               {ollamaStatus.models.map((model) => (
                 <div key={model.name} className="text-xs text-bolt-elements-textSecondary flex items-center gap-2 pl-5">
@@ -1326,7 +1326,7 @@ export default function DebugTab() {
         <div className="p-4 rounded-xl bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#1A1A1A] hover:border-purple-500/30 transition-all duration-200">
           <div className="flex items-center gap-2">
             <div className="i-ph:cpu text-purple-500 w-4 h-4" />
-            <div className="text-sm text-bolt-elements-textSecondary">Memory Usage</div>
+            <div className="text-sm text-bolt-elements-textSecondary">Uso de Memória</div>
           </div>
           <div className="flex items-center gap-2 mt-2">
             <span
@@ -1355,7 +1355,7 @@ export default function DebugTab() {
           />
           <div className="text-xs text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5">
             <div className="i-ph:info w-3.5 h-3.5 text-purple-500" />
-            Used: {systemInfo?.memory.used ?? '0 GB'} / {systemInfo?.memory.total ?? '0 GB'}
+            Usado: {systemInfo?.memory.used ?? '0 GB'} / {systemInfo?.memory.total ?? '0 GB'}
           </div>
         </div>
 
@@ -1363,7 +1363,7 @@ export default function DebugTab() {
         <div className="p-4 rounded-xl bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#1A1A1A] hover:border-purple-500/30 transition-all duration-200">
           <div className="flex items-center gap-2">
             <div className="i-ph:timer text-purple-500 w-4 h-4" />
-            <div className="text-sm text-bolt-elements-textSecondary">Page Load Time</div>
+            <div className="text-sm text-bolt-elements-textSecondary">Tempo de Carregamento da Página</div>
           </div>
           <div className="flex items-center gap-2 mt-2">
             <span
@@ -1381,7 +1381,7 @@ export default function DebugTab() {
           </div>
           <div className="text-xs text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5">
             <div className="i-ph:code w-3.5 h-3.5 text-purple-500" />
-            DOM Ready: {systemInfo ? (systemInfo.performance.timing.domReadyTime / 1000).toFixed(2) : '-'}s
+            DOM Pronto: {systemInfo ? (systemInfo.performance.timing.domReadyTime / 1000).toFixed(2) : '-'}s
           </div>
         </div>
 
@@ -1389,7 +1389,7 @@ export default function DebugTab() {
         <div className="p-4 rounded-xl bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#1A1A1A] hover:border-purple-500/30 transition-all duration-200">
           <div className="flex items-center gap-2">
             <div className="i-ph:wifi-high text-purple-500 w-4 h-4" />
-            <div className="text-sm text-bolt-elements-textSecondary">Network Speed</div>
+            <div className="text-sm text-bolt-elements-textSecondary">Velocidade da Rede</div>
           </div>
           <div className="flex items-center gap-2 mt-2">
             <span
@@ -1431,7 +1431,7 @@ export default function DebugTab() {
                 errorLogs.length > 0 ? 'i-ph:warning text-red-500' : 'i-ph:check-circle text-green-500',
               )}
             />
-            {errorLogs.length > 0 ? 'Errors detected' : 'No errors detected'}
+            {errorLogs.length > 0 ? 'Erros detectados' : 'Nenhum erro detectado'}
           </div>
         </div>
       </div>
@@ -1456,7 +1456,7 @@ export default function DebugTab() {
           ) : (
             <div className="i-ph:gear w-4 h-4" />
           )}
-          Update System Info
+          Atualizar Informações do Sistema
         </button>
 
         <button
@@ -1477,7 +1477,7 @@ export default function DebugTab() {
           ) : (
             <div className="i-ph:chart-bar w-4 h-4" />
           )}
-          Log Performance
+          Registrar Desempenho
         </button>
 
         <button
@@ -1498,7 +1498,7 @@ export default function DebugTab() {
           ) : (
             <div className="i-ph:warning w-4 h-4" />
           )}
-          Check Errors
+          Verificar Erros
         </button>
 
         <button
@@ -1519,7 +1519,7 @@ export default function DebugTab() {
           ) : (
             <div className="i-ph:info w-4 h-4" />
           )}
-          Fetch WebApp Info
+          Buscar Informações do Aplicativo Web
         </button>
 
         <ExportButton />
@@ -1553,39 +1553,39 @@ export default function DebugTab() {
                 <div className="space-y-2">
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:desktop text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">OS: </span>
+                    <span className="text-bolt-elements-textSecondary">SO: </span>
                     <span className="text-bolt-elements-textPrimary">{systemInfo.os}</span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:device-mobile text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Platform: </span>
+                    <span className="text-bolt-elements-textSecondary">Plataforma: </span>
                     <span className="text-bolt-elements-textPrimary">{systemInfo.platform}</span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:microchip text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Architecture: </span>
+                    <span className="text-bolt-elements-textSecondary">Arquitetura: </span>
                     <span className="text-bolt-elements-textPrimary">{systemInfo.arch}</span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:cpu text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">CPU Cores: </span>
+                    <span className="text-bolt-elements-textSecondary">Núcleos da CPU: </span>
                     <span className="text-bolt-elements-textPrimary">{systemInfo.cpus}</span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:node text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Node Version: </span>
+                    <span className="text-bolt-elements-textSecondary">Versão do Node: </span>
                     <span className="text-bolt-elements-textPrimary">{systemInfo.node}</span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:wifi-high text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Network Type: </span>
+                    <span className="text-bolt-elements-textSecondary">Tipo de Rede: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {systemInfo.network.type} ({systemInfo.network.effectiveType})
                     </span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:gauge text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Network Speed: </span>
+                    <span className="text-bolt-elements-textSecondary">Velocidade da Rede: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {systemInfo.network.downlink}Mbps (RTT: {systemInfo.network.rtt}ms)
                     </span>
@@ -1593,15 +1593,15 @@ export default function DebugTab() {
                   {systemInfo.battery && (
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:battery-charging text-bolt-elements-textSecondary w-4 h-4" />
-                      <span className="text-bolt-elements-textSecondary">Battery: </span>
+                      <span className="text-bolt-elements-textSecondary">Bateria: </span>
                       <span className="text-bolt-elements-textPrimary">
-                        {systemInfo.battery.level.toFixed(1)}% {systemInfo.battery.charging ? '(Charging)' : ''}
+                        {systemInfo.battery.level.toFixed(1)}% {systemInfo.battery.charging ? '(Carregando)' : ''}
                       </span>
                     </div>
                   )}
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:hard-drive text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Storage: </span>
+                    <span className="text-bolt-elements-textSecondary">Armazenamento: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {(systemInfo.storage.usage / (1024 * 1024 * 1024)).toFixed(2)}GB /{' '}
                       {(systemInfo.storage.quota / (1024 * 1024 * 1024)).toFixed(2)}GB
@@ -1611,33 +1611,33 @@ export default function DebugTab() {
                 <div className="space-y-2">
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:database text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Memory Usage: </span>
+                    <span className="text-bolt-elements-textSecondary">Uso de Memória: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {systemInfo.memory.used} / {systemInfo.memory.total} ({systemInfo.memory.percentage}%)
                     </span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:browser text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Browser: </span>
+                    <span className="text-bolt-elements-textSecondary">Navegador: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {systemInfo.browser.name} {systemInfo.browser.version}
                     </span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:monitor text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Screen: </span>
+                    <span className="text-bolt-elements-textSecondary">Tela: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {systemInfo.screen.width}x{systemInfo.screen.height} ({systemInfo.screen.pixelRatio}x)
                     </span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:clock text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Timezone: </span>
+                    <span className="text-bolt-elements-textSecondary">Fuso Horário: </span>
                     <span className="text-bolt-elements-textPrimary">{systemInfo.time.timezone}</span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:translate text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Language: </span>
+                    <span className="text-bolt-elements-textSecondary">Idioma: </span>
                     <span className="text-bolt-elements-textPrimary">{systemInfo.browser.language}</span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
@@ -1651,14 +1651,14 @@ export default function DebugTab() {
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:timer text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">Page Load: </span>
+                    <span className="text-bolt-elements-textSecondary">Carregamento da Página: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {(systemInfo.performance.timing.loadTime / 1000).toFixed(2)}s
                     </span>
                   </div>
                   <div className="text-sm flex items-center gap-2">
                     <div className="i-ph:code text-bolt-elements-textSecondary w-4 h-4" />
-                    <span className="text-bolt-elements-textSecondary">DOM Ready: </span>
+                    <span className="text-bolt-elements-textSecondary">DOM Pronto: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {(systemInfo.performance.timing.domReadyTime / 1000).toFixed(2)}s
                     </span>
@@ -1666,13 +1666,13 @@ export default function DebugTab() {
                 </div>
               </div>
             ) : (
-              <div className="text-sm text-bolt-elements-textSecondary">Loading system information...</div>
+              <div className="text-sm text-bolt-elements-textSecondary">Carregando informações do sistema...</div>
             )}
           </div>
         </CollapsibleContent>
       </Collapsible>
 
-      {/* Performance Metrics */}
+      {/* Métricas de Desempenho */}
       <Collapsible
         open={openSections.performance}
         onOpenChange={(open: boolean) => setOpenSections((prev) => ({ ...prev, performance: open }))}
@@ -1682,7 +1682,7 @@ export default function DebugTab() {
           <div className="flex items-center justify-between p-6 rounded-xl bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#1A1A1A]">
             <div className="flex items-center gap-3">
               <div className="i-ph:chart-line text-purple-500 w-5 h-5" />
-              <h3 className="text-base font-medium text-bolt-elements-textPrimary">Performance Metrics</h3>
+              <h3 className="text-base font-medium text-bolt-elements-textPrimary">Métricas de Desempenho</h3>
             </div>
             <div
               className={classNames(
@@ -1699,25 +1699,25 @@ export default function DebugTab() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <div className="text-sm">
-                    <span className="text-bolt-elements-textSecondary">Page Load Time: </span>
+                    <span className="text-bolt-elements-textSecondary">Tempo de Carregamento da Página: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {(systemInfo.performance.timing.loadTime / 1000).toFixed(2)}s
                     </span>
                   </div>
                   <div className="text-sm">
-                    <span className="text-bolt-elements-textSecondary">DOM Ready Time: </span>
+                    <span className="text-bolt-elements-textSecondary">Tempo para DOM Pronto: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {(systemInfo.performance.timing.domReadyTime / 1000).toFixed(2)}s
                     </span>
                   </div>
                   <div className="text-sm">
-                    <span className="text-bolt-elements-textSecondary">Request Time: </span>
+                    <span className="text-bolt-elements-textSecondary">Tempo de Requisição: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {(systemInfo.performance.timing.requestTime / 1000).toFixed(2)}s
                     </span>
                   </div>
                   <div className="text-sm">
-                    <span className="text-bolt-elements-textSecondary">Redirect Time: </span>
+                    <span className="text-bolt-elements-textSecondary">Tempo de Redirecionamento: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {(systemInfo.performance.timing.redirectTime / 1000).toFixed(2)}s
                     </span>
@@ -1725,32 +1725,32 @@ export default function DebugTab() {
                 </div>
                 <div className="space-y-2">
                   <div className="text-sm">
-                    <span className="text-bolt-elements-textSecondary">JS Heap Usage: </span>
+                    <span className="text-bolt-elements-textSecondary">Uso do JS Heap: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {(systemInfo.performance.memory.usedJSHeapSize / (1024 * 1024)).toFixed(1)}MB /{' '}
                       {(systemInfo.performance.memory.totalJSHeapSize / (1024 * 1024)).toFixed(1)}MB
                     </span>
                   </div>
                   <div className="text-sm">
-                    <span className="text-bolt-elements-textSecondary">Heap Utilization: </span>
+                    <span className="text-bolt-elements-textSecondary">Utilização do Heap: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {systemInfo.performance.memory.usagePercentage.toFixed(1)}%
                     </span>
                   </div>
                   <div className="text-sm">
-                    <span className="text-bolt-elements-textSecondary">Navigation Type: </span>
+                    <span className="text-bolt-elements-textSecondary">Tipo de Navegação: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {systemInfo.performance.navigation.type === 0
-                        ? 'Navigate'
+                        ? 'Navegação'
                         : systemInfo.performance.navigation.type === 1
-                          ? 'Reload'
+                          ? 'Recarregar'
                           : systemInfo.performance.navigation.type === 2
-                            ? 'Back/Forward'
-                            : 'Other'}
+                            ? 'Voltar/Avançar'
+                            : 'Outro'}
                     </span>
                   </div>
                   <div className="text-sm">
-                    <span className="text-bolt-elements-textSecondary">Redirects: </span>
+                    <span className="text-bolt-elements-textSecondary">Redirecionamentos: </span>
                     <span className="text-bolt-elements-textPrimary">
                       {systemInfo.performance.navigation.redirectCount}
                     </span>
@@ -1772,7 +1772,7 @@ export default function DebugTab() {
           <div className="flex items-center justify-between p-6 rounded-xl bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#1A1A1A]">
             <div className="flex items-center gap-3">
               <div className="i-ph:info text-blue-500 w-5 h-5" />
-              <h3 className="text-base font-medium text-bolt-elements-textPrimary">WebApp Information</h3>
+              <h3 className="text-base font-medium text-bolt-elements-textPrimary">Informações do Aplicativo Web</h3>
               {loading.webAppInfo && <span className="loading loading-spinner loading-sm" />}
             </div>
             <div
@@ -1793,49 +1793,49 @@ export default function DebugTab() {
             ) : !webAppInfo ? (
               <div className="flex flex-col items-center justify-center p-8 text-bolt-elements-textSecondary">
                 <div className="i-ph:warning-circle w-8 h-8 mb-2" />
-                <p>Failed to load WebApp information</p>
+                <p>Falha ao carregar as informações do Aplicativo Web</p>
                 <button
                   onClick={() => getWebAppInfo()}
                   className="mt-4 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                 >
-                  Retry
+                  Tentar Novamente
                 </button>
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <h3 className="mb-4 text-base font-medium text-bolt-elements-textPrimary">Basic Information</h3>
+                  <h3 className="mb-4 text-base font-medium text-bolt-elements-textPrimary">Informações Básicas</h3>
                   <div className="space-y-3">
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:app-window text-bolt-elements-textSecondary w-4 h-4" />
-                      <span className="text-bolt-elements-textSecondary">Name:</span>
+                      <span className="text-bolt-elements-textSecondary">Nome:</span>
                       <span className="text-bolt-elements-textPrimary">{webAppInfo.name}</span>
                     </div>
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:tag text-bolt-elements-textSecondary w-4 h-4" />
-                      <span className="text-bolt-elements-textSecondary">Version:</span>
+                      <span className="text-bolt-elements-textSecondary">Versão:</span>
                       <span className="text-bolt-elements-textPrimary">{webAppInfo.version}</span>
                     </div>
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:certificate text-bolt-elements-textSecondary w-4 h-4" />
-                      <span className="text-bolt-elements-textSecondary">License:</span>
+                      <span className="text-bolt-elements-textSecondary">Licença:</span>
                       <span className="text-bolt-elements-textPrimary">{webAppInfo.license}</span>
                     </div>
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:cloud text-bolt-elements-textSecondary w-4 h-4" />
-                      <span className="text-bolt-elements-textSecondary">Environment:</span>
+                      <span className="text-bolt-elements-textSecondary">Ambiente:</span>
                       <span className="text-bolt-elements-textPrimary">{webAppInfo.environment}</span>
                     </div>
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:node text-bolt-elements-textSecondary w-4 h-4" />
-                      <span className="text-bolt-elements-textSecondary">Node Version:</span>
+                      <span className="text-bolt-elements-textSecondary">Versão do Node:</span>
                       <span className="text-bolt-elements-textPrimary">{webAppInfo.runtimeInfo.nodeVersion}</span>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="mb-4 text-base font-medium text-bolt-elements-textPrimary">Git Information</h3>
+                  <h3 className="mb-4 text-base font-medium text-bolt-elements-textPrimary">Informações do Git</h3>
                   <div className="space-y-3">
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:git-branch text-bolt-elements-textSecondary w-4 h-4" />
@@ -1849,12 +1849,12 @@ export default function DebugTab() {
                     </div>
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:user text-bolt-elements-textSecondary w-4 h-4" />
-                      <span className="text-bolt-elements-textSecondary">Author:</span>
+                      <span className="text-bolt-elements-textSecondary">Autor:</span>
                       <span className="text-bolt-elements-textPrimary">{webAppInfo.gitInfo.local.author}</span>
                     </div>
                     <div className="text-sm flex items-center gap-2">
                       <div className="i-ph:clock text-bolt-elements-textSecondary w-4 h-4" />
-                      <span className="text-bolt-elements-textSecondary">Commit Time:</span>
+                      <span className="text-bolt-elements-textSecondary">Hora do Commit:</span>
                       <span className="text-bolt-elements-textPrimary">{webAppInfo.gitInfo.local.commitTime}</span>
                     </div>
 
@@ -1863,7 +1863,7 @@ export default function DebugTab() {
                         <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
                           <div className="text-sm flex items-center gap-2">
                             <div className="i-ph:git-repository text-bolt-elements-textSecondary w-4 h-4" />
-                            <span className="text-bolt-elements-textSecondary">Repository:</span>
+                            <span className="text-bolt-elements-textSecondary">Repositório:</span>
                             <span className="text-bolt-elements-textPrimary">
                               {webAppInfo.gitInfo.github.currentRepo.fullName}
                               {webAppInfo.gitInfo.isForked && ' (fork)'}
@@ -1929,10 +1929,10 @@ export default function DebugTab() {
               <div className="mt-6">
                 <h3 className="mb-4 text-base font-medium text-bolt-elements-textPrimary">Dependencies</h3>
                 <div className="bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#1A1A1A] rounded-lg divide-y divide-[#E5E5E5] dark:divide-[#1A1A1A]">
-                  <DependencySection title="Production" deps={webAppInfo.dependencies.production} />
-                  <DependencySection title="Development" deps={webAppInfo.dependencies.development} />
-                  <DependencySection title="Peer" deps={webAppInfo.dependencies.peer} />
-                  <DependencySection title="Optional" deps={webAppInfo.dependencies.optional} />
+                  <DependencySection title="Produção" deps={webAppInfo.dependencies.production} />
+                  <DependencySection title="Desenvolvimento" deps={webAppInfo.dependencies.development} />
+                  <DependencySection title="Parceria" deps={webAppInfo.dependencies.peer} />
+                  <DependencySection title="Opcional" deps={webAppInfo.dependencies.optional} />
                 </div>
               </div>
             )}
@@ -1950,10 +1950,10 @@ export default function DebugTab() {
           <div className="flex items-center justify-between p-6 rounded-xl bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#1A1A1A]">
             <div className="flex items-center gap-3">
               <div className="i-ph:warning text-red-500 w-5 h-5" />
-              <h3 className="text-base font-medium text-bolt-elements-textPrimary">Error Check</h3>
+              <h3 className="text-base font-medium text-bolt-elements-textPrimary">Verificação de Erros</h3>
               {errorLogs.length > 0 && (
                 <Badge variant="destructive" className="ml-2">
-                  {errorLogs.length} Errors
+                  {errorLogs.length} Erros
                 </Badge>
               )}
             </div>
@@ -1971,34 +1971,34 @@ export default function DebugTab() {
             <ScrollArea className="h-[300px]">
               <div className="space-y-4">
                 <div className="text-sm text-bolt-elements-textSecondary">
-                  Checks for:
+                  Verifica:
                   <ul className="list-disc list-inside mt-2 space-y-1">
-                    <li>Unhandled JavaScript errors</li>
-                    <li>Unhandled Promise rejections</li>
-                    <li>Runtime exceptions</li>
-                    <li>Network errors</li>
+                    <li>Erros de JavaScript não tratados</li>
+                    <li>Rejeições de Promises não tratadas</li>
+                    <li>Exceções em tempo de execução</li>
+                    <li>Erros de rede</li>
                   </ul>
                 </div>
                 <div className="text-sm">
                   <span className="text-bolt-elements-textSecondary">Status: </span>
                   <span className="text-bolt-elements-textPrimary">
                     {loading.errors
-                      ? 'Checking...'
+                      ? 'Verificando...'
                       : errorLogs.length > 0
-                        ? `${errorLogs.length} errors found`
-                        : 'No errors found'}
+                        ? `${errorLogs.length} erros encontrados`
+                        : 'Nenhum erro encontrado'}
                   </span>
                 </div>
                 {errorLogs.length > 0 && (
                   <div className="mt-4">
-                    <div className="text-sm font-medium text-bolt-elements-textPrimary mb-2">Recent Errors:</div>
+                    <div className="text-sm font-medium text-bolt-elements-textPrimary mb-2">Erros Recentes:</div>
                     <div className="space-y-2">
                       {errorLogs.map((error) => (
                         <div key={error.id} className="text-sm text-red-500 dark:text-red-400 p-2 rounded bg-red-500/5">
                           <div className="font-medium">{error.message}</div>
                           {error.source && (
                             <div className="text-xs mt-1 text-red-400">
-                              Source: {error.source}
+                              Fonte: {error.source}
                               {error.details?.lineNumber && `:${error.details.lineNumber}`}
                             </div>
                           )}

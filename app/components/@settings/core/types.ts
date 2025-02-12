@@ -68,28 +68,28 @@ export interface TabWindowConfig {
 
 export const TAB_LABELS: Record<TabType, string> = {
   profile: 'Profile',
-  settings: 'Settings',
-  notifications: 'Notifications',
-  features: 'Features',
-  data: 'Data Management',
-  'cloud-providers': 'Cloud Providers',
-  'local-providers': 'Local Providers',
-  'service-status': 'Service Status',
-  connection: 'Connections',
-  debug: 'Debug',
-  'event-logs': 'Event Logs',
-  update: 'Updates',
-  'task-manager': 'Task Manager',
-  'tab-management': 'Tab Management',
+  settings: 'Configurações',
+  notifications: 'Notificações',
+  features: 'Funcionalidades',
+  data: 'Gerenciamento de Dados',
+  'cloud-providers': 'Provedores de Nuvem',
+  'local-providers': 'Provedores Locais',
+  'service-status': 'Status do Serviço',
+  connection: 'Conexões',
+  debug: 'Depuração',
+  'event-logs': 'Logs de Eventos',
+  update: 'Atualizações',
+  'task-manager': 'Gerenciador de Tarefas',
+  'tab-management': 'Gerenciamento de Guias',
 };
 
 export const categoryLabels: Record<SettingCategory, string> = {
-  profile: 'Profile & Account',
-  file_sharing: 'File Sharing',
-  connectivity: 'Connectivity',
-  system: 'System',
-  services: 'Services',
-  preferences: 'Preferences',
+  profile: 'Profile e Conta',
+  file_sharing: 'Compartilhamento de Arquivos',
+  connectivity: 'Conectividade',
+  system: 'system',
+  services: 'Serviços',
+  preferences: 'Preferências',
 };
 
 export const categoryIcons: Record<SettingCategory, string> = {

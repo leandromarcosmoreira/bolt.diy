@@ -34,7 +34,7 @@ const NotificationsTab = () => {
     const count = Object.keys(logs).length;
     logStore.logInfo('Cleared notifications', {
       type: 'notification_clear',
-      message: `Cleared ${count} notifications`,
+      message: `Notificações ${count} limpas`,
       clearedCount: count,
       component: 'notifications',
     });
@@ -44,7 +44,7 @@ const NotificationsTab = () => {
   const handleUpdateAction = (updateUrl: string) => {
     logStore.logInfo('Update link clicked', {
       type: 'update_click',
-      message: 'User clicked update link',
+      message: 'O usuário clicou no link de atualização',
       updateUrl,
       component: 'notifications',
     });
@@ -54,7 +54,7 @@ const NotificationsTab = () => {
   const handleFilterChange = (newFilter: FilterType) => {
     logStore.logInfo('Notification filter changed', {
       type: 'filter_change',
-      message: `Filter changed to ${newFilter}`,
+      message: `Filtro alterado para ${newFilter}`,
       previousFilter: filter,
       newFilter,
       component: 'notifications',
@@ -159,14 +159,14 @@ const NotificationsTab = () => {
   };
 
   const filterOptions: { id: FilterType; label: string; icon: string; color: string }[] = [
-    { id: 'all', label: 'All Notifications', icon: 'i-ph:bell', color: '#9333ea' },
-    { id: 'system', label: 'System', icon: 'i-ph:gear', color: '#6b7280' },
-    { id: 'update', label: 'Updates', icon: 'i-ph:arrow-circle-up', color: '#9333ea' },
-    { id: 'error', label: 'Errors', icon: 'i-ph:warning-circle', color: '#ef4444' },
-    { id: 'warning', label: 'Warnings', icon: 'i-ph:warning', color: '#f59e0b' },
-    { id: 'info', label: 'Information', icon: 'i-ph:info', color: '#3b82f6' },
-    { id: 'provider', label: 'Providers', icon: 'i-ph:robot', color: '#10b981' },
-    { id: 'network', label: 'Network', icon: 'i-ph:wifi-high', color: '#6366f1' },
+    { id: 'all', label: 'Todas as Notificações', icon: 'i-ph:bell', color: '#9333ea' },
+    { id: 'system', label: 'system', icon: 'i-ph:gear', color: '#6b7280' },
+    { id: 'update', label: 'Atualizações', icon: 'i-ph:arrow-circle-up', color: '#9333ea' },
+    { id: 'error', label: 'Erros', icon: 'i-ph:warning-circle', color: '#ef4444' },
+    { id: 'warning', label: 'Avisos', icon: 'i-ph:warning', color: '#f59e0b' },
+    { id: 'info', label: 'Informações', icon: 'i-ph:info', color: '#3b82f6' },
+    { id: 'provider', label: 'Provedores', icon: 'i-ph:robot', color: '#10b981' },
+    { id: 'network', label: 'Rede', icon: 'i-ph:wifi-high', color: '#6366f1' },
   ];
 
   return (
@@ -233,7 +233,7 @@ const NotificationsTab = () => {
           )}
         >
           <span className="i-ph:trash text-lg text-gray-500 dark:text-gray-400 group-hover:text-purple-500 transition-colors" />
-          Clear All
+          Limpar Tudo
         </button>
       </div>
 
@@ -279,7 +279,7 @@ const NotificationsTab = () => {
                       <h3 className="text-sm font-medium text-gray-900 dark:text-white">{log.message}</h3>
                       {log.details && renderNotificationDetails(log.details as NotificationDetails)}
                       <p className="text-xs text-gray-500 dark:text-gray-400">
-                        Category: {log.category}
+                        Categoria: {log.category}
                         {log.subCategory ? ` > ${log.subCategory}` : ''}
                       </p>
                     </div>

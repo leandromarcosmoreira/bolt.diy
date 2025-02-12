@@ -180,7 +180,7 @@ export default function ConnectionsTab() {
       }));
     } catch (error) {
       logStore.logError('Failed to fetch GitHub stats', { error });
-      toast.error('Failed to fetch GitHub statistics');
+      toast.error('Falha ao buscar as estatísticas do GitHub');
     } finally {
       setIsFetchingStats(false);
     }
@@ -214,10 +214,10 @@ export default function ConnectionsTab() {
       // Fetch additional stats
       await fetchGitHubStats(token);
 
-      toast.success('Successfully connected to GitHub');
+      toast.success('Conexão com o GitHub realizada com sucesso');
     } catch (error) {
       logStore.logError('Failed to authenticate with GitHub', { error });
-      toast.error('Failed to connect to GitHub');
+      toast.error('Falha ao conectar ao GitHub');
       setConnection({ user: null, token: '', tokenType: 'classic' });
     } finally {
       setIsConnecting(false);
@@ -232,7 +232,7 @@ export default function ConnectionsTab() {
   const handleDisconnect = () => {
     localStorage.removeItem('github_connection');
     setConnection({ user: null, token: '', tokenType: 'classic' });
-    toast.success('Disconnected from GitHub');
+    toast.success('Desconectado do GitHub');
   };
 
   if (isLoading) {
@@ -249,10 +249,10 @@ export default function ConnectionsTab() {
         transition={{ delay: 0.1 }}
       >
         <div className="i-ph:plugs-connected w-5 h-5 text-purple-500" />
-        <h2 className="text-lg font-medium text-bolt-elements-textPrimary">Connection Settings</h2>
+        <h2 className="text-lg font-medium text-bolt-elements-textPrimary">Configurações de Conexão</h2>
       </motion.div>
       <p className="text-sm text-bolt-elements-textSecondary mb-6">
-        Manage your external service connections and integrations
+        Gerencie suas conexões e integrações com serviços externos
       </p>
 
       <div className="grid grid-cols-1 gap-4">
@@ -266,12 +266,12 @@ export default function ConnectionsTab() {
           <div className="p-6 space-y-6">
             <div className="flex items-center gap-2">
               <div className="i-ph:github-logo w-5 h-5 text-bolt-elements-textPrimary" />
-              <h3 className="text-base font-medium text-bolt-elements-textPrimary">GitHub Connection</h3>
+              <h3 className="text-base font-medium text-bolt-elements-textPrimary">Conexão com o GitHub</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-bolt-elements-textSecondary mb-2">Token Type</label>
+                <label className="block text-sm text-bolt-elements-textSecondary mb-2">Tipo de Token</label>
                 <select
                   value={connection.tokenType}
                   onChange={(e) =>
@@ -287,21 +287,21 @@ export default function ConnectionsTab() {
                     'disabled:opacity-50',
                   )}
                 >
-                  <option value="classic">Personal Access Token (Classic)</option>
-                  <option value="fine-grained">Fine-grained Token</option>
+                  <option value="classic">Token de Acesso Pessoal (Clássico)</option>
+                  <option value="fine-grained">Token de Granularidade Fina</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm text-bolt-elements-textSecondary mb-2">
-                  {connection.tokenType === 'classic' ? 'Personal Access Token' : 'Fine-grained Token'}
+                  {connection.tokenType === 'classic' ? 'Token de Acesso Pessoal' : 'Token de Granularidade Fina'}
                 </label>
                 <input
                   type="password"
                   value={connection.token}
                   onChange={(e) => setConnection((prev) => ({ ...prev, token: e.target.value }))}
                   disabled={isConnecting || !!connection.user}
-                  placeholder={`Enter your GitHub ${connection.tokenType === 'classic' ? 'personal access token' : 'fine-grained token'}`}
+                  placeholder={`Digite seu ${connection.tokenType === 'classic' ? 'token de acesso pessoal' : 'token de granularidade fina'} do GitHub`}
                   className={classNames(
                     'w-full px-3 py-2 rounded-lg text-sm',
                     'bg-[#F8F8F8] dark:bg-[#1A1A1A]',
@@ -318,15 +318,15 @@ export default function ConnectionsTab() {
                     rel="noopener noreferrer"
                     className="text-purple-500 hover:underline inline-flex items-center gap-1"
                   >
-                    Get your token
+                    Obtenha seu token
                     <div className="i-ph:arrow-square-out w-10 h-5" />
                   </a>
                   <span className="mx-2">•</span>
                   <span>
-                    Required scopes:{' '}
+                    Requisitos de escopo:{' '}
                     {connection.tokenType === 'classic'
                       ? 'repo, read:org, read:user'
-                      : 'Repository access, Organization access'}
+                      : 'Acesso ao repositório, Acesso à organização'}
                   </span>
                 </div>
               </div>
@@ -347,12 +347,12 @@ export default function ConnectionsTab() {
                   {isConnecting ? (
                     <>
                       <div className="i-ph:spinner-gap animate-spin" />
-                      Connecting...
+                      Conectando...
                     </>
                   ) : (
                     <>
                       <div className="i-ph:plug-charging w-4 h-4" />
-                      Connect
+                      Conectar
                     </>
                   )}
                 </button>
@@ -366,14 +366,14 @@ export default function ConnectionsTab() {
                   )}
                 >
                   <div className="i-ph:plug-x w-4 h-4" />
-                  Disconnect
+                  Desconectar
                 </button>
               )}
 
               {connection.user && (
                 <span className="text-sm text-bolt-elements-textSecondary flex items-center gap-1">
                   <div className="i-ph:check-circle w-4 h-4" />
-                  Connected to GitHub
+                  Conectado ao GitHub
                 </span>
               )}
             </div>
@@ -395,25 +395,25 @@ export default function ConnectionsTab() {
                 {isFetchingStats ? (
                   <div className="mt-4 flex items-center gap-2 text-sm text-bolt-elements-textSecondary">
                     <div className="i-ph:spinner-gap w-4 h-4 animate-spin" />
-                    Fetching GitHub stats...
+                    Buscando estatísticas do GitHub...
                   </div>
                 ) : (
                   connection.stats && (
                     <div className="mt-4 grid grid-cols-3 gap-4">
                       <div>
-                        <p className="text-sm text-bolt-elements-textSecondary">Public Repos</p>
+                        <p className="text-sm text-bolt-elements-textSecondary">Repositórios Públicos</p>
                         <p className="text-lg font-medium text-bolt-elements-textPrimary">
                           {connection.user.public_repos}
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-bolt-elements-textSecondary">Total Stars</p>
+                        <p className="text-sm text-bolt-elements-textSecondary">Total de Estrelas</p>
                         <p className="text-lg font-medium text-bolt-elements-textPrimary">
                           {connection.stats.totalStars}
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-bolt-elements-textSecondary">Total Forks</p>
+                        <p className="text-sm text-bolt-elements-textSecondary">Total de Forks</p>
                         <p className="text-lg font-medium text-bolt-elements-textPrimary">
                           {connection.stats.totalForks}
                         </p>
@@ -442,11 +442,11 @@ export default function ConnectionsTab() {
                     <div className="flex gap-4 mt-2 text-sm text-bolt-elements-textSecondary">
                       <span className="flex items-center gap-1">
                         <div className="i-ph:users w-4 h-4" />
-                        {connection.user.followers} followers
+                        {connection.user.followers} seguidores
                       </span>
                       <span className="flex items-center gap-1">
                         <div className="i-ph:star w-4 h-4" />
-                        {connection.stats.totalStars} stars
+                        {connection.stats.totalStars} estrelas
                       </span>
                       <span className="flex items-center gap-1">
                         <div className="i-ph:git-fork w-4 h-4" />
@@ -459,7 +459,7 @@ export default function ConnectionsTab() {
                 {/* Organizations Section */}
                 {connection.stats.organizations.length > 0 && (
                   <div className="mb-6">
-                    <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Organizations</h4>
+                    <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Organizações</h4>
                     <div className="flex flex-wrap gap-3">
                       {connection.stats.organizations.map((org) => (
                         <a
@@ -479,7 +479,7 @@ export default function ConnectionsTab() {
 
                 {/* Languages Section */}
                 <div className="mb-6">
-                  <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Top Languages</h4>
+                  <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Principais Linguagens</h4>
                   <div className="flex flex-wrap gap-2">
                     {Object.entries(connection.stats.languages)
                       .sort(([, a], [, b]) => b - a)
@@ -497,14 +497,14 @@ export default function ConnectionsTab() {
 
                 {/* Recent Activity Section */}
                 <div className="mb-6">
-                  <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Recent Activity</h4>
+                  <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Atividade Recente</h4>
                   <div className="space-y-3">
                     {connection.stats.recentActivity.map((event) => (
                       <div key={event.id} className="p-3 rounded-lg bg-[#F8F8F8] dark:bg-[#1A1A1A] text-sm">
                         <div className="flex items-center gap-2 text-bolt-elements-textPrimary">
                           <div className="i-ph:git-commit w-4 h-4 text-bolt-elements-textSecondary" />
                           <span className="font-medium">{event.type.replace('Event', '')}</span>
-                          <span>on</span>
+                          <span>ligado</span>
                           <a
                             href={`https://github.com/${event.repo.name}`}
                             target="_blank"
@@ -526,25 +526,25 @@ export default function ConnectionsTab() {
                 {/* Additional Stats */}
                 <div className="grid grid-cols-4 gap-4 mb-6">
                   <div className="p-4 rounded-lg bg-[#F8F8F8] dark:bg-[#1A1A1A]">
-                    <div className="text-sm text-bolt-elements-textSecondary">Member Since</div>
+                    <div className="text-sm text-bolt-elements-textSecondary">Membro Desde</div>
                     <div className="text-lg font-medium text-bolt-elements-textPrimary">
                       {new Date(connection.user.created_at).toLocaleDateString()}
                     </div>
                   </div>
                   <div className="p-4 rounded-lg bg-[#F8F8F8] dark:bg-[#1A1A1A]">
-                    <div className="text-sm text-bolt-elements-textSecondary">Public Gists</div>
+                    <div className="text-sm text-bolt-elements-textSecondary">Gists Públicos</div>
                     <div className="text-lg font-medium text-bolt-elements-textPrimary">
                       {connection.stats.totalGists}
                     </div>
                   </div>
                   <div className="p-4 rounded-lg bg-[#F8F8F8] dark:bg-[#1A1A1A]">
-                    <div className="text-sm text-bolt-elements-textSecondary">Organizations</div>
+                    <div className="text-sm text-bolt-elements-textSecondary">Organizações</div>
                     <div className="text-lg font-medium text-bolt-elements-textPrimary">
                       {connection.stats.organizations.length}
                     </div>
                   </div>
                   <div className="p-4 rounded-lg bg-[#F8F8F8] dark:bg-[#1A1A1A]">
-                    <div className="text-sm text-bolt-elements-textSecondary">Languages</div>
+                    <div className="text-sm text-bolt-elements-textSecondary">Linguagens</div>
                     <div className="text-lg font-medium text-bolt-elements-textPrimary">
                       {Object.keys(connection.stats.languages).length}
                     </div>
@@ -552,7 +552,7 @@ export default function ConnectionsTab() {
                 </div>
 
                 {/* Existing repositories section */}
-                <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Recent Repositories</h4>
+                <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Repositórios Recentes</h4>
                 <div className="space-y-3">
                   {connection.stats.repos.map((repo) => (
                     <a
@@ -577,7 +577,7 @@ export default function ConnectionsTab() {
                               {repo.default_branch}
                             </span>
                             <span>•</span>
-                            <span>Updated {new Date(repo.updated_at).toLocaleDateString()}</span>
+                            <span>Atualizado {new Date(repo.updated_at).toLocaleDateString()}</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-3 text-xs text-bolt-elements-textSecondary">
@@ -608,7 +608,7 @@ function LoadingSpinner() {
     <div className="flex items-center justify-center p-4">
       <div className="flex items-center gap-2">
         <div className="i-ph:spinner-gap-bold animate-spin w-4 h-4" />
-        <span className="text-bolt-elements-textSecondary">Loading...</span>
+        <span className="text-bolt-elements-textSecondary">Carregando...</span>
       </div>
     </div>
   );

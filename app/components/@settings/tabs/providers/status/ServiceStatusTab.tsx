@@ -759,7 +759,7 @@ const ServiceStatusTab = () => {
               type="password"
               value={testApiKey}
               onChange={(e) => setTestApiKey(e.target.value)}
-              placeholder="Enter API key to test"
+              placeholder="Digite a chave da API para testar"
               className={classNames(
                 'flex-1 px-3 py-1.5 rounded-lg text-sm',
                 'bg-bolt-elements-background-depth-3 border border-bolt-elements-borderColor',

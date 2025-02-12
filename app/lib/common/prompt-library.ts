@@ -17,13 +17,13 @@ export class PromptLibrary {
     }
   > = {
     default: {
-      label: 'Default Prompt',
-      description: 'This is the battle tested default system Prompt',
+      label: 'Prompt Padrão',
+      description: 'Este é o prompt padrão testado em batalha',
       get: (options) => getSystemPrompt(options.cwd),
     },
     optimized: {
-      label: 'Optimized Prompt (experimental)',
-      description: 'an Experimental version of the prompt for lower token usage',
+      label: 'Prompt Otimizado (experimental)',
+      description: 'Uma versão experimental do prompt para uso reduzido de tokens',
       get: (options) => optimized(options),
     },
   };

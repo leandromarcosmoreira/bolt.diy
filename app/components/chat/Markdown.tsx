@@ -34,7 +34,7 @@ export const Markdown = memo(({ children, html = false, limitedMarkdown = false 
         }
 
         if (className?.includes('__boltThought__')) {
-          return <ThoughtBox title="Thought process">{children}</ThoughtBox>;
+          return <ThoughtBox title="Raciocínio">{children}</ThoughtBox>;
         }
 
         return (

@@ -98,7 +98,7 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
 
   const onFileSave = useCallback(() => {
     workbenchStore.saveCurrentDocument().catch(() => {
-      toast.error('Failed to update file content');
+      toast.error('Falha ao atualizar o conteúdo do arquivo');
     });
   }, []);
 
@@ -112,10 +112,10 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
     try {
       const directoryHandle = await window.showDirectoryPicker();
       await workbenchStore.syncFiles(directoryHandle);
-      toast.success('Files synced successfully');
+      toast.success('Arquivos sincronizados com sucesso');
     } catch (error) {
       console.error('Error syncing files:', error);
-      toast.error('Failed to sync files');
+      toast.error('Falha ao sincronizar os arquivos');
     } finally {
       setIsSyncing(false);
     }
@@ -221,7 +221,7 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
               return repoUrl;
             } catch (error) {
               console.error('Error pushing to GitHub:', error);
-              toast.error('Failed to push to GitHub');
+              toast.error('Falha ao enviar para o GitHub');
               throw error; // Rethrow to let PushToGitHubDialog handle the error state
             }
           }}
