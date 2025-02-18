@@ -92,7 +92,13 @@ export default defineConfig((config) => {
     },
     build: {
       target: 'esnext',
-    },
+      modulePreload: true,
+      rollupOptions: {
+        external: ['child_process', 'crypto', 'util'],
+      },
+      commonjsOptions: {
+        transformMixedEsModules: true,
+      },
     plugins: [
       nodePolyfills({
         include: ['path', 'buffer', 'process'],
@@ -125,7 +131,8 @@ export default defineConfig((config) => {
         },
       },
     },
-  };
+  }
+}
 });
 
 function chrome129IssuePlugin() {
