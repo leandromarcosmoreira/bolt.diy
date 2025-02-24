@@ -90,8 +90,15 @@ export default defineConfig((config) => {
       __PKG_PEER_DEPENDENCIES: JSON.stringify(pkg.peerDependencies),
       __PKG_OPTIONAL_DEPENDENCIES: JSON.stringify(pkg.optionalDependencies),
     },
+    ssr: {
+      target: 'node',
+      noExternal: ['cookie-signature', 'stream-slice'],
+    },
     build: {
       target: 'esnext',
+      rollupOptions: {
+        external: ['child_process', 'util', 'crypto', 'stream'],
+      },
     },
     plugins: [
       nodePolyfills({
@@ -125,6 +132,12 @@ export default defineConfig((config) => {
         },
       },
     },
+    server: {
+      host: '0.0.0.0',
+      port: Number(process.env.PORT) || 5173,
+      strictPort: true,
+      allowedHosts: [process.env.VITE_ALLOWED_HOST || 'localhost'],
+    }
   };
 });
 

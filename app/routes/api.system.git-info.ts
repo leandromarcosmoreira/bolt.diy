@@ -65,8 +65,8 @@ const getGitHubInfo = async (repoFullName: string) => {
       });
 
       // If we get a 404, try the main repo as fallback
-      if (response.status === 404 && repoFullName !== 'stackblitz-labs/bolt.diy') {
-        return getGitHubInfo('stackblitz-labs/bolt.diy');
+      if (response.status === 404 && repoFullName !== 'leandromarcosmoreira/bolt.diy') {
+        return getGitHubInfo('leandromarcosmoreira/bolt.diy');
       }
 
       throw new Error(`GitHub API error: ${response.statusText}`);
@@ -95,7 +95,7 @@ export const loader: LoaderFunction = async ({ request: _request }) => {
 
   // If no local info or GitHub info, try the main repo
   if (!githubInfo) {
-    githubInfo = await getGitHubInfo('stackblitz-labs/bolt.diy');
+    githubInfo = await getGitHubInfo('leandromarcosmoreira/bolt.diy');
   }
 
   const response = {

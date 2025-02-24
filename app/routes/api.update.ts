@@ -71,7 +71,7 @@ export const action: ActionFunction = async ({ request }) => {
             });
           } catch {
             throw new Error(
-              'No upstream repository found. Please set up the upstream repository first by running:\ngit remote add upstream https://github.com/stackblitz-labs/bolt.diy.git',
+              'No upstream repository found. Please set up the upstream repository first by running:\ngit remote add upstream https://github.com/leandromarcosmoreira/bolt.diy.git',
             );
           }
 
@@ -380,7 +380,7 @@ export const action: ActionFunction = async ({ request }) => {
               remoteCommit: remoteCommit.trim().substring(0, 7),
               updateReady: true,
               changelog,
-              compareUrl: `https://github.com/stackblitz-labs/bolt.diy/compare/${currentCommit.trim().substring(0, 7)}...${remoteCommit.trim().substring(0, 7)}`,
+              compareUrl: `https://github.com/leandromarcosmoreira/bolt.diy/compare/${currentCommit.trim().substring(0, 7)}...${remoteCommit.trim().substring(0, 7)}`,
             },
           });
 
@@ -400,7 +400,7 @@ export const action: ActionFunction = async ({ request }) => {
                 remoteCommit: remoteCommit.trim().substring(0, 7),
                 updateReady: true,
                 changelog,
-                compareUrl: `https://github.com/stackblitz-labs/bolt.diy/compare/${currentCommit.trim().substring(0, 7)}...${remoteCommit.trim().substring(0, 7)}`,
+                compareUrl: `https://github.com/leandromarcosmoreira/bolt.diy/compare/${currentCommit.trim().substring(0, 7)}...${remoteCommit.trim().substring(0, 7)}`,
               },
             });
             return;
