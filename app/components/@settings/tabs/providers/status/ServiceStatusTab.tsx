@@ -16,6 +16,7 @@ import { useToast } from '~/components/ui/use-toast';
 type ProviderName =
   | 'AmazonBedrock'
   | 'Anthropic'
+  | 'Cloudflare'
   | 'Cohere'
   | 'Deepseek'
   | 'Google'
@@ -81,6 +82,12 @@ const PROVIDER_STATUS_URLS: Record<ProviderName, ProviderConfig> = {
       'anthropic-version': '2024-02-29',
     },
     testModel: 'claude-3-sonnet-20240229',
+  },
+  Cloudflare: {
+    statusUrl: 'https://www.cloudflarestatus.com/api/v2/status.json',
+    apiUrl: 'https://api.cloudflare.com/client/v4/accounts',
+    headers: {},
+    testModel: 'llama-3-8b',
   },
   Cohere: {
     statusUrl: 'https://status.cohere.com/',
@@ -175,6 +182,7 @@ const PROVIDER_STATUS_URLS: Record<ProviderName, ProviderConfig> = {
 const PROVIDER_ICONS: Record<ProviderName, IconType> = {
   AmazonBedrock: SiAmazon,
   Anthropic: FaBrain,
+  Cloudflare: FaCloud,
   Cohere: BiChip,
   Google: SiGoogle,
   Groq: BsCloud,
@@ -209,6 +217,7 @@ const ServiceStatusTab = () => {
       const envKeyMap: Record<ProviderName, string> = {
         OpenAI: 'OPENAI_API_KEY',
         Anthropic: 'ANTHROPIC_API_KEY',
+        Cloudflare: 'CLOUDFLARE_API_TOKEN',
         Cohere: 'COHERE_API_KEY',
         Google: 'GOOGLE_GENERATIVE_AI_API_KEY',
         HuggingFace: 'HuggingFace_API_KEY',

@@ -2,6 +2,7 @@ import type { ProviderName, ProviderConfig, StatusCheckResult } from './types';
 import { BaseProviderChecker } from './base-provider';
 
 import { AmazonBedrockStatusChecker } from './providers/amazon-bedrock';
+import { CloudflareStatusChecker } from './providers/cloudflare';
 import { CohereStatusChecker } from './providers/cohere';
 import { DeepseekStatusChecker } from './providers/deepseek';
 import { GoogleStatusChecker } from './providers/google';
@@ -21,6 +22,12 @@ export class ProviderStatusCheckerFactory {
       apiUrl: 'https://bedrock.us-east-1.amazonaws.com/models',
       headers: {},
       testModel: 'anthropic.claude-3-sonnet-20240229-v1:0',
+    },
+    Cloudflare: {
+      statusUrl: 'https://www.cloudflarestatus.com/api/v2/status.json',
+      apiUrl: 'https://api.cloudflare.com/client/v4/accounts',
+      headers: {},
+      testModel: 'llama-3-8b',
     },
     Cohere: {
       statusUrl: 'https://status.cohere.com/',
@@ -100,6 +107,8 @@ export class ProviderStatusCheckerFactory {
     switch (provider) {
       case 'AmazonBedrock':
         return new AmazonBedrockStatusChecker(config);
+      case 'Cloudflare':
+        return new CloudflareStatusChecker(config);
       case 'Cohere':
         return new CohereStatusChecker(config);
       case 'Deepseek':

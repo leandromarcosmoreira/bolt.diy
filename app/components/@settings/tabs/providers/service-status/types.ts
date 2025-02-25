@@ -2,6 +2,7 @@ import type { IconType } from 'react-icons';
 
 export type ProviderName =
   | 'AmazonBedrock'
+  | 'Cloudflare'
   | 'Cohere'
   | 'Deepseek'
   | 'Google'

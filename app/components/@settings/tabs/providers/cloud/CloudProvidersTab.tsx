@@ -19,6 +19,7 @@ import type { IconType } from 'react-icons';
 type ProviderName =
   | 'AmazonBedrock'
   | 'Anthropic'
+  | 'Cloudflare'
   | 'Cohere'
   | 'Deepseek'
   | 'Google'
@@ -36,6 +37,7 @@ type ProviderName =
 const PROVIDER_ICONS: Record<ProviderName, IconType> = {
   AmazonBedrock: SiAmazon,
   Anthropic: FaBrain,
+  Cloudflare: FaCloud,
   Cohere: BiChip,
   Deepseek: BiCodeBlock,
   Google: SiGoogle,
@@ -54,6 +56,7 @@ const PROVIDER_ICONS: Record<ProviderName, IconType> = {
 const PROVIDER_DESCRIPTIONS: Partial<Record<ProviderName, string>> = {
   Anthropic: 'Access Claude and other Anthropic models',
   OpenAI: 'Use GPT-4, GPT-3.5, and other OpenAI models',
+  Cloudflare: 'Access Cloudflare models',
 };
 
 const CloudProvidersTab = () => {
