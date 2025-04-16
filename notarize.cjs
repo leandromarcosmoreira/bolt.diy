@@ -7,9 +7,9 @@ exports.default = async function notarizing(context) {
     return;
   }
 
-  // Skip notarization when identity is null (development build)
+  // Pula notarização quando a identidade é nula (build de desenvolvimento)
   if (!context.packager.config.mac || context.packager.config.mac.identity === null) {
-    console.log('Skipping notarization: identity is null');
+    console.log('Pulando notarização: identidade é nula');
     return;
   }
 
@@ -17,15 +17,15 @@ exports.default = async function notarizing(context) {
   const appBundleId = context.packager.config.appId;
 
   try {
-    console.log(`Notarizing ${appBundleId} found at ${appOutDir}/${appName}.app`);
+    console.log(`Notarizando ${appBundleId} encontrado em ${appOutDir}/${appName}.app`);
     await notarize({
       tool: 'notarytool',
       appPath: `${appOutDir}/${appName}.app`,
       teamId: process.env.APPLE_TEAM_ID,
     });
-    console.log(`Done notarizing ${appBundleId}`);
+    console.log(`Notarização concluída para ${appBundleId}`);
   } catch (error) {
-    console.error('Notarization failed:', error);
+    console.error('Falha na notarização:', error);
     throw error;
   }
 };

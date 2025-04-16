@@ -56,10 +56,10 @@ function cleanoutMarkdownSyntax(content: string) {
   const codeBlockRegex = /^\s*```\w*\n([\s\S]*?)\n\s*```\s*$/;
   const match = content.match(codeBlockRegex);
 
-  // console.log('matching', !!match, content);
+  // console.log('comparando', !!match, content);
 
   if (match) {
-    return match[1]; // Remove common leading 4-space indent
+    return match[1]; // Remover indentação comum de 4 espaços
   } else {
     return content;
   }
@@ -97,7 +97,7 @@ export class StreamingMessageParser {
         const currentArtifact = state.currentArtifact;
 
         if (currentArtifact === undefined) {
-          unreachable('Artifact not initialized');
+          unreachable('Artefato não inicializado');
         }
 
         if (state.insideAction) {
@@ -111,7 +111,7 @@ export class StreamingMessageParser {
             let content = currentAction.content.trim();
 
             if ('type' in currentAction && currentAction.type === 'file') {
-              // Remove markdown code block syntax if present and file is not markdown
+              // Remover sintaxe de bloco de código markdown se presente e o arquivo não for markdown
               if (!currentAction.filePath.endsWith('.md')) {
                 content = cleanoutMarkdownSyntax(content);
                 content = cleanEscapedTags(content);
@@ -223,11 +223,11 @@ export class StreamingMessageParser {
               const artifactId = this.#extractAttribute(artifactTag, 'id') as string;
 
               if (!artifactTitle) {
-                logger.warn('Artifact title missing');
+                logger.warn('Título do artefato ausente');
               }
 
               if (!artifactId) {
-                logger.warn('Artifact id missing');
+                logger.warn('ID do artefato ausente');
               }
 
               state.insideArtifact = true;
@@ -297,8 +297,8 @@ export class StreamingMessageParser {
       const operation = this.#extractAttribute(actionTag, 'operation');
 
       if (!operation || !['migration', 'query'].includes(operation)) {
-        logger.warn(`Invalid or missing operation for Supabase action: ${operation}`);
-        throw new Error(`Invalid Supabase operation: ${operation}`);
+        logger.warn(`Operação inválida ou ausente para ação Supabase: ${operation}`);
+        throw new Error(`Operação Supabase inválida: ${operation}`);
       }
 
       (actionAttributes as SupabaseAction).operation = operation as 'migration' | 'query';
@@ -307,8 +307,8 @@ export class StreamingMessageParser {
         const filePath = this.#extractAttribute(actionTag, 'filePath');
 
         if (!filePath) {
-          logger.warn('Migration requires a filePath');
-          throw new Error('Migration requires a filePath');
+          logger.warn('Migração requer um caminho de arquivo');
+          throw new Error('Migração requer um caminho de arquivo');
         }
 
         (actionAttributes as SupabaseAction).filePath = filePath;
@@ -317,12 +317,12 @@ export class StreamingMessageParser {
       const filePath = this.#extractAttribute(actionTag, 'filePath') as string;
 
       if (!filePath) {
-        logger.debug('File path not specified');
+        logger.debug('Caminho do arquivo não especificado');
       }
 
       (actionAttributes as FileAction).filePath = filePath;
     } else if (!['shell', 'start'].includes(actionType)) {
-      logger.warn(`Unknown action type '${actionType}'`);
+      logger.warn(`Tipo de ação desconhecido '${actionType}'`);
     }
 
     return actionAttributes as FileAction | ShellAction;

@@ -9,10 +9,10 @@ export class PerplexityStatusChecker extends BaseProviderChecker {
       const text = await statusPageResponse.text();
 
       // Check for specific Perplexity status indicators
-      const isOperational = text.includes('All Systems Operational');
-      const hasIncidents = text.includes('Active Incidents');
-      const hasDegradation = text.includes('Degraded Performance');
-      const hasOutage = text.includes('Service Outage');
+      const isOperational = text.includes('Todos os sistemas operacionais');
+      const hasIncidents = text.includes('Incidentes ativos');
+      const hasDegradation = text.includes('Desempenho degradado');
+      const hasOutage = text.includes('Desempenho degradado');
 
       // Extract incidents
       const incidents: string[] = [];
@@ -30,29 +30,29 @@ export class PerplexityStatusChecker extends BaseProviderChecker {
       // Check specific services
       const services = {
         api: {
-          operational: text.includes('API Service') && text.includes('Operational'),
-          degraded: text.includes('API Service') && text.includes('Degraded Performance'),
-          outage: text.includes('API Service') && text.includes('Service Outage'),
+          operacional: text.includes('API Service') && text.includes('Operacional'),
+          instavel: text.includes('API Service') && text.includes('Desempenho degradado'),
+          outage: text.includes('API Service') && text.includes('Desempenho degradado'),
         },
         inference: {
-          operational: text.includes('Inference Service') && text.includes('Operational'),
-          degraded: text.includes('Inference Service') && text.includes('Degraded Performance'),
-          outage: text.includes('Inference Service') && text.includes('Service Outage'),
+          operacional: text.includes('Inference Service') && text.includes('Operacional'),
+          instavel: text.includes('Inference Service') && text.includes('Desempenho degradado'),
+          outage: text.includes('Inference Service') && text.includes('Desempenho degradado'),
         },
       };
 
-      let status: StatusCheckResult['status'] = 'operational';
-      let message = 'All systems operational';
+      let status: StatusCheckResult['status'] = 'operacional';
+      let message = 'Todos os sistemas operacionais';
 
       if (services.api.outage || services.inference.outage || hasOutage) {
         status = 'down';
-        message = 'Service outage detected';
-      } else if (services.api.degraded || services.inference.degraded || hasDegradation || hasIncidents) {
-        status = 'degraded';
-        message = 'Service experiencing issues';
+        message = 'Desempenho degradado';
+      } else if (services.api.instavel || services.inference.instavel || hasDegradation || hasIncidents) {
+        status = 'instavel';
+        message = 'Desempenho degradado';
       } else if (!isOperational) {
-        status = 'degraded';
-        message = 'Service status unknown';
+        status = 'instavel';
+        message = 'Status do serviço desconhecido';
       }
 
       // If status page check fails, fallback to endpoint check
@@ -62,9 +62,9 @@ export class PerplexityStatusChecker extends BaseProviderChecker {
         const apiStatus = await this.checkEndpoint(apiEndpoint);
 
         return {
-          status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-          message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-          incidents: ['Note: Limited status information due to CORS restrictions'],
+          status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+          message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+          incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
         };
       }
 
@@ -82,9 +82,9 @@ export class PerplexityStatusChecker extends BaseProviderChecker {
       const apiStatus = await this.checkEndpoint(apiEndpoint);
 
       return {
-        status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-        message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-        incidents: ['Note: Limited status information due to CORS restrictions'],
+        status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+        message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+        incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
       };
     }
   }

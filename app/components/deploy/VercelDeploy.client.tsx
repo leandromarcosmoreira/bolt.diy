@@ -15,12 +15,12 @@ export function useVercelDeploy() {
 
   const handleVercelDeploy = async () => {
     if (!vercelConn.user || !vercelConn.token) {
-      toast.error('Please connect to Vercel first in the settings tab!');
+      toast.error('Por favor, conecte-se ao Vercel primeiro na aba de configurações!');
       return false;
     }
 
     if (!currentChatId) {
-      toast.error('No active chat found');
+      toast.error('Nenhum chat ativo encontrado');
       return false;
     }
 
@@ -30,7 +30,7 @@ export function useVercelDeploy() {
       const artifact = workbenchStore.firstArtifact;
 
       if (!artifact) {
-        throw new Error('No active project found');
+        throw new Error('Nenhum projeto ativo encontrado');
       }
 
       // Create a deployment artifact for visual feedback
@@ -67,7 +67,7 @@ export function useVercelDeploy() {
       if (!artifact.runner.buildOutput) {
         // Notify that build failed
         deployArtifact.runner.handleDeployAction('building', 'failed', {
-          error: 'Build failed. Check the terminal for details.',
+          error: 'Build falhou. Build failed. Check the terminal for details.',
           source: 'vercel',
         });
         throw new Error('Build failed');
@@ -177,7 +177,7 @@ export function useVercelDeploy() {
       return true;
     } catch (err) {
       console.error('Vercel deploy error:', err);
-      toast.error(err instanceof Error ? err.message : 'Vercel deployment failed');
+      toast.error(err instanceof Error ? err.message : 'Falha no deploy do Vercel');
 
       return false;
     } finally {

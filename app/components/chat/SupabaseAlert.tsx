@@ -17,10 +17,10 @@ export function SupabaseChatAlert({ alert, clearAlert, postMessage }: Props) {
   const [isExecuting, setIsExecuting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  // Determine connection state
+  // Determinar estado da conexão
   const isConnected = !!(connection.token && connection.selectedProjectId);
 
-  // Set title and description based on connection state
+  // Definir título e descrição baseado no estado da conexão
   const title = isConnected ? 'Supabase Query' : 'Supabase Connection Required';
   const description = isConnected ? 'Execute database query' : 'Supabase connection required';
   const message = isConnected
@@ -28,16 +28,16 @@ export function SupabaseChatAlert({ alert, clearAlert, postMessage }: Props) {
     : 'Please connect to Supabase to continue with this operation.';
 
   const handleConnectClick = () => {
-    // Dispatch an event to open the Supabase connection dialog
+    // Disparar um evento para abrir o diálogo de conexão do Supabase
     document.dispatchEvent(new CustomEvent('open-supabase-connection'));
   };
 
-  // Determine if we should show the Connect button or Apply Changes button
+  // Determinar se devemos mostrar o botão Conectar ou Aplicar Mudanças
   const showConnectButton = !isConnected;
 
   const executeSupabaseAction = async (sql: string) => {
     if (!connection.token || !connection.selectedProjectId) {
-      console.error('No Supabase token or project selected');
+      console.error('Nenhum token ou projeto Supabase selecionado');
       return;
     }
 
@@ -58,14 +58,14 @@ export function SupabaseChatAlert({ alert, clearAlert, postMessage }: Props) {
 
       if (!response.ok) {
         const errorData = (await response.json()) as any;
-        throw new Error(`Supabase query failed: ${errorData.error?.message || response.statusText}`);
+        throw new Error(`Consulta Supabase falhou: ${errorData.error?.message || response.statusText}`);
       }
 
       const result = await response.json();
-      console.log('Supabase query executed successfully:', result);
+      console.log('Consulta Supabase executada com sucesso:', result);
       clearAlert();
     } catch (error) {
-      console.error('Failed to execute Supabase action:', error);
+      console.error('Falha ao executar ação Supabase:', error);
       postMessage(
         `*Error executing Supabase query please fix and return the query again*\n\`\`\`\n${error instanceof Error ? error.message : String(error)}\n\`\`\`\n`,
       );

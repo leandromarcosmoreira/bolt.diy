@@ -129,9 +129,9 @@ export class ProviderStatusCheckerFactory {
             const apiStatus = await this.checkEndpoint(this.config.apiUrl);
 
             return {
-              status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-              message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-              incidents: ['Note: Limited status information due to CORS restrictions'],
+              status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+              message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+              incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
             };
           }
         })(config);

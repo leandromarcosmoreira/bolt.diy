@@ -4,7 +4,7 @@ import { atom } from 'nanostores';
 import { generateId, type JSONValue, type Message } from 'ai';
 import { toast } from 'react-toastify';
 import { workbenchStore } from '~/lib/stores/workbench';
-import { logStore } from '~/lib/stores/logs'; // Import logStore
+import { logStore } from '~/lib/stores/logs'; // Importar logStore
 import {
   getMessages,
   getNextId,
@@ -52,9 +52,9 @@ export function useChatHistory() {
       setReady(true);
 
       if (persistenceEnabled) {
-        const error = new Error('Chat persistence is unavailable');
-        logStore.logError('Chat persistence initialization failed', error);
-        toast.error('Chat persistence is unavailable');
+        const error = new Error('A persistência do chat não está disponível');
+        logStore.logError('Falha na inicialização da persistência do chat', error);
+        toast.error('A persistência do chat não está disponível');
       }
 
       return;
@@ -112,15 +112,15 @@ export function useChatHistory() {
                 {
                   id: generateId(),
                   role: 'user',
-                  content: `Restore project from snapshot
+                  content: `Restaurar projeto do snapshot
                   `,
                   annotations: ['no-store', 'hidden'],
                 },
                 {
                   id: storedMessages.messages[snapshotIndex].id,
                   role: 'assistant',
-                  content: ` 📦 Chat Restored from snapshot, You can revert this message to load the full chat history
-                  <boltArtifact id="imported-files" title="Project Files Snapshot" type="bundled">
+                  content: ` 📦 Chat Restaurado do snapshot, Você pode reverter esta mensagem para carregar o histórico completo do chat
+                  <boltArtifact id="imported-files" title="Snapshot de Arquivos do Projeto" type="bundled">
                   ${Object.entries(snapshot?.files || {})
                     .filter((x) => !x[0].endsWith('lock.json'))
                     .map(([key, value]) => {
@@ -155,7 +155,7 @@ ${value.content}
                       {
                         id: `${storedMessages.messages[snapshotIndex].id}-2`,
                         role: 'user' as const,
-                        content: `setup project`,
+                        content: `configurar projeto`,
                         annotations: ['no-store', 'hidden'],
                       },
                       {
@@ -197,7 +197,7 @@ ${value.content}
         .catch((error) => {
           console.error(error);
 
-          logStore.logError('Failed to load chat messages', error);
+          logStore.logError('Falha ao carregar mensagens do chat', error);
           toast.error(error.message);
         });
     }
@@ -269,7 +269,7 @@ ${value.content}
         await setMessages(db, id, initialMessages, urlId, description.get(), undefined, metadata);
         chatMetadata.set(metadata);
       } catch (error) {
-        toast.error('Failed to update chat metadata');
+        toast.error('Falha ao atualizar metadados do chat');
         console.error(error);
       }
     },
@@ -339,9 +339,9 @@ ${value.content}
       try {
         const newId = await duplicateChat(db, mixedId || listItemId);
         navigate(`/chat/${newId}`);
-        toast.success('Chat duplicated successfully');
+        toast.success('Chat duplicado com sucesso');
       } catch (error) {
-        toast.error('Failed to duplicate chat');
+        toast.error('Falha ao duplicar chat');
         console.log(error);
       }
     },
@@ -353,12 +353,12 @@ ${value.content}
       try {
         const newId = await createChatFromMessages(db, description, messages, metadata);
         window.location.href = `/chat/${newId}`;
-        toast.success('Chat imported successfully');
+        toast.success('Chat importado com sucesso');
       } catch (error) {
         if (error instanceof Error) {
-          toast.error('Failed to import chat: ' + error.message);
+          toast.error('Falha ao importar chat: ' + error.message);
         } else {
-          toast.error('Failed to import chat');
+          toast.error('Falha ao importar chat');
         }
       }
     },
@@ -389,7 +389,7 @@ ${value.content}
 
 function navigateChat(nextId: string) {
   /**
-   * FIXME: Using the intended navigate function causes a rerender for <Chat /> that breaks the app.
+   * FIXME: Usar a função navigate pretendida causa uma nova renderização para <Chat /> que quebra o aplicativo.
    *
    * `navigate(`/chat/${nextId}`, { replace: true });`
    */

@@ -1,65 +1,65 @@
-# 🚀 Release v0.0.7
+# 🚀 Lançamento v0.0.7
 
-## What's Changed 🌟
+## O que Mudou 🌟
 
-### 🔄 Changes since v0.0.6
+### 🔄 Mudanças desde v0.0.6
 
-### ✨ Features
+### ✨ Funcionalidades
 
-* added support for reasoning content ([#1168](https://github.com/stackblitz-labs/bolt.diy/pull/1168)) by @thecodacus
-* add deepseek-r1-distill-llama-70b to groq provider ([#1187](https://github.com/stackblitz-labs/bolt.diy/pull/1187)) by @saif78642
-* add Gemini 2.0 Flash-thinking-exp-01-21 model with 65k token support ([#1202](https://github.com/stackblitz-labs/bolt.diy/pull/1202)) by @saif78642
-* added more dynamic models, sorted and remove duplicate models ([#1206](https://github.com/stackblitz-labs/bolt.diy/pull/1206)) by @thecodacus
-* support for <think></think> tags to allow reasoning tokens formatted in UI ([#1205](https://github.com/stackblitz-labs/bolt.diy/pull/1205)) by @thecodacus
-* enhanced Code Context and Project Summary Features ([#1191](https://github.com/stackblitz-labs/bolt.diy/pull/1191)) by @thecodacus
-* added dynamic model support for openAI provider ([#1241](https://github.com/stackblitz-labs/bolt.diy/pull/1241)) by @thecodacus
-* bolt dyi new settings UI V3 ([#1245](https://github.com/stackblitz-labs/bolt.diy/pull/1245)) by @Stijnus
-* implement llm model search ([#1322](https://github.com/stackblitz-labs/bolt.diy/pull/1322)) by @kamilfurtak
-* diff-view-v2-no-conflict ([#1335](https://github.com/stackblitz-labs/bolt.diy/pull/1335)) by @Toddyclipsgg
-* netlify one click deployment ([#1376](https://github.com/stackblitz-labs/bolt.diy/pull/1376)) by @xKevIsDev
-* diff view v3 ([#1367](https://github.com/stackblitz-labs/bolt.diy/pull/1367)) by @Toddyclipsgg
-* added anthropic dynamic models ([#1374](https://github.com/stackblitz-labs/bolt.diy/pull/1374)) by @thecodacus
-* make user made changes persistent after reload ([#1387](https://github.com/stackblitz-labs/bolt.diy/pull/1387)) by @thecodacus
+* adicionado suporte para conteúdo de raciocínio ([#1168](https://github.com/stackblitz-labs/bolt.diy/pull/1168)) por @thecodacus
+* adicionado deepseek-r1-distill-llama-70b ao provedor groq ([#1187](https://github.com/stackblitz-labs/bolt.diy/pull/1187)) por @saif78642
+* adicionado modelo Gemini 2.0 Flash-thinking-exp-01-21 com suporte a 65k tokens ([#1202](https://github.com/stackblitz-labs/bolt.diy/pull/1202)) por @saif78642
+* adicionados mais modelos dinâmicos, ordenados e removidos modelos duplicados ([#1206](https://github.com/stackblitz-labs/bolt.diy/pull/1206)) por @thecodacus
+* suporte para tags <think></think> para permitir tokens de raciocínio formatados na UI ([#1205](https://github.com/stackblitz-labs/bolt.diy/pull/1205)) por @thecodacus
+* recursos aprimorados de Contexto de Código e Resumo do Projeto ([#1191](https://github.com/stackblitz-labs/bolt.diy/pull/1191)) por @thecodacus
+* adicionado suporte a modelos dinâmicos para o provedor openAI ([#1241](https://github.com/stackblitz-labs/bolt.diy/pull/1241)) por @thecodacus
+* nova interface de configurações do bolt dyi V3 ([#1245](https://github.com/stackblitz-labs/bolt.diy/pull/1245)) por @Stijnus
+* implementada busca de modelos llm ([#1322](https://github.com/stackblitz-labs/bolt.diy/pull/1322)) por @kamilfurtak
+* visualização de diferenças v2-sem conflitos ([#1335](https://github.com/stackblitz-labs/bolt.diy/pull/1335)) por @Toddyclipsgg
+* implantação com um clique no netlify ([#1376](https://github.com/stackblitz-labs/bolt.diy/pull/1376)) por @xKevIsDev
+* visualização de diferenças v3 ([#1367](https://github.com/stackblitz-labs/bolt.diy/pull/1367)) por @Toddyclipsgg
+* adicionados modelos dinâmicos da anthropic ([#1374](https://github.com/stackblitz-labs/bolt.diy/pull/1374)) por @thecodacus
+* tornar as alterações feitas pelo usuário persistentes após recarregar ([#1387](https://github.com/stackblitz-labs/bolt.diy/pull/1387)) por @thecodacus
 
 
-### 🐛 Bug Fixes
+### 🐛 Correções de Bugs
 
-* docker prod env variable fix ([#1170](https://github.com/stackblitz-labs/bolt.diy/pull/1170)) by @thecodacus
-* improve push to github option ([#1111](https://github.com/stackblitz-labs/bolt.diy/pull/1111)) by @thecodacus
-* git import issue when importing bolt on bolt ([#1020](https://github.com/stackblitz-labs/bolt.diy/pull/1020)) by @thecodacus
-* issue with alternate message when importing from folder and git ([#1216](https://github.com/stackblitz-labs/bolt.diy/pull/1216)) by @thecodacus
-* tune the system prompt to avoid diff writing ([#1218](https://github.com/stackblitz-labs/bolt.diy/pull/1218)) by @thecodacus
-* removed chrome canary note (6a8449e) by @leex279
-* starter template icons fix and auto resize of custon icons are reverted ([#1298](https://github.com/stackblitz-labs/bolt.diy/pull/1298)) by @thecodacus
-* auto scroll fix, scroll allow user to scroll up during ai response ([#1299](https://github.com/stackblitz-labs/bolt.diy/pull/1299)) by @thecodacus
-* bug fix New UI / Feature tab - Default values hard-coded (294adfd) by @leex279
-* debounce profile update notifications to prevent toast spam (70b723d) by @xKevIsDev
-* bolt dyi UI bugfix ([#1342](https://github.com/stackblitz-labs/bolt.diy/pull/1342)) by @Stijnus
-* preserve complete provider settings in cookies (220e2da) by @xKevIsDev
-* for remove settings icon _index.tsx ([#1356](https://github.com/stackblitz-labs/bolt.diy/pull/1356)) by @Stijnus
-* fix enhance prompt to stop implementing full project instead of enhancing  ([#1383](https://github.com/stackblitz-labs/bolt.diy/pull/1383)) by @thecodacus
+* correção de variável de ambiente do docker prod ([#1170](https://github.com/stackblitz-labs/bolt.diy/pull/1170)) por @thecodacus
+* melhorada a opção de enviar para o github ([#1111](https://github.com/stackblitz-labs/bolt.diy/pull/1111)) por @thecodacus
+* problema de importação git ao importar bolt no bolt ([#1020](https://github.com/stackblitz-labs/bolt.diy/pull/1020)) por @thecodacus
+* problema com mensagem alternativa ao importar de pasta e git ([#1216](https://github.com/stackblitz-labs/bolt.diy/pull/1216)) por @thecodacus
+* ajustado o prompt do sistema para evitar escrita de diferenças ([#1218](https://github.com/stackblitz-labs/bolt.diy/pull/1218)) por @thecodacus
+* removida nota do chrome canary (6a8449e) por @leex279
+* correção dos ícones do template inicial e redimensionamento automático de ícones personalizados revertido ([#1298](https://github.com/stackblitz-labs/bolt.diy/pull/1298)) por @thecodacus
+* correção de rolagem automática, permite que o usuário role para cima durante a resposta da IA ([#1299](https://github.com/stackblitz-labs/bolt.diy/pull/1299)) por @thecodacus
+* correção de bug Nova UI / Aba de Recursos - Valores padrão codificados (294adfd) por @leex279
+* debounce nas notificações de atualização de perfil para evitar spam de toast (70b723d) por @xKevIsDev
+* correção de bug na UI do bolt dyi ([#1342](https://github.com/stackblitz-labs/bolt.diy/pull/1342)) por @Stijnus
+* preservar configurações completas do provedor em cookies (220e2da) por @xKevIsDev
+* para remover ícone de configurações _index.tsx ([#1356](https://github.com/stackblitz-labs/bolt.diy/pull/1356)) por @Stijnus
+* corrigido aprimoramento de prompt para parar de implementar projeto completo em vez de aprimorar ([#1383](https://github.com/stackblitz-labs/bolt.diy/pull/1383)) por @thecodacus
 
 
 ### ⚙️ CI
 
-* updated Dockerfile to install latest version of corepack to ensure to have the right version to pnpm (c88938c) by @BaptisteCDC
+* atualizado Dockerfile para instalar a versão mais recente do corepack para garantir a versão correta do pnpm (c88938c) por @BaptisteCDC
 
 
-### 🔍 Other Changes
+### 🔍 Outras Mudanças
 
-* new anthropogenic model for amazon bedrock (0fd039b) by @leex279
-* This reverts commit 871aefbe83c31660b32b53b63772ebba33ed7954, reversing ([#1335](https://github.com/stackblitz-labs/bolt.diy/pull/1335)) by @Toddyclipsgg
-* Update docker.yaml (stable/main deployment) (f0ea22e) by @leex279
-* Update Dockerfile - Test Bugfix Dockerpipeline (8e790d0) by @leex279
-* Update Dockerfile (5297081) by @leex279
-* Update docker.yaml (7dda793) by @leex279
-* Update docker.yaml (67c4051) by @leex279
-* Fix broken astro project git clone ([#1352](https://github.com/stackblitz-labs/bolt.diy/pull/1352)) by @Phr33d0m
+* novo modelo antropogênico para amazon bedrock (0fd039b) por @leex279
+* Isso reverte o commit 871aefbe83c31660b32b53b63772ebba33ed7954, revertendo ([#1335](https://github.com/stackblitz-labs/bolt.diy/pull/1335)) por @Toddyclipsgg
+* Atualização do docker.yaml (implantação stable/main) (f0ea22e) por @leex279
+* Atualização do Dockerfile - Correção de Bug do Pipeline Docker (8e790d0) por @leex279
+* Atualização do Dockerfile (5297081) por @leex279
+* Atualização do docker.yaml (7dda793) por @leex279
+* Atualização do docker.yaml (67c4051) por @leex279
+* Correção de clone git de projeto astro quebrado ([#1352](https://github.com/stackblitz-labs/bolt.diy/pull/1352)) por @Phr33d0m
 
 
-## ✨ First-time Contributors
+## ✨ Contribuidores pela Primeira Vez
 
-A huge thank you to our amazing new contributors! Your first contribution marks the start of an exciting journey! 🌟
+Um enorme agradecimento aos nossos incríveis novos contribuidores! Sua primeira contribuição marca o início de uma jornada emocionante! 🌟
 
 * 🌟 [@BaptisteCDC](https://github.com/BaptisteCDC)
 * 🌟 [@Phr33d0m](https://github.com/Phr33d0m)
@@ -67,6 +67,6 @@ A huge thank you to our amazing new contributors! Your first contribution marks 
 * 🌟 [@saif78642](https://github.com/saif78642)
 * 🌟 [@xKevIsDev](https://github.com/xKevIsDev)
 
-## 📈 Stats
+## 📈 Estatísticas
 
-**Full Changelog**: [`v0.0.6..v0.0.7`](https://github.com/stackblitz-labs/bolt.diy/compare/v0.0.6...v0.0.7)
+**Changelog Completo**: [`v0.0.6..v0.0.7`](https://github.com/stackblitz-labs/bolt.diy/compare/v0.0.6...v0.0.7)

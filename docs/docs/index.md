@@ -1,6 +1,44 @@
-# Welcome to bolt diy
+# Bem-vindo ao bolt.diy
 
-bolt.diy allows you to choose the LLM that you use for each prompt! Currently, you can use OpenAI, Anthropic, Ollama, OpenRouter, Gemini, LMStudio, Mistral, xAI, HuggingFace, DeepSeek, or Groq models - and it is easily extended to use any other model supported by the Vercel AI SDK! See the instructions below for running this locally and extending it to include more models.
+Bolt.diy é uma plataforma de desenvolvimento que permite criar, editar e executar aplicações web diretamente no navegador. Com suporte para modelos de linguagem locais e em nuvem, o bolt.diy oferece uma experiência de desenvolvimento flexível e poderosa.
+
+## Recursos Principais
+
+- **Desenvolvimento no Navegador**: Crie e edite aplicações web sem necessidade de instalação local
+- **Suporte para LLMs**: Integração com modelos de linguagem locais e em nuvem
+- **Ambiente de Desenvolvimento Completo**: Editor de código, terminal e visualização em tempo real
+- **Personalização**: Adapte o ambiente de desenvolvimento às suas necessidades
+
+## Começando
+
+Para começar a usar o bolt.diy, siga estas etapas:
+
+1. Clone o repositório
+2. Instale as dependências
+3. Configure as variáveis de ambiente
+4. Inicie o servidor de desenvolvimento
+
+Consulte nossa [documentação de instalação](installation.md) para instruções detalhadas.
+
+## Contribuindo
+
+Agradecemos contribuições da comunidade! Se você gostaria de contribuir, por favor:
+
+1. Leia nosso [guia de contribuição](CONTRIBUTING.md)
+2. Verifique os [problemas abertos](https://github.com/stackblitz-labs/bolt.diy/issues)
+3. Envie um pull request
+
+## Suporte
+
+Se você encontrar problemas ou tiver dúvidas:
+
+- Consulte nossa [FAQ](FAQ.md)
+- Abra um [problema](https://github.com/stackblitz-labs/bolt.diy/issues)
+- Junte-se à nossa [comunidade](https://thinktank.ottomator.ai/c/bolt-diy/17)
+
+## Licença
+
+O bolt.diy é licenciado sob a [Licença MIT](LICENSE).
 
 ## Table of Contents
 
@@ -99,7 +137,7 @@ ANTHROPIC_API_KEY=XXX
 
 Once you've set your keys, you can proceed with running the app. You will set these keys up during the initial setup, and you can revisit and update them later after the app is running.
 
-**Note**: Never commit your `.env.local` file to version control. It’s already included in the `.gitignore`.
+**Note**: Never commit your `.env.local` file to version control. It's already included in the `.gitignore`.
 
 #### 2. Configure API Keys Directly in the Application
 
@@ -228,33 +266,4 @@ When you add a new model to the MODEL_LIST array, it will immediately be availab
 - `pnpm run build`: Builds the project.
 - `pnpm run start`: Runs the built application locally using Wrangler Pages. This script uses `bindings.sh` to set up necessary bindings so you don't have to duplicate environment variables.
 - `pnpm run preview`: Builds the project and then starts it locally, useful for testing the production build. Note, HTTP streaming currently doesn't work as expected with `wrangler pages dev`.
-- `pnpm test`: Runs the test suite using Vitest.
-- `pnpm run typecheck`: Runs TypeScript type checking.
-- `pnpm run typegen`: Generates TypeScript types using Wrangler.
-- `pnpm run deploy`: Builds the project and deploys it to Cloudflare Pages.
-
----
-
-## Development
-
-To start the development server:
-
-```bash
-pnpm run dev
-```
-
-This will start the Remix Vite development server. You will need Google Chrome Canary to run this locally if you use Chrome! It's an easy install and a good browser for web development anyway.
-
----
-
-## Tips and Tricks
-
-Here are some tips to get the most out of bolt.diy:
-
-- **Be specific about your stack**: If you want to use specific frameworks or libraries (like Astro, Tailwind, ShadCN, or any other popular JavaScript framework), mention them in your initial prompt to ensure Bolt scaffolds the project accordingly.
-
-- **Use the enhance prompt icon**: Before sending your prompt, try clicking the 'enhance' icon to have the AI model help you refine your prompt, then edit the results before submitting.
-
-- **Scaffold the basics first, then add features**: Make sure the basic structure of your application is in place before diving into more advanced functionality. This helps Bolt understand the foundation of your project and ensure everything is wired up right before building out more advanced functionality.
-
-- **Batch simple instructions**: Save time by combining simple instructions into one message. For example, you can ask Bolt to change the color scheme, add mobile responsiveness, and restart the dev server, all in one go saving you time and reducing API credit consumption significantly.
+- `

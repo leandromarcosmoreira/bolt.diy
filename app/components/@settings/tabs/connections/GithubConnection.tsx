@@ -545,7 +545,7 @@ export default function GitHubConnection() {
           <div className="flex items-center gap-2">
             <GithubLogo />
             <h3 className="text-base font-medium text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary">
-              GitHub Connection
+              Conexão GitHub
             </h3>
           </div>
         </div>
@@ -554,14 +554,14 @@ export default function GitHubConnection() {
           <div className="text-xs text-bolt-elements-textSecondary bg-bolt-elements-background-depth-1 dark:bg-bolt-elements-background-depth-1 p-3 rounded-lg mb-4">
             <p className="flex items-center gap-1 mb-1">
               <span className="i-ph:lightbulb w-3.5 h-3.5 text-bolt-elements-icon-success dark:text-bolt-elements-icon-success" />
-              <span className="font-medium">Tip:</span> You can also set the{' '}
+              <span className="font-medium">Dica:</span> Você também pode configurar a{' '}
               <code className="px-1 py-0.5 bg-bolt-elements-background-depth-2 dark:bg-bolt-elements-background-depth-2 rounded">
                 VITE_GITHUB_ACCESS_TOKEN
               </code>{' '}
-              environment variable to connect automatically.
+              variável de ambiente para conectar automaticamente.
             </p>
             <p>
-              For fine-grained tokens, also set{' '}
+              Para tokens fine-grained, também defina a{' '}
               <code className="px-1 py-0.5 bg-bolt-elements-background-depth-2 dark:bg-bolt-elements-background-depth-2 rounded">
                 VITE_GITHUB_TOKEN_TYPE=fine-grained
               </code>
@@ -571,7 +571,7 @@ export default function GitHubConnection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mb-2">
-              Token Type
+              Tipo de Token
             </label>
             <select
               value={connection.tokenType}
@@ -590,22 +590,22 @@ export default function GitHubConnection() {
                 'disabled:opacity-50',
               )}
             >
-              <option value="classic">Personal Access Token (Classic)</option>
-              <option value="fine-grained">Fine-grained Token</option>
+              <option value="classic">Token de Acesso Pessoal (Classic)</option>
+              <option value="fine-grained">Token Fine-grained</option>
             </select>
           </div>
 
           <div>
             <label className="block text-sm text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mb-2">
-              {connection.tokenType === 'classic' ? 'Personal Access Token' : 'Fine-grained Token'}
+              {connection.tokenType === 'classic' ? 'Token de Acesso Pessoal' : 'Token Fine-grained'}
             </label>
             <input
               type="password"
               value={connection.token}
               onChange={(e) => setConnection((prev) => ({ ...prev, token: e.target.value }))}
               disabled={isConnecting || !!connection.user}
-              placeholder={`Enter your GitHub ${
-                connection.tokenType === 'classic' ? 'personal access token' : 'fine-grained token'
+              placeholder={`Digite seu GitHub ${
+                connection.tokenType === 'classic' ? 'token de acesso pessoal' : 'token fine-grained'
               }`}
               className={classNames(
                 'w-full px-3 py-2 rounded-lg text-sm',
@@ -623,15 +623,15 @@ export default function GitHubConnection() {
                 rel="noopener noreferrer"
                 className="text-bolt-elements-borderColorActive hover:underline inline-flex items-center gap-1"
               >
-                Get your token
+                Obter seu token
                 <div className="i-ph:arrow-square-out w-4 h-4" />
               </a>
               <span className="mx-2">•</span>
               <span>
-                Required scopes:{' '}
+                Escopos necessários:{' '}
                 {connection.tokenType === 'classic'
                   ? 'repo, read:org, read:user'
-                  : 'Repository access, Organization access'}
+                  : 'Acesso ao repositório, Acesso à organização'}
               </span>
             </div>
           </div>
@@ -653,12 +653,12 @@ export default function GitHubConnection() {
               {isConnecting ? (
                 <>
                   <div className="i-ph:spinner-gap animate-spin" />
-                  Connecting...
+                  Conectando...
                 </>
               ) : (
                 <>
                   <div className="i-ph:plug-charging w-4 h-4" />
-                  Connect
+                  Conectar
                 </>
               )}
             </button>
@@ -675,11 +675,11 @@ export default function GitHubConnection() {
                     )}
                   >
                     <div className="i-ph:plug w-4 h-4" />
-                    Disconnect
+                    Desconectar
                   </button>
                   <span className="text-sm text-bolt-elements-textSecondary flex items-center gap-1">
                     <div className="i-ph:check-circle w-4 h-4 text-green-500" />
-                    Connected to GitHub
+                    Conectado ao GitHub
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -703,12 +703,12 @@ export default function GitHubConnection() {
                     {isFetchingStats ? (
                       <>
                         <div className="i-ph:spinner-gap w-4 h-4 animate-spin" />
-                        Refreshing...
+                        Atualizando...
                       </>
                     ) : (
                       <>
                         <div className="i-ph:arrows-clockwise w-4 h-4" />
-                        Refresh Stats
+                        Atualizar Estatísticas
                       </>
                     )}
                   </Button>
@@ -741,7 +741,7 @@ export default function GitHubConnection() {
                 <div className="flex items-center justify-between p-4 rounded-lg bg-bolt-elements-background dark:bg-bolt-elements-background-depth-2 border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor hover:border-bolt-elements-borderColorActive/70 dark:hover:border-bolt-elements-borderColorActive/70 transition-all duration-200">
                   <div className="flex items-center gap-2">
                     <div className="i-ph:chart-bar w-4 h-4 text-bolt-elements-item-contentAccent" />
-                    <span className="text-sm font-medium text-bolt-elements-textPrimary">GitHub Stats</span>
+                    <span className="text-sm font-medium text-bolt-elements-textPrimary">Estatísticas GitHub</span>
                   </div>
                   <div
                     className={classNames(
@@ -755,7 +755,7 @@ export default function GitHubConnection() {
                 <div className="space-y-4 mt-4">
                   {/* Languages Section */}
                   <div className="mb-6">
-                    <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Top Languages</h4>
+                    <h4 className="text-sm font-medium text-bolt-elements-textPrimary mb-3">Linguagens Principais</h4>
                     <div className="flex flex-wrap gap-2">
                       {Object.entries(connection.stats.languages)
                         .sort(([, a], [, b]) => b - a)
@@ -775,19 +775,19 @@ export default function GitHubConnection() {
                   <div className="grid grid-cols-4 gap-4 mb-6">
                     {[
                       {
-                        label: 'Member Since',
+                        label: 'Membro desde',
                         value: new Date(connection.user.created_at).toLocaleDateString(),
                       },
                       {
-                        label: 'Public Gists',
+                        label: 'Gists Públicos',
                         value: connection.stats.publicGists,
                       },
                       {
-                        label: 'Organizations',
+                        label: 'Organizações',
                         value: connection.stats.organizations ? connection.stats.organizations.length : 0,
                       },
                       {
-                        label: 'Languages',
+                        label: 'Linguagens',
                         value: Object.keys(connection.stats.languages).length,
                       },
                     ].map((stat, index) => (
@@ -805,15 +805,17 @@ export default function GitHubConnection() {
                   <div className="mt-4">
                     <div className="space-y-4">
                       <div>
-                        <h5 className="text-sm font-medium text-bolt-elements-textPrimary mb-2">Repository Stats</h5>
+                        <h5 className="text-sm font-medium text-bolt-elements-textPrimary mb-2">
+                          Estatísticas do Repositório
+                        </h5>
                         <div className="grid grid-cols-2 gap-4">
                           {[
                             {
-                              label: 'Public Repos',
+                              label: 'Repositórios Públicos',
                               value: connection.stats.publicRepos,
                             },
                             {
-                              label: 'Private Repos',
+                              label: 'Repositórios Privados',
                               value: connection.stats.privateRepos,
                             },
                           ].map((stat, index) => (
@@ -829,11 +831,13 @@ export default function GitHubConnection() {
                       </div>
 
                       <div>
-                        <h5 className="text-sm font-medium text-bolt-elements-textPrimary mb-2">Contribution Stats</h5>
+                        <h5 className="text-sm font-medium text-bolt-elements-textPrimary mb-2">
+                          Estatísticas de Contribuição
+                        </h5>
                         <div className="grid grid-cols-3 gap-4">
                           {[
                             {
-                              label: 'Stars',
+                              label: 'Estrelas',
                               value: connection.stats.stars || 0,
                               icon: 'i-ph:star',
                               iconColor: 'text-bolt-elements-icon-warning',
@@ -845,7 +849,7 @@ export default function GitHubConnection() {
                               iconColor: 'text-bolt-elements-icon-info',
                             },
                             {
-                              label: 'Followers',
+                              label: 'Seguidores',
                               value: connection.stats.followers || 0,
                               icon: 'i-ph:users',
                               iconColor: 'text-bolt-elements-icon-success',

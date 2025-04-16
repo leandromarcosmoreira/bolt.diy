@@ -57,7 +57,7 @@ export const allowedHTMLElements = [
   'think',
 ];
 
-// Add custom rehype plugin
+// Adiciona plugin rehype personalizado
 function remarkThinkRawContent() {
   return (tree: any) => {
     visit(tree, (node: any) => {

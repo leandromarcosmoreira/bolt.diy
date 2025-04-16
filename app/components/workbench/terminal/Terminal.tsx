@@ -55,7 +55,7 @@ export const Terminal = memo(
 
         resizeObserver.observe(element);
 
-        logger.debug(`Attach [${id}]`);
+        logger.debug(`Anexando [${id}]`);
 
         onTerminalReady?.(terminal);
 

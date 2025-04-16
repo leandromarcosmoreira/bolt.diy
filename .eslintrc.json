@@ -8,7 +8,7 @@
       "plugin:prettier/recommended"
     ],
     "rules": {
-      // example: turn off console warnings
+      // exemplo: desativa avisos de console
       "no-console": "off"
     }
   }

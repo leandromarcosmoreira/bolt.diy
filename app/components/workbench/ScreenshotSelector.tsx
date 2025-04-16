@@ -16,7 +16,7 @@ export const ScreenshotSelector = memo(
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
     useEffect(() => {
-      // Cleanup function to stop all tracks when component unmounts
+      // Função de limpeza para parar todas as tracks quando o componente é desmontado
       return () => {
         if (videoRef.current) {
           videoRef.current.pause();
@@ -45,7 +45,7 @@ export const ScreenshotSelector = memo(
             },
           } as MediaStreamConstraints);
 
-          // Add handler for when sharing stops
+          // Adicionar manipulador para quando o compartilhamento parar
           stream.addEventListener('inactive', () => {
             if (videoRef.current) {
               videoRef.current.pause();
@@ -67,7 +67,7 @@ export const ScreenshotSelector = memo(
 
           mediaStreamRef.current = stream;
 
-          // Initialize video element if needed
+          // Inicializar elemento de vídeo se necessário
           if (!videoRef.current) {
             const video = document.createElement('video');
             video.style.opacity = '0';
@@ -78,13 +78,13 @@ export const ScreenshotSelector = memo(
             videoRef.current = video;
           }
 
-          // Set up video with the stream
+          // Configurar vídeo com o stream
           videoRef.current.srcObject = stream;
           await videoRef.current.play();
         } catch (error) {
           console.error('Failed to initialize stream:', error);
           setIsSelectionMode(false);
-          toast.error('Failed to initialize screen capture');
+          toast.error('Falha ao inicializar a captura de tela');
         }
       }
 
@@ -116,28 +116,28 @@ export const ScreenshotSelector = memo(
         const tempCtx = tempCanvas.getContext('2d');
 
         if (!tempCtx) {
-          throw new Error('Failed to get temporary canvas context');
+          throw new Error('Falha ao obter contexto do canvas temporário');
         }
 
-        // Draw the full video frame
+        // Desenhar o frame completo do vídeo
         tempCtx.drawImage(videoRef.current, 0, 0);
 
-        // Calculate scale factor between video and screen
+        // Calcular fator de escala entre vídeo e tela
         const scaleX = videoRef.current.videoWidth / window.innerWidth;
         const scaleY = videoRef.current.videoHeight / window.innerHeight;
 
-        // Get window scroll position
+        // Obter posição de rolagem da janela
         const scrollX = window.scrollX;
         const scrollY = window.scrollY + 40;
 
-        // Get the container's position in the page
+        // Obter a posição do container na página
         const containerRect = containerRef.current.getBoundingClientRect();
 
-        // Offset adjustments for more accurate clipping
-        const leftOffset = -9; // Adjust left position
-        const bottomOffset = -14; // Adjust bottom position
+        // Ajustes de offset para clipping mais preciso
+        const leftOffset = -9; // Ajustar posição à esquerda
+        const bottomOffset = -14; // Ajustar posição inferior
 
-        // Calculate the scaled coordinates with scroll offset and adjustments
+        // Calcular as coordenadas escaladas com offset de rolagem e ajustes
         const scaledX = Math.round(
           (containerRect.left + Math.min(selectionStart.x, selectionEnd.x) + scrollX + leftOffset) * scaleX,
         );
@@ -147,7 +147,7 @@ export const ScreenshotSelector = memo(
         const scaledWidth = Math.round(Math.abs(selectionEnd.x - selectionStart.x) * scaleX);
         const scaledHeight = Math.round(Math.abs(selectionEnd.y - selectionStart.y) * scaleY);
 
-        // Create final canvas for the cropped area
+        // Criar canvas final para a área recortada
         const canvas = document.createElement('canvas');
         canvas.width = Math.round(Math.abs(selectionEnd.x - selectionStart.x));
         canvas.height = Math.round(Math.abs(selectionEnd.y - selectionStart.y));
@@ -155,13 +155,13 @@ export const ScreenshotSelector = memo(
         const ctx = canvas.getContext('2d');
 
         if (!ctx) {
-          throw new Error('Failed to get canvas context');
+          throw new Error('Falha ao obter contexto do canvas');
         }
 
-        // Draw the cropped area
+        // Desenhar a área recortada
         ctx.drawImage(tempCanvas, scaledX, scaledY, scaledWidth, scaledHeight, 0, 0, canvas.width, canvas.height);
 
-        // Convert to blob
+        // Converter para blob
         const blob = await new Promise<Blob>((resolve, reject) => {
           canvas.toBlob((blob) => {
             if (blob) {
@@ -172,37 +172,37 @@ export const ScreenshotSelector = memo(
           }, 'image/png');
         });
 
-        // Create a FileReader to convert blob to base64
+        // Criar um FileReader para converter blob para base64
         const reader = new FileReader();
 
         reader.onload = (e) => {
           const base64Image = e.target?.result as string;
 
-          // Find the textarea element
+          // Encontrar o elemento textarea
           const textarea = document.querySelector('textarea');
 
           if (textarea) {
-            // Get the setters from the BaseChat component
+            // Obter os setters do componente BaseChat
             const setUploadedFiles = (window as any).__BOLT_SET_UPLOADED_FILES__;
             const setImageDataList = (window as any).__BOLT_SET_IMAGE_DATA_LIST__;
             const uploadedFiles = (window as any).__BOLT_UPLOADED_FILES__ || [];
             const imageDataList = (window as any).__BOLT_IMAGE_DATA_LIST__ || [];
 
             if (setUploadedFiles && setImageDataList) {
-              // Update the files and image data
+              // Atualizar os arquivos e dados da imagem
               const file = new File([blob], 'screenshot.png', { type: 'image/png' });
               setUploadedFiles([...uploadedFiles, file]);
               setImageDataList([...imageDataList, base64Image]);
-              toast.success('Screenshot captured and added to chat');
+              toast.success('Captura de tela realizada e adicionada ao chat');
             } else {
-              toast.error('Could not add screenshot to chat');
+              toast.error('Não foi possível adicionar a captura de tela ao chat');
             }
           }
         };
         reader.readAsDataURL(blob);
       } catch (error) {
         console.error('Failed to capture screenshot:', error);
-        toast.error('Failed to capture screenshot');
+        toast.error('Falha ao capturar tela');
 
         if (mediaStreamRef.current) {
           mediaStreamRef.current.getTracks().forEach((track) => track.stop());
@@ -212,7 +212,7 @@ export const ScreenshotSelector = memo(
         setIsCapturing(false);
         setSelectionStart(null);
         setSelectionEnd(null);
-        setIsSelectionMode(false); // Turn off selection mode after capture
+        setIsSelectionMode(false); // Desligar modo de seleção após captura
       }
     }, [isSelectionMode, selectionStart, selectionEnd, containerRef, setIsSelectionMode]);
 

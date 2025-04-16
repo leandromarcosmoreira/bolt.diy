@@ -139,7 +139,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       }
     }, [data]);
     useEffect(() => {
-      console.log(transcript);
+      console.log('Transcrição:', transcript);
     }, [transcript]);
 
     useEffect(() => {
@@ -170,7 +170,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         };
 
         recognition.onerror = (event) => {
-          console.error('Speech recognition error:', event.error);
+          console.error('Erro no reconhecimento de fala:', event.error);
           setIsListening(false);
         };
 
@@ -186,7 +186,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
           parsedApiKeys = getApiKeysFromCookies();
           setApiKeys(parsedApiKeys);
         } catch (error) {
-          console.error('Error loading API keys from cookies:', error);
+          console.error('Erro ao carregar chaves de API dos cookies:', error);
           Cookies.remove('apiKeys');
         }
 
@@ -198,7 +198,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
             setModelList(typedData.modelList);
           })
           .catch((error) => {
-            console.error('Error fetching model list:', error);
+            console.error('Erro ao buscar lista de modelos:', error);
           })
           .finally(() => {
             setIsModelLoading(undefined);
@@ -220,10 +220,10 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         const data = await response.json();
         providerModels = (data as { modelList: ModelInfo[] }).modelList;
       } catch (error) {
-        console.error('Error loading dynamic models for:', providerName, error);
+        console.error('Erro ao carregar modelos dinâmicos para:', providerName, error);
       }
 
-      // Only update models for the specific provider
+      // Atualizar apenas os modelos para o provedor específico
       setModelList((prevModels) => {
         const otherModels = prevModels.filter((model) => model.provider !== providerName);
         return [...otherModels, ...providerModels];
@@ -250,11 +250,11 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         sendMessage(event, messageInput);
 
         if (recognition) {
-          recognition.abort(); // Stop current recognition
-          setTranscript(''); // Clear transcript
+          recognition.abort(); // Parar reconhecimento atual
+          setTranscript(''); // Limpar transcrição
           setIsListening(false);
 
-          // Clear the input by triggering handleInputChange with empty value
+          // Limpar a entrada disparando handleInputChange com valor vazio
           if (handleInputChange) {
             const syntheticEvent = {
               target: { value: '' },
@@ -329,10 +329,10 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
             {!chatStarted && (
               <div id="intro" className="mt-[16vh] max-w-chat mx-auto text-center px-4 lg:px-0">
                 <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
-                  Where ideas begin
+                  Onde ideias nascem
                 </h1>
                 <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">
-                  Bring ideas to life in seconds or get help on existing projects.
+                  Dê vida às ideias em segundos ou receba ajuda em projetos.
                 </p>
               </div>
             )}
@@ -444,17 +444,15 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                             apiKeys={apiKeys}
                             modelLoading={isModelLoading}
                           />
-                          {(providerList || []).length > 0 &&
-                            provider &&
-                            (!LOCAL_PROVIDERS.includes(provider.name) || 'OpenAILike') && (
-                              <APIKeyManager
-                                provider={provider}
-                                apiKey={apiKeys[provider.name] || ''}
-                                setApiKey={(key) => {
-                                  onApiKeysChange(provider.name, key);
-                                }}
-                              />
-                            )}
+                          {(providerList || []).length > 0 && provider && !LOCAL_PROVIDERS.includes(provider.name) && (
+                            <APIKeyManager
+                              provider={provider}
+                              apiKey={apiKeys[provider.name] || ''}
+                              setApiKey={(key) => {
+                                onApiKeysChange(provider.name, key);
+                              }}
+                            />
+                          )}
                         </div>
                       )}
                     </ClientOnly>
@@ -532,7 +530,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                             return;
                           }
 
-                          // ignore if using input method engine
+                          // ignorar se estiver usando método de entrada
                           if (event.nativeEvent.isComposing) {
                             return;
                           }
@@ -549,7 +547,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                         minHeight: TEXTAREA_MIN_HEIGHT,
                         maxHeight: TEXTAREA_MAX_HEIGHT,
                       }}
-                      placeholder="How can Bolt help you today?"
+                      placeholder="Como o Bolt pode ajudar você hoje?"
                       translate="no"
                     />
                     <ClientOnly>
@@ -582,7 +580,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                           className={classNames('transition-all', enhancingPrompt ? 'opacity-100' : '')}
                           onClick={() => {
                             enhancePrompt?.();
-                            toast.success('Prompt enhanced!');
+                            toast.success('Prompt aprimorado!');
                           }}
                         >
                           {enhancingPrompt ? (
@@ -617,8 +615,8 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                       {input.length > 3 ? (
                         <div className="text-xs text-bolt-elements-textTertiary">
                           Use <kbd className="kdb px-1.5 py-0.5 rounded bg-bolt-elements-background-depth-2">Shift</kbd>{' '}
-                          + <kbd className="kdb px-1.5 py-0.5 rounded bg-bolt-elements-background-depth-2">Return</kbd>{' '}
-                          a new line
+                          + <kbd className="kdb px-1.5 py-0.5 rounded bg-bolt-elements-background-depth-2">Enter</kbd>{' '}
+                          para nova linha
                         </div>
                       ) : null}
                       <SupabaseConnection />

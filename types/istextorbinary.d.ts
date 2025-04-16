@@ -1,13 +1,13 @@
 /**
- * @note For some reason the types aren't picked up from node_modules so I declared the module here
- * with only the function that we use.
+ * @note Por algum motivo os tipos não são detectados do node_modules então eu declarei o módulo aqui
+ * com apenas a função que usamos.
  */
 declare module 'istextorbinary' {
   export interface EncodingOpts {
-    /** Defaults to 24 */
+    /** Padrão é 24 */
     chunkLength?: number;
 
-    /** If not provided, will check the start, beginning, and end */
+    /** Se não fornecido, verificará o início, começo e fim */
     chunkBegin?: number;
   }
 

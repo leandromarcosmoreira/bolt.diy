@@ -25,13 +25,13 @@ export class PromptLibrary {
     }
   > = {
     default: {
-      label: 'Default Prompt',
-      description: 'This is the battle tested default system Prompt',
+      label: 'Prompt Padrão',
+      description: 'Este é o prompt padrão de sistema testado em campo',
       get: (options) => getSystemPrompt(options.cwd, options.supabase),
     },
     optimized: {
-      label: 'Optimized Prompt (experimental)',
-      description: 'an Experimental version of the prompt for lower token usage',
+      label: 'Prompt Otimizado (experimental)',
+      description: 'Uma versão experimental do prompt para uso com menos tokens',
       get: (options) => optimized(options),
     },
   };
@@ -49,7 +49,7 @@ export class PromptLibrary {
     const prompt = this.library[promptId];
 
     if (!prompt) {
-      throw 'Prompt Now Found';
+      throw 'Prompt não encontrado';
     }
 
     return this.library[promptId]?.get(options);

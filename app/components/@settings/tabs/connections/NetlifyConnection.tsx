@@ -22,7 +22,7 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '~/component
 import { formatDistanceToNow } from 'date-fns';
 import { Badge } from '~/components/ui/Badge';
 
-// Add the Netlify logo SVG component at the top of the file
+// Adicionar o componente do logo Netlify no topo do arquivo
 const NetlifyLogo = () => (
   <svg viewBox="0 0 40 40" className="w-5 h-5">
     <path
@@ -32,7 +32,7 @@ const NetlifyLogo = () => (
   </svg>
 );
 
-// Add new interface for site actions
+// Adicionar nova interface para ações do site
 interface SiteAction {
   name: string;
   icon: React.ComponentType<any>;
@@ -58,7 +58,7 @@ export default function NetlifyConnection() {
   // Add site actions
   const siteActions: SiteAction[] = [
     {
-      name: 'Clear Cache',
+      name: 'Limpar Cache',
       icon: ArrowPathIcon,
       action: async (siteId: string) => {
         try {
@@ -70,18 +70,18 @@ export default function NetlifyConnection() {
           });
 
           if (!response.ok) {
-            throw new Error('Failed to clear cache');
+            throw new Error('Falha ao limpar cache');
           }
 
-          toast.success('Site cache cleared successfully');
+          toast.success('Cache do site limpo com sucesso');
         } catch (err: unknown) {
           const error = err instanceof Error ? err.message : 'Unknown error';
-          toast.error(`Failed to clear site cache: ${error}`);
+          toast.error(`Falha ao limpar cache do site: ${error}`);
         }
       },
     },
     {
-      name: 'Delete Site',
+      name: 'Remover Site',
       icon: TrashIcon,
       action: async (siteId: string) => {
         try {
@@ -93,14 +93,14 @@ export default function NetlifyConnection() {
           });
 
           if (!response.ok) {
-            throw new Error('Failed to delete site');
+            throw new Error('Falha ao excluir site');
           }
 
-          toast.success('Site deleted successfully');
+          toast.success('Site excluído com sucesso');
           fetchNetlifyStats(connection.token);
         } catch (err: unknown) {
           const error = err instanceof Error ? err.message : 'Unknown error';
-          toast.error(`Failed to delete site: ${error}`);
+          toast.error(`Falha ao excluir site: ${error}`);
         }
       },
       requiresConfirmation: true,
@@ -108,7 +108,7 @@ export default function NetlifyConnection() {
     },
   ];
 
-  // Add deploy management functions
+  // Adicionar funções de gerenciamento de deploy
   const handleDeploy = async (siteId: string, deployId: string, action: 'lock' | 'unlock' | 'publish') => {
     try {
       setIsActionLoading(true);
@@ -126,31 +126,31 @@ export default function NetlifyConnection() {
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to ${action} deploy`);
+        throw new Error(`Falha ao ${action} implantação`);
       }
 
-      toast.success(`Deploy ${action}ed successfully`);
+      toast.success(`Deploy ${action}ado com sucesso`);
       fetchNetlifyStats(connection.token);
     } catch (err: unknown) {
       const error = err instanceof Error ? err.message : 'Unknown error';
-      toast.error(`Failed to ${action} deploy: ${error}`);
+      toast.error(`Falha ao ${action}ar deploy: ${error}`);
     } finally {
       setIsActionLoading(false);
     }
   };
 
   useEffect(() => {
-    // Initialize connection with environment token if available
+    // Inicializar conexão com token do ambiente se disponível
     initializeNetlifyConnection();
   }, []);
 
   useEffect(() => {
-    // Check if we have a connection with a token but no stats
+    // Verificar se temos uma conexão com token mas sem estatísticas
     if (connection.user && connection.token && (!connection.stats || !connection.stats.sites)) {
       fetchNetlifyStats(connection.token);
     }
 
-    // Update local state from connection
+    // Atualizar estado local da conexão
     if (connection.stats) {
       setSites(connection.stats.sites || []);
       setDeploys(connection.stats.deploys || []);
@@ -162,7 +162,7 @@ export default function NetlifyConnection() {
 
   const handleConnect = async () => {
     if (!tokenInput) {
-      toast.error('Please enter a Netlify API token');
+      toast.error('Por favor, insira um token de API do Netlify');
       return;
     }
 
@@ -176,7 +176,7 @@ export default function NetlifyConnection() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`Erro HTTP! Status: ${response.status}`);
       }
 
       const userData = (await response.json()) as NetlifyUser;
@@ -187,13 +187,13 @@ export default function NetlifyConnection() {
         token: tokenInput,
       });
 
-      toast.success('Connected to Netlify successfully');
+      toast.success('Conectado ao Netlify com sucesso');
 
       // Fetch stats after successful connection
       fetchNetlifyStats(tokenInput);
     } catch (error) {
       console.error('Error connecting to Netlify:', error);
-      toast.error(`Failed to connect to Netlify: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      toast.error(`Falha ao conectar ao Netlify: ${error instanceof Error ? error.message : 'Erro desconhecido'}`);
     } finally {
       setIsConnecting(false);
       setTokenInput('');
@@ -201,15 +201,15 @@ export default function NetlifyConnection() {
   };
 
   const handleDisconnect = () => {
-    // Clear from localStorage
+    // Limpar do localStorage
     localStorage.removeItem('netlify_connection');
 
-    // Remove cookies
+    // Remover cookies
     document.cookie = 'netlifyToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
-    // Update the store
+    // Atualizar a store
     updateNetlifyConnection({ user: null, token: '' });
-    toast.success('Disconnected from Netlify');
+    toast.success('Desconectado do Netlify');
   };
 
   const fetchNetlifyStats = async (token: string) => {
@@ -224,13 +224,13 @@ export default function NetlifyConnection() {
       });
 
       if (!sitesResponse.ok) {
-        throw new Error(`Failed to fetch sites: ${sitesResponse.statusText}`);
+        throw new Error(`Falha ao buscar sites: ${sitesResponse.statusText}`);
       }
 
       const sitesData = (await sitesResponse.json()) as NetlifySite[];
       setSites(sitesData);
 
-      // Fetch recent deploys for the first site (if any)
+      // Buscar deploys recentes para o primeiro site (se houver)
       let deploysData: NetlifyDeploy[] = [];
       let buildsData: NetlifyBuild[] = [];
       let lastDeployTime = '';
@@ -238,7 +238,7 @@ export default function NetlifyConnection() {
       if (sitesData && sitesData.length > 0) {
         const firstSite = sitesData[0];
 
-        // Fetch deploys
+        // Buscar deploys
         const deploysResponse = await fetch(`https://api.netlify.com/api/v1/sites/${firstSite.id}/deploys`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -250,12 +250,12 @@ export default function NetlifyConnection() {
           setDeploys(deploysData);
           setDeploymentCount(deploysData.length);
 
-          // Get the latest deploy time
+          // Obter o horário do último deploy
           if (deploysData.length > 0) {
             lastDeployTime = deploysData[0].created_at;
             setLastUpdated(lastDeployTime);
 
-            // Fetch builds for the site
+            // Buscar builds para o site
             const buildsResponse = await fetch(`https://api.netlify.com/api/v1/sites/${firstSite.id}/builds`, {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -270,7 +270,7 @@ export default function NetlifyConnection() {
         }
       }
 
-      // Update the stats in the store
+      // Atualizar as estatísticas na store
       updateNetlifyConnection({
         stats: {
           sites: sitesData,
@@ -281,10 +281,12 @@ export default function NetlifyConnection() {
         },
       });
 
-      toast.success('Netlify stats updated');
+      toast.success('Estatísticas do Netlify atualizadas');
     } catch (error) {
       console.error('Error fetching Netlify stats:', error);
-      toast.error(`Failed to fetch Netlify stats: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      toast.error(
+        `Falha ao buscar estatísticas do Netlify: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+      );
     } finally {
       setFetchingStats(false);
     }
@@ -643,20 +645,20 @@ export default function NetlifyConnection() {
             <div className="text-[#00AD9F]">
               <NetlifyLogo />
             </div>
-            <h2 className="text-lg font-medium text-bolt-elements-textPrimary">Netlify Connection</h2>
+            <h2 className="text-lg font-medium text-bolt-elements-textPrimary">Conexão Netlify</h2>
           </div>
         </div>
 
         {!connection.user ? (
           <div className="mt-4">
             <label className="block text-sm text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mb-2">
-              API Token
+              Token da API
             </label>
             <input
               type="password"
               value={tokenInput}
               onChange={(e) => setTokenInput(e.target.value)}
-              placeholder="Enter your Netlify API token"
+              placeholder="Digite seu token da API Netlify"
               className={classNames(
                 'w-full px-3 py-2 rounded-lg text-sm',
                 'bg-[#F8F8F8] dark:bg-[#1A1A1A]',
@@ -673,7 +675,7 @@ export default function NetlifyConnection() {
                 rel="noopener noreferrer"
                 className="text-bolt-elements-borderColorActive hover:underline inline-flex items-center gap-1"
               >
-                Get your token
+                Obter seu token
                 <div className="i-ph:arrow-square-out w-4 h-4" />
               </a>
             </div>
@@ -692,12 +694,12 @@ export default function NetlifyConnection() {
                 {isConnecting ? (
                   <>
                     <div className="i-ph:spinner-gap animate-spin" />
-                    Connecting...
+                    Conectando...
                   </>
                 ) : (
                   <>
                     <div className="i-ph:plug-charging w-4 h-4" />
-                    Connect
+                    Conectar
                   </>
                 )}
               </button>
@@ -715,11 +717,11 @@ export default function NetlifyConnection() {
                 )}
               >
                 <div className="i-ph:plug w-4 h-4" />
-                Disconnect
+                Desconectar
               </button>
               <span className="text-sm text-bolt-elements-textSecondary flex items-center gap-1">
                 <div className="i-ph:check-circle w-4 h-4 text-green-500" />
-                Connected to Netlify
+                Conectado ao Netlify
               </span>
             </div>
             {renderStats()}

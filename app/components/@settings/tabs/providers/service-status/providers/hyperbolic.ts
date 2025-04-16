@@ -14,12 +14,12 @@ export class HyperbolicStatusChecker extends BaseProviderChecker {
       // Check their website as a secondary indicator
       const websiteStatus = await this.checkEndpoint('https://hyperbolic.ai');
 
-      let status: StatusCheckResult['status'] = 'operational';
-      let message = 'All systems operational';
+      let status: StatusCheckResult['status'] = 'operacional';
+      let message = 'All systems operacional';
 
-      if (apiStatus !== 'reachable' || websiteStatus !== 'reachable') {
-        status = apiStatus !== 'reachable' ? 'down' : 'degraded';
-        message = apiStatus !== 'reachable' ? 'API appears to be down' : 'Service may be experiencing issues';
+      if (apiStatus !== 'acessivel' || websiteStatus !== 'acessivel') {
+        status = apiStatus !== 'acessivel' ? 'down' : 'instavel';
+        message = apiStatus !== 'acessivel' ? 'API appears to be down' : 'Service may be experiencing issues';
       }
 
       return {
@@ -31,7 +31,7 @@ export class HyperbolicStatusChecker extends BaseProviderChecker {
       console.error('Error checking Hyperbolic status:', error);
 
       return {
-        status: 'degraded',
+        status: 'instavel',
         message: 'Unable to determine service status',
         incidents: ['Note: Limited status information available'],
       };

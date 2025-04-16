@@ -62,10 +62,10 @@ export const Preview = memo(() => {
   const [iframeUrl, setIframeUrl] = useState<string | undefined>();
   const [isSelectionMode, setIsSelectionMode] = useState(false);
 
-  // Toggle between responsive mode and device mode
+  // Alternar entre modo responsivo e modo dispositivo
   const [isDeviceModeOn, setIsDeviceModeOn] = useState(false);
 
-  // Use percentage for width
+  // Usar porcentagem para largura
   const [widthPercent, setWidthPercent] = useState<number>(37.5);
   const [currentWidth, setCurrentWidth] = useState<number>(0);
 
@@ -78,8 +78,8 @@ export const Preview = memo(() => {
     pointerId: null as number | null,
   });
 
-  // Reduce scaling factor to make resizing less sensitive
-  const SCALING_FACTOR = 1;
+  // Reduzir fator de escala para tornar o redimensionamento menos sensível
+  const SCALING_FACTOR = 0.5;
 
   const [isWindowSizeDropdownOpen, setIsWindowSizeDropdownOpen] = useState(false);
   const [selectedWindowSize, setSelectedWindowSize] = useState<WindowSize>(WINDOW_SIZES[0]);
@@ -560,7 +560,7 @@ export const Preview = memo(() => {
           }
         }
       } else {
-        console.warn('[Preview] Invalid WebContainer URL:', activePreview.baseUrl);
+        console.warn('[Preview] URL do WebContainer inválida:', activePreview.baseUrl);
       }
     }
   };
@@ -719,7 +719,7 @@ export const Preview = memo(() => {
             icon="i-ph:browser"
             onClick={() => {
               if (!activePreview?.baseUrl) {
-                console.warn('[Preview] No active preview available');
+                console.warn('[Preview] Nenhuma visualização ativa disponível');
                 return;
               }
 
@@ -728,7 +728,7 @@ export const Preview = memo(() => {
               );
 
               if (!match) {
-                console.warn('[Preview] Invalid WebContainer URL:', activePreview.baseUrl);
+                console.warn('[Preview] URL do WebContainer inválida:', activePreview.baseUrl);
                 return;
               }
 
@@ -742,20 +742,20 @@ export const Preview = memo(() => {
                 'width=1280,height=720,menubar=no,toolbar=no,location=no,status=no,resizable=yes',
               );
             }}
-            title="Open Preview in New Window"
+            title="Abrir Visualização em Nova Janela"
           />
 
           <div className="flex items-center relative">
             <IconButton
               icon="i-ph:arrow-square-out"
               onClick={() => openInNewWindow(selectedWindowSize)}
-              title={`Open Preview in ${selectedWindowSize.name} Window`}
+              title={`Abrir em Janela ${selectedWindowSize.name}`}
             />
             <IconButton
               icon="i-ph:caret-down"
               onClick={() => setIsWindowSizeDropdownOpen(!isWindowSizeDropdownOpen)}
               className="ml-1"
-              title="Select Window Size"
+              title="Selecionar Tamanho"
             />
 
             {isWindowSizeDropdownOpen && (
@@ -764,11 +764,13 @@ export const Preview = memo(() => {
                 <div className="absolute right-0 top-full mt-2 z-50 min-w-[240px] max-h-[400px] overflow-y-auto bg-white dark:bg-black rounded-xl shadow-2xl border border-[#E5E7EB] dark:border-[rgba(255,255,255,0.1)] overflow-hidden">
                   <div className="p-3 border-b border-[#E5E7EB] dark:border-[rgba(255,255,255,0.1)]">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-[#111827] dark:text-gray-300">Device Options</span>
+                      <span className="text-sm font-medium text-[#111827] dark:text-gray-300">
+                        Opções do Dispositivo
+                      </span>
                     </div>
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-[#6B7280] dark:text-gray-400">Show Device Frame</span>
+                        <span className="text-xs text-[#6B7280] dark:text-gray-400">Mostrar Moldura</span>
                         <button
                           className={`w-10 h-5 rounded-full transition-colors duration-200 ${
                             showDeviceFrame ? 'bg-[#6D28D9]' : 'bg-gray-300 dark:bg-gray-700'
@@ -786,7 +788,7 @@ export const Preview = memo(() => {
                         </button>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-[#6B7280] dark:text-gray-400">Landscape Mode</span>
+                        <span className="text-xs text-[#6B7280] dark:text-gray-400">Modo Paisagem</span>
                         <button
                           className={`w-10 h-5 rounded-full transition-colors duration-200 ${
                             isLandscape ? 'bg-[#6D28D9]' : 'bg-gray-300 dark:bg-gray-700'
@@ -826,7 +828,7 @@ export const Preview = memo(() => {
                           {isLandscape && (size.frameType === 'mobile' || size.frameType === 'tablet')
                             ? `${size.height} × ${size.width}`
                             : `${size.width} × ${size.height}`}
-                          {size.hasFrame && showDeviceFrame ? ' (with frame)' : ''}
+                          {size.hasFrame && showDeviceFrame ? ' (com moldura)' : ''}
                         </span>
                       </div>
                       {selectedWindowSize.name === size.name && (
@@ -970,7 +972,7 @@ export const Preview = memo(() => {
             </>
           ) : (
             <div className="flex w-full h-full justify-center items-center bg-bolt-elements-background-depth-1 text-bolt-elements-textPrimary">
-              No preview available
+              Nenhuma visualização disponível
             </div>
           )}
 

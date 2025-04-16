@@ -88,13 +88,13 @@ export function DataTab() {
 
   // State for settings categories and available chats
   const [settingsCategories] = useState<SettingsCategory[]>([
-    { id: 'core', label: 'Core Settings', description: 'User profile and main settings' },
-    { id: 'providers', label: 'Providers', description: 'API keys and provider configurations' },
-    { id: 'features', label: 'Features', description: 'Feature flags and settings' },
-    { id: 'ui', label: 'UI', description: 'UI configuration and preferences' },
-    { id: 'connections', label: 'Connections', description: 'External service connections' },
-    { id: 'debug', label: 'Debug', description: 'Debug settings and logs' },
-    { id: 'updates', label: 'Updates', description: 'Update settings and notifications' },
+    { id: 'core', label: 'Configurações Principais', description: 'Perfil do usuário e configurações principais' },
+    { id: 'providers', label: 'Provedores', description: 'Chaves de API e configurações dos provedores' },
+    { id: 'features', label: 'Funcionalidades', description: 'Recursos e ajustes do app' },
+    { id: 'ui', label: 'Interface', description: 'Preferências e ajustes visuais' },
+    { id: 'connections', label: 'Conexões', description: 'Integrações e conexões externas' },
+    { id: 'debug', label: 'Depuração', description: 'Logs e ajustes de depuração' },
+    { id: 'updates', label: 'Atualizações', description: 'Configurações e avisos de atualização' },
   ]);
 
   const [availableChats, setAvailableChats] = useState<ExtendedChat[]>([]);
@@ -141,7 +141,7 @@ export function DataTab() {
   // Load available chats
   useEffect(() => {
     if (db) {
-      console.log('Loading chats from boltHistory database', {
+      console.log('Carregando conversas do banco de dados boltHistory', {
         name: db.name,
         version: db.version,
         objectStoreNames: Array.from(db.objectStoreNames),
@@ -149,7 +149,7 @@ export function DataTab() {
 
       getAllChats(db)
         .then((chats) => {
-          console.log('Found chats:', chats.length);
+          console.log('Encontrei conversas:', chats.length);
 
           // Cast to ExtendedChat to handle additional properties
           const extendedChats = chats as ExtendedChat[];
@@ -159,8 +159,8 @@ export function DataTab() {
           setChatItems(extendedChats.map((chat) => createChatItem(chat)));
         })
         .catch((error) => {
-          console.error('Error loading chats:', error);
-          toast.error('Failed to load chats: ' + (error instanceof Error ? error.message : 'Unknown error'));
+          console.error('Erro ao carregar conversas:', error);
+          toast.error('Falha ao carregar conversas: ' + (error instanceof Error ? error.message : 'Erro desconhecido'));
         });
     }
   }, [db]);
@@ -229,10 +229,10 @@ export function DataTab() {
       <ConfirmationDialog
         isOpen={showResetInlineConfirm}
         onClose={() => setShowResetInlineConfirm(false)}
-        title="Reset All Settings?"
-        description="This will reset all your settings to their default values. This action cannot be undone."
-        confirmLabel="Reset Settings"
-        cancelLabel="Cancel"
+        title="Redefinir Todas as Configurações?"
+        description="Isso redefinirá todas as suas configurações para seus valores padrão. Esta ação não pode ser revertida."
+        confirmLabel="Redefinir Configurações"
+        cancelLabel="Cancelar"
         variant="destructive"
         isLoading={isResetting}
         onConfirm={handleResetSettings}
@@ -242,10 +242,10 @@ export function DataTab() {
       <ConfirmationDialog
         isOpen={showDeleteInlineConfirm}
         onClose={() => setShowDeleteInlineConfirm(false)}
-        title="Delete All Chats?"
-        description="This will permanently delete all your chat history. This action cannot be undone."
-        confirmLabel="Delete All"
-        cancelLabel="Cancel"
+        title="Excluir Todas as Conversas?"
+        description="Isso excluirá toda a sua história de conversas. Esta ação não pode ser revertida."
+        confirmLabel="Excluir Todas"
+        cancelLabel="Cancelar"
         variant="destructive"
         isLoading={isDeleting}
         onConfirm={handleResetChatsWithState}
@@ -255,26 +255,26 @@ export function DataTab() {
       <SelectionDialog
         isOpen={showSettingsSelection}
         onClose={() => setShowSettingsSelection(false)}
-        title="Select Settings to Export"
+        title="Selecionar Configurações para Exportar"
         items={settingsCategories}
         onConfirm={(selectedIds) => {
           handleExportSelectedSettings(selectedIds);
           setShowSettingsSelection(false);
         }}
-        confirmLabel="Export Selected"
+        confirmLabel="Exportar Selecionadas"
       />
 
       {/* Chats Selection Dialog */}
       <SelectionDialog
         isOpen={showChatsSelection}
         onClose={() => setShowChatsSelection(false)}
-        title="Select Chats to Export"
+        title="Selecionar Conversas para Exportar"
         items={chatItems}
         onConfirm={(selectedIds) => {
           handleExportSelectedChats(selectedIds);
           setShowChatsSelection(false);
         }}
-        confirmLabel="Export Selected"
+        confirmLabel="Exportar Selecionadas"
       />
 
       {/* Chats Section */}
@@ -283,7 +283,7 @@ export function DataTab() {
         {dbLoading ? (
           <div className="flex items-center justify-center p-4">
             <div className="i-ph-spinner-gap-bold animate-spin w-6 h-6 mr-2" />
-            <span>Loading chats database...</span>
+            <span>Carregando banco de dados de conversas...</span>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -294,10 +294,10 @@ export function DataTab() {
                     <div className="i-ph-download-duotone w-5 h-5" />
                   </motion.div>
                   <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                    Export All Chats
+                    Exportar Todas as Conversas
                   </CardTitle>
                 </div>
-                <CardDescription>Export all your chats to a JSON file.</CardDescription>
+                <CardDescription>Exporte todas as suas conversas para um arquivo JSON.</CardDescription>
               </CardHeader>
               <CardFooter>
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -305,7 +305,7 @@ export function DataTab() {
                     onClick={async () => {
                       try {
                         if (!db) {
-                          toast.error('Database not available');
+                          toast.error('Banco de dados não disponível');
                           return;
                         }
 
@@ -316,15 +316,16 @@ export function DataTab() {
                         });
 
                         if (availableChats.length === 0) {
-                          toast.warning('No chats available to export');
+                          toast.warning('Nenhuma conversa disponível para exportar');
                           return;
                         }
 
                         await handleExportAllChats();
+                        toast.success('Conversas exportadas com sucesso');
                       } catch (error) {
-                        console.error('Error exporting chats:', error);
+                        console.error('Erro ao exportar conversas:', error);
                         toast.error(
-                          `Failed to export chats: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                          `Falha ao exportar conversas: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
                         );
                       }
                     }}
@@ -358,10 +359,10 @@ export function DataTab() {
                     <div className="i-ph-filter-duotone w-5 h-5" />
                   </motion.div>
                   <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                    Export Selected Chats
+                    Exportar Conversas Selecionadas
                   </CardTitle>
                 </div>
-                <CardDescription>Choose specific chats to export.</CardDescription>
+                <CardDescription>Escolha conversas específicas para exportar.</CardDescription>
               </CardHeader>
               <CardFooter>
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -381,7 +382,7 @@ export function DataTab() {
                         Exporting...
                       </>
                     ) : (
-                      'Select Chats'
+                      'Selecionar Conversas'
                     )}
                   </Button>
                 </motion.div>
@@ -395,10 +396,10 @@ export function DataTab() {
                     <div className="i-ph-upload-duotone w-5 h-5" />
                   </motion.div>
                   <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                    Import Chats
+                    Importar Conversas
                   </CardTitle>
                 </div>
-                <CardDescription>Import chats from a JSON file.</CardDescription>
+                <CardDescription>Importe conversas de um arquivo JSON.</CardDescription>
               </CardHeader>
               <CardFooter>
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -436,10 +437,10 @@ export function DataTab() {
                     <div className="i-ph-trash-duotone w-5 h-5" />
                   </motion.div>
                   <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                    Delete All Chats
+                    Excluir Todas as Conversas
                   </CardTitle>
                 </div>
-                <CardDescription>Delete all your chat history.</CardDescription>
+                <CardDescription>Exclua toda a sua história de conversas.</CardDescription>
               </CardHeader>
               <CardFooter>
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -459,7 +460,7 @@ export function DataTab() {
                         Deleting...
                       </>
                     ) : (
-                      'Delete All'
+                      'Excluir Todas'
                     )}
                   </Button>
                 </motion.div>
@@ -471,7 +472,7 @@ export function DataTab() {
 
       {/* Settings Section */}
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">Settings</h2>
+        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">Configurações</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Card>
             <CardHeader>
@@ -480,10 +481,10 @@ export function DataTab() {
                   <div className="i-ph-download-duotone w-5 h-5" />
                 </motion.div>
                 <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                  Export All Settings
+                  Exportar Todas as Configurações
                 </CardTitle>
               </div>
-              <CardDescription>Export all your settings to a JSON file.</CardDescription>
+              <CardDescription>Exporte todas as suas configurações para um arquivo JSON.</CardDescription>
             </CardHeader>
             <CardFooter>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -503,7 +504,7 @@ export function DataTab() {
                       Exporting...
                     </>
                   ) : (
-                    'Export All'
+                    'Exportar Todas'
                   )}
                 </Button>
               </motion.div>
@@ -517,10 +518,10 @@ export function DataTab() {
                   <div className="i-ph-filter-duotone w-5 h-5" />
                 </motion.div>
                 <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                  Export Selected Settings
+                  Exportar Configurações Selecionadas
                 </CardTitle>
               </div>
-              <CardDescription>Choose specific settings to export.</CardDescription>
+              <CardDescription>Escolha configurações específicas para exportar.</CardDescription>
             </CardHeader>
             <CardFooter>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -540,7 +541,7 @@ export function DataTab() {
                       Exporting...
                     </>
                   ) : (
-                    'Select Settings'
+                    'Selecionar Configurações'
                   )}
                 </Button>
               </motion.div>
@@ -554,10 +555,10 @@ export function DataTab() {
                   <div className="i-ph-upload-duotone w-5 h-5" />
                 </motion.div>
                 <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                  Import Settings
+                  Importar Configurações
                 </CardTitle>
               </div>
-              <CardDescription>Import settings from a JSON file.</CardDescription>
+              <CardDescription>Importe configurações de um arquivo JSON.</CardDescription>
             </CardHeader>
             <CardFooter>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -577,7 +578,7 @@ export function DataTab() {
                       Importing...
                     </>
                   ) : (
-                    'Import Settings'
+                    'Importar Configurações'
                   )}
                 </Button>
               </motion.div>
@@ -595,10 +596,10 @@ export function DataTab() {
                   <div className="i-ph-arrow-counter-clockwise-duotone w-5 h-5" />
                 </motion.div>
                 <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                  Reset All Settings
+                  Redefinir Todas as Configurações
                 </CardTitle>
               </div>
-              <CardDescription>Reset all settings to their default values.</CardDescription>
+              <CardDescription>Redefina todas as configurações para seus valores padrão.</CardDescription>
             </CardHeader>
             <CardFooter>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -618,7 +619,7 @@ export function DataTab() {
                       Resetting...
                     </>
                   ) : (
-                    'Reset All'
+                    'Redefinir Todas'
                   )}
                 </Button>
               </motion.div>
@@ -629,7 +630,7 @@ export function DataTab() {
 
       {/* API Keys Section */}
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">API Keys</h2>
+        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">Chaves API</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Card>
             <CardHeader>
@@ -638,10 +639,10 @@ export function DataTab() {
                   <div className="i-ph-file-text-duotone w-5 h-5" />
                 </motion.div>
                 <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                  Download Template
+                  Baixar Modelo
                 </CardTitle>
               </div>
-              <CardDescription>Download a template file for your API keys.</CardDescription>
+              <CardDescription>Baixe um arquivo modelo para suas chaves API.</CardDescription>
             </CardHeader>
             <CardFooter>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -661,7 +662,7 @@ export function DataTab() {
                       Downloading...
                     </>
                   ) : (
-                    'Download'
+                    'Baixar'
                   )}
                 </Button>
               </motion.div>
@@ -675,10 +676,10 @@ export function DataTab() {
                   <div className="i-ph-upload-duotone w-5 h-5" />
                 </motion.div>
                 <CardTitle className="text-lg group-hover:text-bolt-elements-item-contentAccent transition-colors">
-                  Import API Keys
+                  Importar Chaves API
                 </CardTitle>
               </div>
-              <CardDescription>Import API keys from a JSON file.</CardDescription>
+              <CardDescription>Importe chaves API de um arquivo JSON.</CardDescription>
             </CardHeader>
             <CardFooter>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
@@ -698,7 +699,7 @@ export function DataTab() {
                       Importing...
                     </>
                   ) : (
-                    'Import Keys'
+                    'Importar Chaves'
                   )}
                 </Button>
               </motion.div>
@@ -709,7 +710,7 @@ export function DataTab() {
 
       {/* Data Visualization */}
       <div>
-        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">Data Usage</h2>
+        <h2 className="text-xl font-semibold mb-4 text-bolt-elements-textPrimary">Uso de Dados</h2>
         <Card>
           <CardContent className="p-5">
             <DataVisualization chats={availableChats} />

@@ -23,16 +23,16 @@ async function enhancerAction({ context, request }: ActionFunctionArgs) {
 
   // validate 'model' and 'provider' fields
   if (!model || typeof model !== 'string') {
-    throw new Response('Invalid or missing model', {
+    throw new Response('Modelo inválido ou ausente', {
       status: 400,
-      statusText: 'Bad Request',
+      statusText: 'Solicitação inválida',
     });
   }
 
   if (!providerName || typeof providerName !== 'string') {
-    throw new Response('Invalid or missing provider', {
+    throw new Response('Provedor inválido ou ausente', {
       status: 400,
-      statusText: 'Bad Request',
+      statusText: 'Solicitação inválida',
     });
   }
 
@@ -48,28 +48,28 @@ async function enhancerAction({ context, request }: ActionFunctionArgs) {
           content:
             `[Model: ${model}]\n\n[Provider: ${providerName}]\n\n` +
             stripIndents`
-            You are a professional prompt engineer specializing in crafting precise, effective prompts.
-            Your task is to enhance prompts by making them more specific, actionable, and effective.
+            Você é um engenheiro de prompt profissional especializado em criar prompts precisos e eficazes.
+            Seu objetivo é aprimorar prompts fazendo-os mais específicos, ações e eficazes.
 
-            I want you to improve the user prompt that is wrapped in \`<original_prompt>\` tags.
+            Quero que você melhore o prompt do usuário que está entre \`<original_prompt>\` tags.
 
-            For valid prompts:
-            - Make instructions explicit and unambiguous
-            - Add relevant context and constraints
-            - Remove redundant information
-            - Maintain the core intent
-            - Ensure the prompt is self-contained
-            - Use professional language
+            Para prompts válidos:
+            - Faça instruções explícitas e inequívocas
+            - Adicione contexto e restrições relevantes
+            - Remova informações redundantes
+            - Mantenha o núcleo do propósito
+            - Garanta que o prompt seja auto-contido
+            - Use linguagem profissional
 
-            For invalid or unclear prompts:
-            - Respond with clear, professional guidance
-            - Keep responses concise and actionable
-            - Maintain a helpful, constructive tone
-            - Focus on what the user should provide
-            - Use a standard template for consistency
+            Para prompts inválidos ou pouco claros:
+            - Responda com orientações claras e profissionais
+            - Mantenha respostas concisas e ações
+            - Mantenha um tom de ajuda e construção
+            - Enfoco no que o usuário deve fornecer
+            - Use um template padrão para consistência
 
-            IMPORTANT: Your response must ONLY contain the enhanced prompt text.
-            Do not include any explanations, metadata, or wrapper tags.
+            IMPORTANTE: Sua resposta deve conter apenas o prompt aprimorado.
+            Não inclua explicações, metadados ou tags de wrapper.
 
             <original_prompt>
               ${message}
@@ -82,7 +82,7 @@ async function enhancerAction({ context, request }: ActionFunctionArgs) {
       providerSettings,
       options: {
         system:
-          'You are a senior software principal architect, you should help the user analyse the user query and enrich it with the necessary context and constraints to make it more specific, actionable, and effective. You should also ensure that the prompt is self-contained and uses professional language. Your response should ONLY contain the enhanced prompt text. Do not include any explanations, metadata, or wrapper tags.',
+          'Você é um arquiteto de software sênior, você deve ajudar o usuário a analisar a consulta do usuário e enriquecê-la com o contexto e restrições necessárias para torná-la mais específica, eficaz e eficaz. Você também deve garantir que o prompt seja auto-contido e use linguagem profissional. Sua resposta deve conter apenas o prompt aprimorado. Não inclua explicações, metadados ou tags de wrapper.',
 
         /*
          * onError: (event) => {

@@ -433,10 +433,10 @@ export function EventLogsTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Event logs exported successfully as JSON');
+      toast.success('Logs de eventos exportados com sucesso como JSON');
     } catch (error) {
-      console.error('Failed to export JSON:', error);
-      toast.error('Failed to export event logs as JSON');
+      console.error('Falha ao exportar JSON:', error);
+      toast.error('Falha ao exportar logs de eventos como JSON');
     }
   };
 
@@ -467,10 +467,10 @@ export function EventLogsTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Event logs exported successfully as CSV');
+      toast.success('Logs de eventos exportados com sucesso como CSV');
     } catch (error) {
-      console.error('Failed to export CSV:', error);
-      toast.error('Failed to export event logs as CSV');
+      console.error('Falha ao exportar CSV:', error);
+      toast.error('Falha ao exportar logs de eventos como CSV');
     }
   };
 
@@ -717,10 +717,10 @@ export function EventLogsTab() {
 
       // Save the PDF
       doc.save(`bolt-event-logs-${new Date().toISOString()}.pdf`);
-      toast.success('Event logs exported successfully as PDF');
+      toast.success('Logs de eventos exportados com sucesso como PDF');
     } catch (error) {
       console.error('Failed to export PDF:', error);
-      toast.error('Failed to export event logs as PDF');
+      toast.error('Falha ao exportar logs de eventos como PDF');
     }
   };
 
@@ -752,10 +752,10 @@ export function EventLogsTab() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      toast.success('Event logs exported successfully as text file');
+      toast.success('Logs de eventos exportados com sucesso como arquivo de texto');
     } catch (error) {
-      console.error('Failed to export text file:', error);
-      toast.error('Failed to export event logs as text file');
+      console.error('Falha ao exportar arquivo de texto:', error);
+      toast.error('Falha ao exportar logs de eventos como arquivo de texto');
     }
   };
 
@@ -992,8 +992,8 @@ export function EventLogsTab() {
           >
             <span className="i-ph:clipboard-text text-4xl text-gray-400 dark:text-gray-600" />
             <div className="flex flex-col gap-1">
-              <h3 className="text-sm font-medium text-gray-900 dark:text-white">No Logs Found</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Try adjusting your search or filters</p>
+              <h3 className="text-sm font-medium text-gray-900 dark:text-white">Nenhum log encontrado</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Tente ajustar sua busca ou filtros</p>
             </div>
           </motion.div>
         ) : (

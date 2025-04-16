@@ -19,7 +19,7 @@ export class ImportExportService {
    */
   static async exportAllChats(db: IDBDatabase): Promise<{ chats: any[]; exportDate: string }> {
     if (!db) {
-      throw new Error('Database not initialized');
+      throw new Error('Banco de dados não inicializado');
     }
 
     try {
@@ -51,7 +51,7 @@ export class ImportExportService {
       };
     } catch (error) {
       console.error('Error exporting chats:', error);
-      throw new Error(`Failed to export chats: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(`Falha ao exportar conversas: ${error instanceof Error ? error.message : 'Erro desconhecido'}`);
     }
   }
 
@@ -219,7 +219,7 @@ export class ImportExportService {
       }
 
       if (typeof value !== 'string') {
-        throw new Error(`Invalid value for key: ${key}`);
+        throw new Error(`Valor inválido para chave: ${key}`);
       }
 
       // Handle both old and new template formats
@@ -350,7 +350,7 @@ export class ImportExportService {
 
     // Clear chats from IndexedDB
     if (!db) {
-      throw new Error('Database not initialized');
+      throw new Error('Banco de dados não inicializado');
     }
 
     // Get all chats and delete them one by one

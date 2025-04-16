@@ -6,16 +6,19 @@ import { Header } from '~/components/header/Header';
 import BackgroundRays from '~/components/ui/BackgroundRays';
 
 export const meta: MetaFunction = () => {
-  return [{ title: 'Bolt' }, { name: 'description', content: 'Talk with Bolt, an AI assistant from StackBlitz' }];
+  return [
+    { title: 'Bolt' },
+    { name: 'description', content: 'Converse com o Bolt, um assistente de IA do StackBlitz' },
+  ];
 };
 
 export const loader = () => json({});
 
 /**
- * Landing page component for Bolt
- * Note: Settings functionality should ONLY be accessed through the sidebar menu.
- * Do not add settings button/panel to this landing page as it was intentionally removed
- * to keep the UI clean and consistent with the design system.
+ * Componente da página inicial do Bolt
+ * Nota: A funcionalidade de configurações deve ser acessada APENAS através do menu lateral.
+ * Não adicione botão/painel de configurações a esta página inicial, pois foi intencionalmente removido
+ * para manter a interface limpa e consistente com o sistema de design.
  */
 export default function Index() {
   return (

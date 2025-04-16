@@ -1,368 +1,366 @@
 # bolt.diy
 
-[![bolt.diy: AI-Powered Full-Stack Web Development in the Browser](./public/social_preview_index.jpg)](https://bolt.diy)
+[![bolt.diy: Desenvolvimento Web Full-Stack com IA no Navegador](./public/social_preview_index.jpg)](https://bolt.diy)
 
-Welcome to bolt.diy, the official open source version of Bolt.new, which allows you to choose the LLM that you use for each prompt! Currently, you can use OpenAI, Anthropic, Ollama, OpenRouter, Gemini, LMStudio, Mistral, xAI, HuggingFace, DeepSeek, or Groq models - and it is easily extended to use any other model supported by the Vercel AI SDK! See the instructions below for running this locally and extending it to include more models.
-
------
-Check the [bolt.diy Docs](https://stackblitz-labs.github.io/bolt.diy/) for more offical installation instructions and more informations.
+Bem-vindo ao bolt.diy, a versão open source oficial do Bolt.new, que permite escolher o LLM que você usa para cada prompt! Atualmente, você pode usar modelos da OpenAI, Anthropic, Ollama, OpenRouter, Gemini, LMStudio, Mistral, xAI, HuggingFace, DeepSeek ou Groq — e é fácil estender para qualquer outro modelo suportado pelo Vercel AI SDK! Veja as instruções abaixo para rodar localmente e adicionar mais modelos.
 
 -----
-Also [this pinned post in our community](https://thinktank.ottomator.ai/t/videos-tutorial-helpful-content/3243) has a bunch of incredible resources for running and deploying bolt.diy yourself!
+Confira a [Documentação do bolt.diy](https://stackblitz-labs.github.io/bolt.diy/) para instruções oficiais de instalação e mais informações.
 
-We have also launched an experimental agent called the "bolt.diy Expert" that can answer common questions about bolt.diy. Find it here on the [oTTomator Live Agent Studio](https://studio.ottomator.ai/).
+-----
+Além disso, [este post fixado na nossa comunidade](https://thinktank.ottomator.ai/t/videos-tutorial-helpful-content/3243) tem vários recursos incríveis para rodar e implantar o bolt.diy por conta própria!
 
-bolt.diy was originally started by [Cole Medin](https://www.youtube.com/@ColeMedin) but has quickly grown into a massive community effort to build the BEST open source AI coding assistant!
+Também lançamos um agente experimental chamado "bolt.diy Expert" que responde dúvidas comuns sobre o bolt.diy. Acesse no [oTTomator Live Agent Studio](https://studio.ottomator.ai/).
 
-## Table of Contents
+O bolt.diy foi criado por [Cole Medin](https://www.youtube.com/@ColeMedin), mas rapidamente virou um grande esforço comunitário para construir o MELHOR assistente de código com IA open source!
 
-- [Join the Community](#join-the-community)
-- [Requested Additions](#requested-additions)
-- [Features](#features)
-- [Setup](#setup)
-- [Run the Application](#run-the-application)
-- [Available Scripts](#available-scripts)
-- [Contributing](#contributing)
+## Índice
+
+- [Participe da Comunidade](#participe-da-comunidade)
+- [Funcionalidades Solicitadas](#funcionalidades-solicitadas)
+- [Funcionalidades](#funcionalidades)
+- [Configuração](#configuracao)
+- [Rodando a Aplicação](#rodando-a-aplicacao)
+- [Scripts Disponíveis](#scripts-disponiveis)
+- [Contribuindo](#contribuindo)
 - [Roadmap](#roadmap)
 - [FAQ](#faq)
 
-## Join the community
+## Participe da comunidade
 
-[Join the bolt.diy community here, in the oTTomator Think Tank!](https://thinktank.ottomator.ai)
+[Entre na comunidade bolt.diy aqui, no oTTomator Think Tank!](https://thinktank.ottomator.ai)
 
-## Project management
+## Gestão do projeto
 
-Bolt.diy is a community effort! Still, the core team of contributors aims at organizing the project in way that allows
-you to understand where the current areas of focus are.
+O bolt.diy é um esforço comunitário! Ainda assim, o time principal de contribuidores busca organizar o projeto de forma que você entenda onde estão os focos atuais.
 
-If you want to know what we are working on, what we are planning to work on, or if you want to contribute to the
-project, please check the [project management guide](./PROJECT.md) to get started easily.
+Se quiser saber no que estamos trabalhando, o que planejamos ou como contribuir, confira o [guia de gestão do projeto](./PROJECT.md) para começar fácil.
 
-## Requested Additions
+## Funcionalidades Solicitadas
 
-- ✅ OpenRouter Integration (@coleam00)
-- ✅ Gemini Integration (@jonathands)
-- ✅ Autogenerate Ollama models from what is downloaded (@yunatamos)
-- ✅ Filter models by provider (@jasonm23)
-- ✅ Download project as ZIP (@fabwaseem)
-- ✅ Improvements to the main bolt.new prompt in `app\lib\.server\llm\prompts.ts` (@kofi-bhr)
-- ✅ DeepSeek API Integration (@zenith110)
-- ✅ Mistral API Integration (@ArulGandhi)
-- ✅ "Open AI Like" API Integration (@ZerxZ)
-- ✅ Ability to sync files (one way sync) to local folder (@muzafferkadir)
-- ✅ Containerize the application with Docker for easy installation (@aaronbolton)
-- ✅ Publish projects directly to GitHub (@goncaloalves)
-- ✅ Ability to enter API keys in the UI (@ali00209)
-- ✅ xAI Grok Beta Integration (@milutinke)
-- ✅ LM Studio Integration (@karrot0)
-- ✅ HuggingFace Integration (@ahsan3219)
-- ✅ Bolt terminal to see the output of LLM run commands (@thecodacus)
-- ✅ Streaming of code output (@thecodacus)
-- ✅ Ability to revert code to earlier version (@wonderwhy-er)
-- ✅ Chat history backup and restore functionality (@sidbetatester)
-- ✅ Cohere Integration (@hasanraiyan)
-- ✅ Dynamic model max token length (@hasanraiyan)
-- ✅ Better prompt enhancing (@SujalXplores)
-- ✅ Prompt caching (@SujalXplores)
-- ✅ Load local projects into the app (@wonderwhy-er)
-- ✅ Together Integration (@mouimet-infinisoft)
+- ✅ Integração OpenRouter (@coleam00)
+- ✅ Integração Gemini (@jonathands)
+- ✅ Gerar modelos Ollama automaticamente do que está baixado (@yunatamos)
+- ✅ Filtrar modelos por provedor (@jasonm23)
+- ✅ Baixar projeto como ZIP (@fabwaseem)
+- ✅ Melhorias no prompt principal do bolt.new em `app\lib\.server\llm\prompts.ts` (@kofi-bhr)
+- ✅ Integração DeepSeek API (@zenith110)
+- ✅ Integração Mistral API (@ArulGandhi)
+- ✅ Integração "Open AI Like" API (@ZerxZ)
+- ✅ Sincronizar arquivos (sync one way) para pasta local (@muzafferkadir)
+- ✅ Containerizar o app com Docker para instalação fácil (@aaronbolton)
+- ✅ Publicar projetos direto no GitHub (@goncaloalves)
+- ✅ Inserir chaves de API pela interface (@ali00209)
+- ✅ Integração xAI Grok Beta (@milutinke)
+- ✅ Integração LM Studio (@karrot0)
+- ✅ Integração HuggingFace (@ahsan3219)
+- ✅ Terminal Bolt para ver saída dos comandos LLM (@thecodacus)
+- ✅ Streaming da saída de código (@thecodacus)
+- ✅ Reverter código para versão anterior (@wonderwhy-er)
+- ✅ Backup e restauração do histórico de chat (@sidbetatester)
+- ✅ Integração Cohere (@hasanraiyan)
+- ✅ Comprimento dinâmico de tokens máximos do modelo (@hasanraiyan)
+- ✅ Melhor aprimoramento de prompt (@SujalXplores)
+- ✅ Cache de prompts (@SujalXplores)
+- ✅ Carregar projetos locais no app (@wonderwhy-er)
+- ✅ Integração Together (@mouimet-infinisoft)
 - ✅ Mobile friendly (@qwikode)
-- ✅ Better prompt enhancing (@SujalXplores)
-- ✅ Attach images to prompts (@atrokhym)(@stijnus)
-- ✅ Added Git Clone button (@thecodacus)
-- ✅ Git Import from url (@thecodacus)
-- ✅ PromptLibrary to have different variations of prompts for different use cases (@thecodacus)
-- ✅ Detect package.json and commands to auto install & run preview for folder and git import (@wonderwhy-er)
-- ✅ Selection tool to target changes visually (@emcconnell)
-- ✅ Detect terminal Errors and ask bolt to fix it (@thecodacus)
-- ✅ Detect preview Errors and ask bolt to fix it (@wonderwhy-er)
-- ✅ Add Starter Template Options (@thecodacus)
-- ✅ Perplexity Integration (@meetpateltech)
-- ✅ AWS Bedrock Integration (@kunjabijukchhe)
-- ✅ Add a "Diff View" to see the changes (@toddyclipsgg)
-- ⬜ **HIGH PRIORITY** - Prevent bolt from rewriting files as often (file locking and diffs)
-- ⬜ **HIGH PRIORITY** - Better prompting for smaller LLMs (code window sometimes doesn't start)
-- ⬜ **HIGH PRIORITY** - Run agents in the backend as opposed to a single model call
-- ✅ Deploy directly to Netlify (@xKevIsDev)
-- ⬜ Supabase Integration
-- ⬜ Have LLM plan the project in a MD file for better results/transparency
-- ⬜ VSCode Integration with git-like confirmations
-- ⬜ Upload documents for knowledge - UI design templates, a code base to reference coding style, etc.
-- ⬜ Voice prompting
-- ⬜ Azure Open AI API Integration
-- ⬜ Vertex AI Integration
-- ⬜ Granite Integration
-- ✅ Popout Window for Web Container(@stijnus)
-- ✅ Ability to change Popout window size (@stijnus)
+- ✅ Melhor aprimoramento de prompt (@SujalXplores)
+- ✅ Anexar imagens aos prompts (@atrokhym)(@stijnus)
+- ✅ Adicionado botão Git Clone (@thecodacus)
+- ✅ Importar Git por URL (@thecodacus)
+- ✅ PromptLibrary com variações de prompts para diferentes casos de uso (@thecodacus)
+- ✅ Detectar package.json e comandos para auto instalar & rodar preview para pasta e importação git (@wonderwhy-er)
+- ✅ Ferramenta de seleção para mudanças visuais (@emcconnell)
+- ✅ Detectar erros no terminal e pedir para o bolt corrigir (@thecodacus)
+- ✅ Detectar erros no preview e pedir para o bolt corrigir (@wonderwhy-er)
+- ✅ Adicionar opções de template inicial (@thecodacus)
+- ✅ Integração Perplexity (@meetpateltech)
+- ✅ Integração AWS Bedrock (@kunjabijukchhe)
+- ✅ Adicionar "Diff View" para ver mudanças (@toddyclipsgg)
+- ⬜ **ALTA PRIORIDADE** - Evitar que o bolt reescreva arquivos com tanta frequência (file locking e diffs)
+- ⬜ **ALTA PRIORIDADE** - Melhor prompting para LLMs menores (janela de código às vezes não inicia)
+- ⬜ **ALTA PRIORIDADE** - Rodar agentes no backend ao invés de uma única chamada de modelo
+- ✅ Deploy direto para Netlify (@xKevIsDev)
+- ⬜ Integração Supabase
+- ⬜ Planejar projeto em arquivo MD para melhores resultados/transparência
+- ⬜ Integração VSCode com confirmações tipo git
+- ⬜ Upload de documentos para conhecimento — templates de design, base de código para referência de estilo, etc.
+- ⬜ Prompt por voz
+- ⬜ Integração Azure Open AI API
+- ⬜ Integração Vertex AI
+- ⬜ Integração Granite
+- ✅ Janela popout para Web Container(@stijnus)
+- ✅ Alterar tamanho da janela popout (@stijnus)
 
-## Features
+## Funcionalidades
 
-- **AI-powered full-stack web development** for **NodeJS based applications** directly in your browser.
-- **Support for multiple LLMs** with an extensible architecture to integrate additional models.
-- **Attach images to prompts** for better contextual understanding.
-- **Integrated terminal** to view output of LLM-run commands.
-- **Revert code to earlier versions** for easier debugging and quicker changes.
-- **Download projects as ZIP** for easy portability Sync to a folder on the host.
-- **Integration-ready Docker support** for a hassle-free setup.
-- **Deploy** directly to **Netlify**
+- **Desenvolvimento web full-stack com IA** para **aplicações NodeJS** direto no navegador.
+- **Suporte a múltiplos LLMs** com arquitetura extensível para integrar novos modelos.
+- **Anexe imagens aos prompts** para melhor contexto.
+- **Terminal integrado** para ver a saída dos comandos LLM.
+- **Reverta código para versões anteriores** para depuração fácil e mudanças rápidas.
+- **Baixe projetos como ZIP** para portabilidade e sincronize com uma pasta local.
+- **Suporte a Docker** para configuração sem complicação.
+- **Deploy** direto para **Netlify**
 
-## Setup
+## Configuração
 
-If you're new to installing software from GitHub, don't worry! If you encounter any issues, feel free to submit an "issue" using the provided links or improve this documentation by forking the repository, editing the instructions, and submitting a pull request. The following instruction will help you get the stable branch up and running on your local machine in no time.
+Se você é novo em instalar softwares do GitHub, não se preocupe! Se encontrar problemas, abra uma "issue" pelos links ou melhore esta documentação fazendo um fork, editando e enviando um pull request. As instruções abaixo vão te ajudar a rodar a branch estável localmente rapidinho.
 
-Let's get you up and running with the stable version of Bolt.DIY!
+Vamos colocar o Bolt.DIY para rodar na sua máquina!
 
-## Quick Download
+## Download Rápido
 
-[![Download Latest Release](https://img.shields.io/github/v/release/stackblitz-labs/bolt.diy?label=Download%20Bolt&sort=semver)](https://github.com/stackblitz-labs/bolt.diy/releases/latest) ← Click here to go the the latest release version!
+[![Baixar Última Versão](https://img.shields.io/github/v/release/stackblitz-labs/bolt.diy?label=Download%20Bolt&sort=semver)](https://github.com/stackblitz-labs/bolt.diy/releases/latest) ← Clique aqui para baixar a versão mais recente!
 
-- Next **click source.zip**
+- Depois, **clique em source.zip**
 
-## Prerequisites
+## Pré-requisitos
 
-Before you begin, you'll need to install two important pieces of software:
+Antes de começar, você precisa instalar dois softwares importantes:
 
-### Install Node.js
+### Instale o Node.js
 
-Node.js is required to run the application.
+Node.js é necessário para rodar a aplicação.
 
-1. Visit the [Node.js Download Page](https://nodejs.org/en/download/)
-2. Download the "LTS" (Long Term Support) version for your operating system
-3. Run the installer, accepting the default settings
-4. Verify Node.js is properly installed:
-   - **For Windows Users**:
-     1. Press `Windows + R`
-     2. Type "sysdm.cpl" and press Enter
-     3. Go to "Advanced" tab → "Environment Variables"
-     4. Check if `Node.js` appears in the "Path" variable
-   - **For Mac/Linux Users**:
-     1. Open Terminal
-     2. Type this command:
+1. Acesse a [Página de Download do Node.js](https://nodejs.org/en/download/)
+2. Baixe a versão "LTS" (Long Term Support) para seu sistema operacional
+3. Rode o instalador, aceitando as configurações padrão
+4. Verifique se o Node.js foi instalado corretamente:
+   - **No Windows**:
+     1. Pressione `Windows + R`
+     2. Digite "sysdm.cpl" e pressione Enter
+     3. Vá na aba "Avançado" → "Variáveis de Ambiente"
+     4. Veja se `Node.js` aparece na variável "Path"
+   - **No Mac/Linux**:
+     1. Abra o Terminal
+     2. Digite:
         ```bash
         echo $PATH
         ```
-     3. Look for `/usr/local/bin` in the output
+     3. Procure por `/usr/local/bin` no resultado
 
-## Running the Application
+## Rodando a Aplicação
 
-You have two options for running Bolt.DIY: directly on your machine or using Docker.
+Você pode rodar o Bolt.DIY de duas formas: direto na sua máquina ou usando Docker.
 
-### Option 1: Direct Installation (Recommended for Beginners)
+### Opção 1: Instalação Direta (Recomendado para Iniciantes)
 
-1. **Install Package Manager (pnpm)**:
+1. **Instale o Gerenciador de Pacotes (pnpm)**:
 
    ```bash
    npm install -g pnpm
    ```
 
-2. **Install Project Dependencies**:
+2. **Instale as Dependências do Projeto**:
 
    ```bash
    pnpm install
    ```
 
-3. **Start the Application**:
+3. **Inicie a Aplicação**:
 
    ```bash
    pnpm run dev
    ```
    
-### Option 2: Using Docker
+### Opção 2: Usando Docker
 
-This option requires some familiarity with Docker but provides a more isolated environment.
+Essa opção exige algum conhecimento de Docker, mas oferece um ambiente mais isolado.
 
-#### Additional Prerequisite
+#### Pré-requisito Adicional
 
-- Install Docker: [Download Docker](https://www.docker.com/)
+- Instale o Docker: [Baixar Docker](https://www.docker.com/)
 
-#### Steps:
+#### Passos:
 
-1. **Build the Docker Image**:
+1. **Construa a Imagem Docker**:
 
    ```bash
-   # Using npm script:
+   # Usando npm script:
    npm run dockerbuild
 
-   # OR using direct Docker command:
+   # OU usando comando Docker direto:
    docker build . --target bolt-ai-development
    ```
 
-2. **Run the Container**:
+2. **Rode o Container**:
    ```bash
    docker compose --profile development up
    ```
 
-## Configuring API Keys and Providers
+## Configurando Chaves de API e Provedores
 
-### Adding Your API Keys
+### Adicionando Suas Chaves de API
 
-Setting up your API keys in Bolt.DIY is straightforward:
+Configurar suas chaves de API no Bolt.DIY é simples:
 
-1. Open the home page (main interface)
-2. Select your desired provider from the dropdown menu
-3. Click the pencil (edit) icon
-4. Enter your API key in the secure input field
+1. Abra a página inicial (interface principal)
+2. Selecione o provedor desejado no menu suspenso
+3. Clique no ícone de lápis (editar)
+4. Insira sua chave de API no campo seguro
 
-![API Key Configuration Interface](./docs/images/api-key-ui-section.png)
+![Interface de Configuração de Chave de API](./docs/images/api-key-ui-section.png)
 
-### Configuring Custom Base URLs
+### Configurando URLs Base Personalizadas
 
-For providers that support custom base URLs (such as Ollama or LM Studio), follow these steps:
+Para provedores que suportam URLs base personalizadas (como Ollama ou LM Studio), siga estes passos:
 
-1. Click the settings icon in the sidebar to open the settings menu
-   ![Settings Button Location](./docs/images/bolt-settings-button.png)
+1. Clique no ícone de configurações na barra lateral para abrir o menu
+   ![Localização do Botão de Configurações](./docs/images/bolt-settings-button.png)
 
-2. Navigate to the "Providers" tab
-3. Search for your provider using the search bar
-4. Enter your custom base URL in the designated field
-   ![Provider Base URL Configuration](./docs/images/provider-base-url.png)
+2. Vá até a aba "Provedores"
+3. Busque seu provedor usando a barra de pesquisa
+4. Insira sua URL base personalizada no campo indicado
+   ![Configuração de URL Base do Provedor](./docs/images/provider-base-url.png)
 
-> **Note**: Custom base URLs are particularly useful when running local instances of AI models or using custom API endpoints.
+> **Nota**: URLs base personalizadas são úteis ao rodar instâncias locais de modelos de IA ou usar endpoints de API próprios.
 
-### Supported Providers
+### Provedores Suportados
 
 - Ollama
 - LM Studio
 - OpenAILike
 
-## Setup Using Git (For Developers only)
+## Configuração via Git (Apenas para Desenvolvedores)
 
-This method is recommended for developers who want to:
+Este método é recomendado para quem quer:
 
-- Contribute to the project
-- Stay updated with the latest changes
-- Switch between different versions
-- Create custom modifications
+- Contribuir com o projeto
+- Ficar por dentro das últimas mudanças
+- Alternar entre versões
+- Criar modificações personalizadas
 
-#### Prerequisites
+#### Pré-requisitos
 
-1. Install Git: [Download Git](https://git-scm.com/downloads)
+1. Instale o Git: [Baixar Git](https://git-scm.com/downloads)
 
-#### Initial Setup
+#### Configuração Inicial
 
-1. **Clone the Repository**:
+1. **Clone o Repositório**:
 
    ```bash
    git clone -b stable https://github.com/stackblitz-labs/bolt.diy.git
    ```
 
-2. **Navigate to Project Directory**:
+2. **Acesse o Diretório do Projeto**:
 
    ```bash
    cd bolt.diy
    ```
 
-3. **Install Dependencies**:
+3. **Instale Dependências**:
 
    ```bash
    pnpm install
    ```
 
-4. **Start the Development Server**:
+4. **Inicie o Servidor de Desenvolvimento**:
    ```bash
    pnpm run dev
    ```
 
-5. **(OPTIONAL)** Switch to the Main Branch if you want to use pre-release/testbranch:
+5. **(OPCIONAL)** Alternar para a Branch Principal se você quiser usar pre-release/testbranch:
    ```bash
    git checkout main
    pnpm install
    pnpm run dev
    ```
-  Hint: Be aware that this can have beta-features and more likely got bugs than the stable release
+  Dica: Tenha cuidado com isso, pois pode ter recursos beta e mais bugs do que a versão estável
 
->**Open the WebUI to test (Default: http://localhost:5173)**
->   - Beginngers: 
->     - Try to use a sophisticated Provider/Model like Anthropic with Claude Sonnet 3.x Models to get best results
->     - Explanation: The System Prompt currently implemented in bolt.diy cant cover the best performance for all providers and models out there. So it works better with some models, then other, even if the models itself are perfect for >programming
->     - Future: Planned is a Plugin/Extentions-Library so there can be different System Prompts for different Models, which will help to get better results
+>**Abra a WebUI para testar (Padrão: http://localhost:5173)**
+>   - Iniciantes: 
+>     - Tente usar um provedor/modelo sofisticado como Anthropic com Claude Sonnet 3.x Models para obter melhores resultados
+>     - Explicação: O Prompt do Sistema atualmente implementado no bolt.diy não pode cobrir o melhor desempenho para todos os provedores e modelos lá fora. Então, funciona melhor com alguns modelos, depois outros, mesmo que os modelos em si sejam perfeitos para >programação
+>     - Futuro: Planejado é um Plugin/Extensões-Library para que haja diferentes Prompts do Sistema para diferentes Modelos, o que ajudará a obter melhores resultados
 
-#### Staying Updated
+#### Mantendo-se Atualizado
 
-To get the latest changes from the repository:
+Para obter as últimas mudanças do repositório:
 
-1. **Save Your Local Changes** (if any):
+1. **Salve suas Mudanças Locais** (se houver):
 
    ```bash
    git stash
    ```
 
-2. **Pull Latest Updates**:
+2. **Puxe as Últimas Atualizações**:
 
    ```bash
    git pull 
    ```
 
-3. **Update Dependencies**:
+3. **Atualize Dependências**:
 
    ```bash
    pnpm install
    ```
 
-4. **Restore Your Local Changes** (if any):
+4. **Restaure suas Mudanças Locais** (se houver):
    ```bash
    git stash pop
    ```
 
-#### Troubleshooting Git Setup
+#### Resolvendo Problemas com Configuração Git
 
-If you encounter issues:
+Se você encontrar problemas:
 
-1. **Clean Installation**:
+1. **Instalação Limpa**:
 
    ```bash
-   # Remove node modules and lock files
+   # Remover módulos do node e arquivos de bloqueio
    rm -rf node_modules pnpm-lock.yaml
 
-   # Clear pnpm cache
+   # Limpar cache pnpm
    pnpm store prune
 
-   # Reinstall dependencies
+   # Reinstalar dependências
    pnpm install
    ```
 
-2. **Reset Local Changes**:
+2. **Resetar Mudanças Locais**:
    ```bash
-   # Discard all local changes
+   # Descartar todas as mudanças locais
    git reset --hard origin/main
    ```
 
-Remember to always commit your local changes or stash them before pulling updates to avoid conflicts.
+Lembre-se de sempre commitar suas mudanças locais ou stashá-las antes de puxar atualizações para evitar conflitos.
 
 ---
 
-## Available Scripts
+## Scripts Disponíveis
 
-- **`pnpm run dev`**: Starts the development server.
-- **`pnpm run build`**: Builds the project.
-- **`pnpm run start`**: Runs the built application locally using Wrangler Pages.
-- **`pnpm run preview`**: Builds and runs the production build locally.
-- **`pnpm test`**: Runs the test suite using Vitest.
-- **`pnpm run typecheck`**: Runs TypeScript type checking.
-- **`pnpm run typegen`**: Generates TypeScript types using Wrangler.
-- **`pnpm run deploy`**: Deploys the project to Cloudflare Pages.
-- **`pnpm run lint:fix`**: Automatically fixes linting issues.
+- **`pnpm run dev`**: Inicia o servidor de desenvolvimento.
+- **`pnpm run build`**: Constroi o projeto.
+- **`pnpm run start`**: Roda o aplicativo construído localmente usando Wrangler Pages.
+- **`pnpm run preview`**: Constroi e roda o build de produção localmente.
+- **`pnpm test`**: Roda o conjunto de testes usando Vitest.
+- **`pnpm run typecheck`**: Roda verificação de tipo TypeScript.
+- **`pnpm run typegen`**: Gera tipos TypeScript usando Wrangler.
+- **`pnpm run deploy`**: Implanta o projeto para Cloudflare Pages.
+- **`pnpm run lint:fix`**: Corrige automaticamente problemas de linting.
 
 ---
 
-## Contributing
+## Contribuindo
 
-We welcome contributions! Check out our [Contributing Guide](CONTRIBUTING.md) to get started.
+Nós damos boas-vindas! Confira nosso [Guia de Contribuição](CONTRIBUTING.md) para começar.
 
 ---
 
 ## Roadmap
 
-Explore upcoming features and priorities on our [Roadmap](https://roadmap.sh/r/ottodev-roadmap-2ovzo).
+Explore recursos futuros e prioridades no nosso [Roadmap](https://roadmap.sh/r/ottodev-roadmap-2ovzo).
 
 ---
 
 ## FAQ
 
-For answers to common questions, issues, and to see a list of recommended models, visit our [FAQ Page](FAQ.md).
+Para respostas para perguntas comuns, problemas e para ver uma lista de modelos recomendados, visite nosso [FAQ Page](FAQ.md).
 
 
-# Licensing
-**Who needs a commercial WebContainer API license?**
+# Licenciamento
+**Quem precisa de uma licença comercial de API de Container Web?**
 
-bolt.diy source code is distributed as MIT, but it uses WebContainers API that [requires licensing](https://webcontainers.io/enterprise) for production usage in a commercial, for-profit setting. (Prototypes or POCs do not require a commercial license.) If you're using the API to meet the needs of your customers, prospective customers, and/or employees, you need a license to ensure compliance with our Terms of Service. Usage of the API in violation of these terms may result in your access being revoked.
+O código-fonte do bolt.diy é distribuído como MIT, mas usa API de Containers Web que [exige licenciamento](https://webcontainers.io/enterprise) para uso em produção em um negócio, para lucro. (Prototipos ou POCs não precisam de uma licença comercial.) Se você está usando a API para atender às necessidades de seus clientes, possíveis clientes e/ou funcionários, você precisa de uma licença para garantir cumprimento com nosso Termos de Serviço. Uso da API em violação desses termos pode resultar em sua acesso sendo revogado.

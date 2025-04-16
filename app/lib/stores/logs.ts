@@ -74,7 +74,7 @@ class LogStore {
         const parsedLogs = JSON.parse(savedLogs);
         this._logs.set(parsedLogs);
       } catch (error) {
-        logger.error('Failed to parse logs from cookies:', error);
+        logger.error('Falha ao analisar logs dos cookies:', error);
       }
     }
   }
@@ -91,7 +91,7 @@ class LogStore {
         const parsedReadLogs = JSON.parse(savedReadLogs);
         this._readLogs = new Set(parsedReadLogs);
       } catch (error) {
-        logger.error('Failed to parse read logs:', error);
+        logger.error('Falha ao analisar logs lidos:', error);
       }
     }
   }
@@ -221,7 +221,7 @@ class LogStore {
 
   // Network Status Logging
   logNetworkStatus(status: 'online' | 'offline' | 'reconnecting' | 'connected', details?: Record<string, any>) {
-    const message = `Network ${status}`;
+    const message = `Rede ${status}`;
     const level = status === 'offline' ? 'error' : status === 'reconnecting' ? 'warning' : 'info';
 
     return this._addLog(message, level, 'network', {
@@ -233,7 +233,7 @@ class LogStore {
 
   // Database Operations Logging
   logDatabase(operation: string, success: boolean, duration: number, details?: Record<string, any>) {
-    const message = `DB ${operation} - ${success ? 'Success' : 'Failed'} (${duration}ms)`;
+    const message = `DB ${operation} - ${success ? 'Sucesso' : 'Falha'} (${duration}ms)`;
     const level = success ? 'info' : 'error';
 
     return this._addLog(message, level, 'database', {
@@ -504,7 +504,7 @@ class LogStore {
 
   logPerformanceMetric(component: string, operation: string, duration: number, details?: any) {
     return this._addLog(
-      `Performance: ${component} - ${operation} took ${duration}ms`,
+      `Performance: ${component} - ${operation} levou ${duration}ms`,
       duration > 1000 ? 'warning' : 'info',
       'performance',
       { component, operation, duration, ...details },

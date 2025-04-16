@@ -29,8 +29,6 @@ export interface OllamaApiResponse {
 
 export default class OllamaProvider extends BaseProvider {
   name = 'Ollama';
-  getApiKeyLink = 'https://ollama.com/download';
-  labelForGetApiKey = 'Download Ollama';
   icon = 'i-ph:cloud-arrow-down';
 
   config = {
@@ -126,7 +124,7 @@ export default class OllamaProvider extends BaseProvider {
     baseUrl = isDocker ? baseUrl.replace('localhost', 'host.docker.internal') : baseUrl;
     baseUrl = isDocker ? baseUrl.replace('127.0.0.1', 'host.docker.internal') : baseUrl;
 
-    logger.debug('Ollama Base Url used: ', baseUrl);
+    logger.debug('URL Base do Ollama usada: ', baseUrl);
 
     const ollamaInstance = ollama(model, {
       numCtx: this.getDefaultNumCtx(serverEnv),

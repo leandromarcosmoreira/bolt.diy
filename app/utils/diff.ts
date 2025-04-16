@@ -29,17 +29,17 @@ export function computeFileModifications(files: FileMap, modifiedFiles: Map<stri
     const unifiedDiff = diffFiles(filePath, originalContent, file.content);
 
     if (!unifiedDiff) {
-      // files are identical
+      // arquivos são idênticos
       continue;
     }
 
     hasModifiedFiles = true;
 
     if (unifiedDiff.length > file.content.length) {
-      // if there are lots of changes we simply grab the current file content since it's smaller than the diff
+      // se houver muitas mudanças, simplesmente pegamos o conteúdo atual do arquivo já que é menor que o diff
       modifications[filePath] = { type: 'file', content: file.content };
     } else {
-      // otherwise we use the diff since it's smaller
+      // caso contrário, usamos o diff já que é menor
       modifications[filePath] = { type: 'diff', content: unifiedDiff };
     }
   }
@@ -52,9 +52,9 @@ export function computeFileModifications(files: FileMap, modifiedFiles: Map<stri
 }
 
 /**
- * Computes a diff in the unified format. The only difference is that the header is omitted
- * because it will always assume that you're comparing two versions of the same file and
- * it allows us to avoid the extra characters we send back to the llm.
+ * Calcula um diff no formato unificado. A única diferença é que o cabeçalho é omitido
+ * porque sempre assumirá que você está comparando duas versões do mesmo arquivo e
+ * isso nos permite evitar os caracteres extras que enviamos de volta ao LLM.
  *
  * @see https://www.gnu.org/software/diffutils/manual/html_node/Unified-Format.html
  */
@@ -78,22 +78,22 @@ export function diffFiles(fileName: string, oldFileContent: string, newFileConte
 const regex = new RegExp(`^${WORK_DIR}\/`);
 
 /**
- * Strips out the work directory from the file path.
+ * Remove o diretório de trabalho do caminho do arquivo.
  */
 export function extractRelativePath(filePath: string) {
   return filePath.replace(regex, '');
 }
 
 /**
- * Converts the unified diff to HTML.
+ * Converte o diff unificado para HTML.
  *
- * Example:
+ * Exemplo:
  *
  * ```html
  * <bolt_file_modifications>
  * <diff path="/home/project/index.js">
- * - console.log('Hello, World!');
- * + console.log('Hello, Bolt!');
+ * - console.log('Olá, Mundo!');
+ * + console.log('Olá, Bolt!');
  * </diff>
  * </bolt_file_modifications>
  * ```

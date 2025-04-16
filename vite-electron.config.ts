@@ -7,7 +7,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 import { execSync } from 'child_process';
 
-// Get git hash with fallback
+// Obtém o hash do git com fallback
 const getGitHash = () => {
   try {
     return execSync('git rev-parse --short HEAD').toString().trim();
@@ -47,8 +47,8 @@ export default defineConfig((config) => {
         transform(code, id) {
           if (id.endsWith('entry.server.tsx')) {
             /*
-             * Hack: fix the issue with react-dom/server not being found in electron
-             * Replace the import from 'react-dom/server' with 'react-dom/server.browser', only for electron build
+             * Correção: resolve o problema com react-dom/server não sendo encontrado no electron
+             * Substitui a importação de 'react-dom/server' por 'react-dom/server.browser', apenas para build do electron
              */
             return code.replace(/from 'react-dom\/server';?/g, "from 'react-dom/server.browser';");
           }

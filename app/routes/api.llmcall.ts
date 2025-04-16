@@ -35,18 +35,18 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
 
   const { name: providerName } = provider;
 
-  // validate 'model' and 'provider' fields
+  // validar campos 'model' e 'provider'
   if (!model || typeof model !== 'string') {
-    throw new Response('Invalid or missing model', {
+    throw new Response('Modelo inválido ou ausente', {
       status: 400,
-      statusText: 'Bad Request',
+      statusText: 'Requisição Inválida',
     });
   }
 
   if (!providerName || typeof providerName !== 'string') {
-    throw new Response('Invalid or missing provider', {
+    throw new Response('Provedor inválido ou ausente', {
       status: 400,
-      statusText: 'Bad Request',
+      statusText: 'Requisição Inválida',
     });
   }
 
@@ -58,7 +58,7 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
     try {
       const result = await streamText({
         options: {
-          system,
+          system: 'Você é um assistente útil e amigável.',
         },
         messages: [
           {
@@ -81,15 +81,15 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
       console.log(error);
 
       if (error instanceof Error && error.message?.includes('API key')) {
-        throw new Response('Invalid or missing API key', {
+        throw new Response('Chave de API inválida ou ausente', {
           status: 401,
-          statusText: 'Unauthorized',
+          statusText: 'Não Autorizado',
         });
       }
 
       throw new Response(null, {
         status: 500,
-        statusText: 'Internal Server Error',
+        statusText: 'Erro Interno do Servidor',
       });
     }
   } else {
@@ -98,7 +98,7 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
       const modelDetails = models.find((m: ModelInfo) => m.name === model);
 
       if (!modelDetails) {
-        throw new Error('Model not found');
+        throw new Error('Modelo não encontrado');
       }
 
       const dynamicMaxTokens = modelDetails && modelDetails.maxTokenAllowed ? modelDetails.maxTokenAllowed : MAX_TOKENS;
@@ -106,10 +106,10 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
       const providerInfo = PROVIDER_LIST.find((p) => p.name === provider.name);
 
       if (!providerInfo) {
-        throw new Error('Provider not found');
+        throw new Error('Provedor não encontrado');
       }
 
-      logger.info(`Generating response Provider: ${provider.name}, Model: ${modelDetails.name}`);
+      logger.info(`Gerando resposta Provedor: ${provider.name}, Modelo: ${modelDetails.name}`);
 
       const result = await generateText({
         system,
@@ -128,7 +128,7 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
         maxTokens: dynamicMaxTokens,
         toolChoice: 'none',
       });
-      logger.info(`Generated response`);
+      logger.info(`Resposta gerada`);
 
       return new Response(JSON.stringify(result), {
         status: 200,
@@ -140,15 +140,15 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
       console.log(error);
 
       if (error instanceof Error && error.message?.includes('API key')) {
-        throw new Response('Invalid or missing API key', {
+        throw new Response('Chave de API inválida ou ausente', {
           status: 401,
-          statusText: 'Unauthorized',
+          statusText: 'Não Autorizado',
         });
       }
 
       throw new Response(null, {
         status: 500,
-        statusText: 'Internal Server Error',
+        statusText: 'Erro Interno do Servidor',
       });
     }
   }

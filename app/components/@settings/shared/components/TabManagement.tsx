@@ -10,14 +10,13 @@ import { toast } from 'react-toastify';
 import { TbLayoutGrid } from 'react-icons/tb';
 import { useSettingsStore } from '~/lib/stores/settings';
 
-// Define tab icons mapping
+// Mapeamento dos ícones das abas
 const TAB_ICONS: Record<TabType, string> = {
   profile: 'i-ph:user-circle-fill',
   settings: 'i-ph:gear-six-fill',
   notifications: 'i-ph:bell-fill',
   features: 'i-ph:star-fill',
   data: 'i-ph:database-fill',
-  'cloud-providers': 'i-ph:cloud-fill',
   'local-providers': 'i-ph:desktop-fill',
   'service-status': 'i-ph:activity-fill',
   connection: 'i-ph:wifi-high-fill',
@@ -28,27 +27,26 @@ const TAB_ICONS: Record<TabType, string> = {
   'tab-management': 'i-ph:squares-four-fill',
 };
 
-// Define which tabs are default in user mode
+// Define quais abas são padrão no modo usuário
 const DEFAULT_USER_TABS: TabType[] = [
   'features',
   'data',
-  'cloud-providers',
   'local-providers',
   'connection',
   'notifications',
   'event-logs',
 ];
 
-// Define which tabs can be added to user mode
+// Define quais abas podem ser adicionadas no modo usuário
 const OPTIONAL_USER_TABS: TabType[] = ['profile', 'settings', 'task-manager', 'service-status', 'debug', 'update'];
 
-// All available tabs for user mode
+// Todas as abas disponíveis no modo usuário
 const ALL_USER_TABS = [...DEFAULT_USER_TABS, ...OPTIONAL_USER_TABS];
 
-// Define which tabs are beta
+// Define quais abas estão em beta
 const BETA_TABS = new Set<TabType>(['task-manager', 'service-status', 'update', 'local-providers']);
 
-// Beta label component
+// Componente do rótulo beta
 const BetaLabel = () => (
   <span className="px-1.5 py-0.5 text-[10px] rounded-full bg-purple-500/10 text-purple-500 font-medium">BETA</span>
 );
@@ -59,10 +57,10 @@ export const TabManagement = () => {
   const { setSelectedTab } = useSettingsStore();
 
   const handleTabVisibilityChange = (tabId: TabType, checked: boolean) => {
-    // Get current tab configuration
+    // Obtém configuração atual da aba
     const currentTab = tabConfiguration.userTabs.find((tab) => tab.id === tabId);
 
-    // If tab doesn't exist in configuration, create it
+    // Se a aba não existe na configuração, cria ela
     if (!currentTab) {
       const newTab = {
         id: tabId,
@@ -78,20 +76,20 @@ export const TabManagement = () => {
         userTabs: updatedTabs,
       });
 
-      toast.success(`Tab ${checked ? 'enabled' : 'disabled'} successfully`);
+      toast.success(`Aba ${checked ? 'ativada' : 'desativada'} com sucesso`);
 
       return;
     }
 
-    // Check if tab can be enabled in user mode
+    // Verifica se a aba pode ser ativada no modo usuário
     const canBeEnabled = DEFAULT_USER_TABS.includes(tabId) || OPTIONAL_USER_TABS.includes(tabId);
 
     if (!canBeEnabled && checked) {
-      toast.error('This tab cannot be enabled in user mode');
+      toast.error('Esta aba não pode ser ativada no modo usuário');
       return;
     }
 
-    // Update tab visibility
+    // Atualiza visibilidade da aba
     const updatedTabs = tabConfiguration.userTabs.map((tab) => {
       if (tab.id === tabId) {
         return { ...tab, visible: checked };
@@ -100,20 +98,20 @@ export const TabManagement = () => {
       return tab;
     });
 
-    // Update store
+    // Atualiza o store
     tabConfigurationStore.set({
       ...tabConfiguration,
       userTabs: updatedTabs,
     });
 
-    // Show success message
-    toast.success(`Tab ${checked ? 'enabled' : 'disabled'} successfully`);
+    // Exibe mensagem de sucesso
+    toast.success(`Aba ${checked ? 'ativada' : 'desativada'} com sucesso`);
   };
 
-  // Create a map of existing tab configurations
+  // Cria um mapa das configurações existentes
   const tabConfigMap = new Map(tabConfiguration.userTabs.map((tab) => [tab.id, tab]));
 
-  // Generate the complete list of tabs, including those not in the configuration
+  // Gera lista completa de abas, incluindo as não configuradas
   const allTabs = ALL_USER_TABS.map((tabId) => {
     return (
       tabConfigMap.get(tabId) || {
@@ -125,13 +123,13 @@ export const TabManagement = () => {
     );
   });
 
-  // Filter tabs based on search query
+  // Filtra abas baseado na busca
   const filteredTabs = allTabs.filter((tab) => TAB_LABELS[tab.id].toLowerCase().includes(searchQuery.toLowerCase()));
 
   useEffect(() => {
-    // Reset to first tab when component unmounts
+    // Reseta para primeira aba ao desmontar
     return () => {
-      setSelectedTab('user'); // Reset to user tab when unmounting
+      setSelectedTab('user'); // Reseta para aba usuário ao desmontar
     };
   }, [setSelectedTab]);
 
@@ -143,7 +141,7 @@ export const TabManagement = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Header */}
+        {/* Cabeçalho */}
         <div className="flex items-center justify-between gap-4 mt-8 mb-4">
           <div className="flex items-center gap-2">
             <div
@@ -156,8 +154,8 @@ export const TabManagement = () => {
               <TbLayoutGrid className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-md font-medium text-bolt-elements-textPrimary">Tab Management</h4>
-              <p className="text-sm text-bolt-elements-textSecondary">Configure visible tabs and their order</p>
+              <h4 className="text-md font-medium text-bolt-elements-textPrimary">Gerenciar Abas</h4>
+              <p className="text-sm text-bolt-elements-textSecondary">Configure abas visíveis e sua ordem</p>
             </div>
           </div>
 
@@ -170,7 +168,7 @@ export const TabManagement = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tabs..."
+              placeholder="Buscar abas..."
               className={classNames(
                 'w-full pl-10 pr-4 py-2 rounded-lg',
                 'bg-bolt-elements-background-depth-2',
@@ -184,17 +182,17 @@ export const TabManagement = () => {
           </div>
         </div>
 
-        {/* Tab Grid */}
+        {/* Grade de Abas */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Default Section Header */}
+          {/* Cabeçalho da Seção Padrão */}
           {filteredTabs.some((tab) => DEFAULT_USER_TABS.includes(tab.id)) && (
             <div className="col-span-full flex items-center gap-2 mt-4 mb-2">
               <div className="i-ph:star-fill w-4 h-4 text-purple-500" />
-              <span className="text-sm font-medium text-bolt-elements-textPrimary">Default Tabs</span>
+              <span className="text-sm font-medium text-bolt-elements-textPrimary">Abas Padrão</span>
             </div>
           )}
 
-          {/* Default Tabs */}
+          {/* Abas Padrão */}
           {filteredTabs
             .filter((tab) => DEFAULT_USER_TABS.includes(tab.id))
             .map((tab, index) => (
@@ -215,7 +213,7 @@ export const TabManagement = () => {
                 {/* Status Badges */}
                 <div className="absolute top-1 right-1.5 flex gap-1">
                   <span className="px-1.5 py-0.25 text-xs rounded-full bg-purple-500/10 text-purple-500 font-medium mr-2">
-                    Default
+                    Padrão
                   </span>
                 </div>
 
@@ -247,7 +245,7 @@ export const TabManagement = () => {
                           {BETA_TABS.has(tab.id) && <BetaLabel />}
                         </div>
                         <p className="text-xs text-bolt-elements-textSecondary mt-0.5">
-                          {tab.visible ? 'Visible in user mode' : 'Hidden in user mode'}
+                          {tab.visible ? 'Visível no modo usuário' : 'Oculta no modo usuário'}
                         </p>
                       </div>
                       <Switch
@@ -280,15 +278,15 @@ export const TabManagement = () => {
               </motion.div>
             ))}
 
-          {/* Optional Section Header */}
+          {/* Cabeçalho da Seção Opcional */}
           {filteredTabs.some((tab) => OPTIONAL_USER_TABS.includes(tab.id)) && (
             <div className="col-span-full flex items-center gap-2 mt-8 mb-2">
               <div className="i-ph:plus-circle-fill w-4 h-4 text-blue-500" />
-              <span className="text-sm font-medium text-bolt-elements-textPrimary">Optional Tabs</span>
+              <span className="text-sm font-medium text-bolt-elements-textPrimary">Abas Opcionais</span>
             </div>
           )}
 
-          {/* Optional Tabs */}
+          {/* Abas Opcionais */}
           {filteredTabs
             .filter((tab) => OPTIONAL_USER_TABS.includes(tab.id))
             .map((tab, index) => (
@@ -309,7 +307,7 @@ export const TabManagement = () => {
                 {/* Status Badges */}
                 <div className="absolute top-1 right-1.5 flex gap-1">
                   <span className="px-1.5 py-0.25 text-xs rounded-full bg-blue-500/10 text-blue-500 font-medium mr-2">
-                    Optional
+                    Opcional
                   </span>
                 </div>
 
@@ -341,7 +339,7 @@ export const TabManagement = () => {
                           {BETA_TABS.has(tab.id) && <BetaLabel />}
                         </div>
                         <p className="text-xs text-bolt-elements-textSecondary mt-0.5">
-                          {tab.visible ? 'Visible in user mode' : 'Hidden in user mode'}
+                          {tab.visible ? 'Visível no modo usuário' : 'Oculta no modo usuário'}
                         </p>
                       </div>
                       <Switch

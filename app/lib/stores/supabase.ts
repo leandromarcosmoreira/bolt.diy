@@ -127,7 +127,7 @@ export async function fetchSupabaseStats(token: string) {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch projects');
+      throw new Error('Falha ao buscar projetos');
     }
 
     const data = (await response.json()) as any;
@@ -160,7 +160,7 @@ export async function fetchProjectApiKeys(projectId: string, token: string) {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch API keys');
+      throw new Error('Falha ao buscar chaves de API');
     }
 
     const data = (await response.json()) as any;

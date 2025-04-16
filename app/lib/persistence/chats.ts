@@ -37,16 +37,16 @@ export async function getAllChats(db: IDBDatabase): Promise<Chat[]> {
 
       request.onsuccess = () => {
         const result = request.result || [];
-        console.log(`getAllChats: Found ${result.length} chats in database '${db.name}'`);
+        console.log(`getAllChats: Encontrei ${result.length} conversas no banco de dados '${db.name}'`);
         resolve(result);
       };
 
       request.onerror = () => {
-        console.error(`getAllChats: Error querying database '${db.name}':`, request.error);
+        console.error(`getAllChats: Erro ao consultar o banco de dados '${db.name}':`, request.error);
         reject(request.error);
       };
     } catch (err) {
-      console.error(`getAllChats: Error creating transaction on database '${db.name}':`, err);
+      console.error(`getAllChats: Erro ao criar a transação no banco de dados '${db.name}':`, err);
       reject(err);
     }
   });

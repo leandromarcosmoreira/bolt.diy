@@ -8,7 +8,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   const previewId = params.id;
 
   if (!previewId) {
-    throw new Response('Preview ID is required', { status: 400 });
+    throw new Response('ID da prévia é obrigatório', { status: 400 });
   }
 
   return json({ previewId });
@@ -20,10 +20,10 @@ export default function WebContainerPreview() {
   const broadcastChannelRef = useRef<BroadcastChannel>();
   const [previewUrl, setPreviewUrl] = useState('');
 
-  // Handle preview refresh
+  // Lidar com atualização da prévia
   const handleRefresh = useCallback(() => {
     if (iframeRef.current && previewUrl) {
-      // Force a clean reload
+      // Forçar um recarregamento limpo
       iframeRef.current.src = '';
       requestAnimationFrame(() => {
         if (iframeRef.current) {
@@ -33,7 +33,7 @@ export default function WebContainerPreview() {
     }
   }, [previewUrl]);
 
-  // Notify other tabs that this preview is ready
+  // Notificar outras abas que esta prévia está pronta
   const notifyPreviewReady = useCallback(() => {
     if (broadcastChannelRef.current && previewUrl) {
       broadcastChannelRef.current.postMessage({
@@ -46,10 +46,10 @@ export default function WebContainerPreview() {
   }, [previewId, previewUrl]);
 
   useEffect(() => {
-    // Initialize broadcast channel
+    // Inicializar canal de transmissão
     broadcastChannelRef.current = new BroadcastChannel(PREVIEW_CHANNEL);
 
-    // Listen for preview updates
+    // Ouvir atualizações de prévia
     broadcastChannelRef.current.onmessage = (event) => {
       if (event.data.previewId === previewId) {
         if (event.data.type === 'refresh-preview' || event.data.type === 'file-change') {
@@ -58,19 +58,19 @@ export default function WebContainerPreview() {
       }
     };
 
-    // Construct the WebContainer preview URL
+    // Construir a URL de prévia do WebContainer
     const url = `https://${previewId}.local-credentialless.webcontainer-api.io`;
     setPreviewUrl(url);
 
-    // Set the iframe src
+    // Definir o src do iframe
     if (iframeRef.current) {
       iframeRef.current.src = url;
     }
 
-    // Notify other tabs that this preview is ready
+    // Notificar outras abas que esta prévia está pronta
     notifyPreviewReady();
 
-    // Cleanup
+    // Limpeza
     return () => {
       broadcastChannelRef.current?.close();
     };
@@ -80,7 +80,7 @@ export default function WebContainerPreview() {
     <div className="w-full h-full">
       <iframe
         ref={iframeRef}
-        title="WebContainer Preview"
+        title="Prévia do WebContainer"
         className="w-full h-full border-none"
         sandbox="allow-scripts allow-forms allow-popups allow-modals allow-storage-access-by-user-activation allow-same-origin"
         allow="cross-origin-isolated"

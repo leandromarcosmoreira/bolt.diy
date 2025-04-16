@@ -30,7 +30,7 @@ export default function ServiceStatusTab() {
             console.error(`Error checking ${provider} status:`, err);
             statuses.push({
               provider,
-              status: 'degraded',
+              status: 'instavel',
               message: 'Unable to check service status',
               incidents: ['Error checking service status'],
               lastChecked: new Date().toISOString(),
@@ -57,9 +57,9 @@ export default function ServiceStatusTab() {
 
   const getStatusColor = (status: ServiceStatus['status']) => {
     switch (status) {
-      case 'operational':
+      case 'operacional':
         return 'text-green-500 dark:text-green-400';
-      case 'degraded':
+      case 'instavel':
         return 'text-yellow-500 dark:text-yellow-400';
       case 'down':
         return 'text-red-500 dark:text-red-400';
@@ -70,9 +70,9 @@ export default function ServiceStatusTab() {
 
   const getStatusIcon = (status: ServiceStatus['status']) => {
     switch (status) {
-      case 'operational':
+      case 'operacional':
         return 'i-ph:check-circle';
-      case 'degraded':
+      case 'instavel':
         return 'i-ph:warning';
       case 'down':
         return 'i-ph:x-circle';

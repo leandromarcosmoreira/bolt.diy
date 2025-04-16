@@ -252,10 +252,10 @@ ${file.content}
 
   if (templatePromptFile) {
     userMessage = `
-TEMPLATE INSTRUCTIONS:
+INSTRUÇÕES DO TEMPLATE:
 ${templatePromptFile.content}
 
-IMPORTANT: Dont Forget to install the dependencies before running the app
+IMPORTANTE: Não se esqueça de instalar as dependências antes de executar o aplicativo
 ---
 `;
   }
@@ -264,38 +264,38 @@ IMPORTANT: Dont Forget to install the dependencies before running the app
     userMessage =
       userMessage +
       `
-STRICT FILE ACCESS RULES - READ CAREFULLY:
+REGRAS DE ACESSO AO ARQUIVO ESTRICTO - LEIA COM ATENÇÃO:
 
-The following files are READ-ONLY and must never be modified:
+Os seguintes arquivos são de leitura e nunca devem ser modificados:
 ${filesToImport.ignoreFile.map((file) => `- ${file.path}`).join('\n')}
 
-Permitted actions:
-✓ Import these files as dependencies
-✓ Read from these files
-✓ Reference these files
+Permitidas ações:
+✓ Importar esses arquivos como dependências
+✓ Ler desses arquivos
+✓ Referência esses arquivos
 
-Strictly forbidden actions:
-❌ Modify any content within these files
-❌ Delete these files
-❌ Rename these files
-❌ Move these files
-❌ Create new versions of these files
-❌ Suggest changes to these files
+Ações proibidas:
+❌ Modificar qualquer conteúdo dentro desses arquivos
+❌ Remover esses arquivos
+❌ Renomear esses arquivos
+❌ Mover esses arquivos
+❌ Criar novas versões desses arquivos
+❌ Sugerir alterações para esses arquivos
 
-Any attempt to modify these protected files will result in immediate termination of the operation.
+Qualquer tentativa de modificar esses arquivos protegidos resultará na imediata interrupção da operação.
 
-If you need to make changes to functionality, create new files instead of modifying the protected ones listed above.
+Se precisar fazer alterações à funcionalidade, crie novos arquivos em vez de modificar os protegidos acima.
 ---
 `;
   }
 
   userMessage += `
 ---
-template import is done, and you can now use the imported files,
-edit only the files that need to be changed, and you can create new files as needed.
-NO NOT EDIT/WRITE ANY FILES THAT ALREADY EXIST IN THE PROJECT AND DOES NOT NEED TO BE MODIFIED
+O template importado está concluído, e você pode agora usar os arquivos importados,
+edite apenas os arquivos que precisam ser alterados, e você pode criar novos arquivos conforme necessário.
+NÃO EDITE/ESCREVA QUALQUER ARQUIVO QUE JÁ EXISTE NO PROJETO E NÃO PRECISA SER MODIFICADO
 ---
-Now that the Template is imported please continue with my original request
+Agora que o Template está importado, continue com minha solicitação original
 `;
 
   return {

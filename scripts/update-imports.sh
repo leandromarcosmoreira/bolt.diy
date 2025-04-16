@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Update imports in TypeScript files
+# Atualiza importações em arquivos TypeScript
 find app -type f -name "*.ts" -o -name "*.tsx" | xargs sed -i '' 's|~/components/settings/settings.types|~/components/@settings/core/types|g'
 
-# Update imports for specific components
+# Atualiza importações para componentes específicos
 find app -type f -name "*.ts" -o -name "*.tsx" | xargs sed -i '' 's|~/components/settings/|~/components/@settings/tabs/|g' 

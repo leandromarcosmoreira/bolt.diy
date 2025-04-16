@@ -102,7 +102,7 @@ export abstract class BaseProviderChecker {
     }
   }
 
-  protected async checkEndpoint(url: string): Promise<'reachable' | 'unreachable'> {
+  protected async checkEndpoint(url: string): Promise<'acessivel' | 'inacessivel'> {
     try {
       const response = await fetch(url, {
         mode: 'no-cors',
@@ -110,10 +110,10 @@ export abstract class BaseProviderChecker {
           Accept: 'text/html',
         },
       });
-      return response.type === 'opaque' ? 'reachable' : 'unreachable';
+      return response.type === 'opaque' ? 'acessivel' : 'inacessivel';
     } catch (error) {
       console.error(`Error checking ${url}:`, error);
-      return 'unreachable';
+      return 'inacessivel';
     }
   }
 

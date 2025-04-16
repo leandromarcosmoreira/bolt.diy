@@ -13,7 +13,7 @@ export function getTerminalTheme(overrides?: ITheme): ITheme {
     selectionForeground: cssVar('--bolt-elements-terminal-selection-textColor'),
     selectionInactiveBackground: cssVar('--bolt-elements-terminal-selection-backgroundColorInactive'),
 
-    // ansi escape code colors
+    // Cores dos códigos de escape ANSI
     black: cssVar('--bolt-elements-terminal-color-black'),
     red: cssVar('--bolt-elements-terminal-color-red'),
     green: cssVar('--bolt-elements-terminal-color-green'),

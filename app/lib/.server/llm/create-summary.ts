@@ -177,7 +177,7 @@ ${slicedMessages
 </new_chats>
 ---
 
-Please provide a summary of the chat till now including the hitorical summary of the chat.
+Please provide a summary of the chat till now including the historical summary of the chat.
 `,
     model: provider.getModelInstance({
       model: currentModel,

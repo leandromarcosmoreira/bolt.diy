@@ -27,7 +27,7 @@ export const Markdown = memo(({ children, html = false, limitedMarkdown = false 
           const messageId = node?.properties.dataMessageId as string;
 
           if (!messageId) {
-            logger.error(`Invalid message id ${messageId}`);
+            logger.error(`ID de mensagem inválido ${messageId}`);
           }
 
           return <Artifact messageId={messageId} />;

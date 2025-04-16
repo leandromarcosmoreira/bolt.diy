@@ -291,16 +291,18 @@ export function useDataOperations({
           const request = store.getAll();
 
           request.onsuccess = () => {
-            console.log(`Found ${request.result ? request.result.length : 0} chats directly from database`);
+            console.log(
+              `Encontrei ${request.result ? request.result.length : 0} conversas diretamente do banco de dados`,
+            );
             resolve(request.result || []);
           };
 
           request.onerror = () => {
-            console.error('Error querying chats store:', request.error);
+            console.error('Erro ao consultar o armazenamento de conversas:', request.error);
             reject(request.error);
           };
         } catch (err) {
-          console.error('Error creating transaction:', err);
+          console.error('Erro ao criar a transação:', err);
           reject(err);
         }
       });
@@ -311,7 +313,7 @@ export function useDataOperations({
         exportDate: new Date().toISOString(),
       };
 
-      console.log(`Preparing to export ${exportData.chats.length} chats`);
+      console.log(`Preparando para exportar ${exportData.chats.length} conversas`);
 
       // Step 2: Create blob
       showProgress('Creating file', 50);
@@ -321,7 +323,7 @@ export function useDataOperations({
       });
 
       // Step 3: Download file
-      showProgress('Downloading file', 75);
+      showProgress('Baixando arquivo', 75);
 
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -333,12 +335,12 @@ export function useDataOperations({
       URL.revokeObjectURL(url);
 
       // Step 4: Complete
-      showProgress('Completing export', 100);
+      showProgress('Completando exportação', 100);
 
       // Dismiss progress toast before showing success toast
       toast.dismiss('progress-toast');
 
-      toast.success(`${exportData.chats.length} chats exported successfully`, {
+      toast.success(`${exportData.chats.length} conversas exportadas com sucesso`, {
         position: 'bottom-right',
         autoClose: 3000,
       });
@@ -346,12 +348,12 @@ export function useDataOperations({
       // Save operation for potential undo
       setLastOperation({ type: 'export-chats', data: exportData });
     } catch (error) {
-      console.error('Error exporting chats:', error);
+      console.error('Erro ao exportar conversas:', error);
 
       // Dismiss progress toast before showing error toast
       toast.dismiss('progress-toast');
 
-      toast.error(`Failed to export chats: ${error instanceof Error ? error.message : 'Unknown error'}`, {
+      toast.error(`Falha ao exportar conversas: ${error instanceof Error ? error.message : 'Erro desconhecido'}`, {
         position: 'bottom-right',
         autoClose: 3000,
       });
@@ -377,7 +379,7 @@ export function useDataOperations({
       }
 
       if (!chatIds || chatIds.length === 0) {
-        toast.error('No chats selected', {
+        toast.error('Nenhuma conversa selecionada', {
           position: 'bottom-right',
           autoClose: 3000,
         });
@@ -390,7 +392,7 @@ export function useDataOperations({
       // Dismiss any existing toast first
       toast.dismiss('progress-toast');
 
-      toast.loading(`Preparing export of ${chatIds.length} chats...`, {
+      toast.loading(`Preparando exportação de ${chatIds.length} conversas...`, {
         position: 'bottom-right',
         autoClose: 3000,
         toastId: 'progress-toast',
@@ -398,7 +400,7 @@ export function useDataOperations({
 
       try {
         // Step 1: Get chats from database
-        showProgress('Retrieving chats from database', 25);
+        showProgress('Recuperando conversas do banco de dados', 25);
 
         const transaction = db.transaction(['chats'], 'readonly');
         const store = transaction.objectStore('chats');

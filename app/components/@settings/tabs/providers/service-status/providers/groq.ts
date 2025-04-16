@@ -8,10 +8,10 @@ export class GroqStatusChecker extends BaseProviderChecker {
       const statusPageResponse = await fetch('https://groqstatus.com/');
       const text = await statusPageResponse.text();
 
-      const isOperational = text.includes('All Systems Operational');
-      const hasIncidents = text.includes('Active Incidents');
-      const hasDegradation = text.includes('Degraded Performance');
-      const hasOutage = text.includes('Service Outage');
+      const isOperational = text.includes('Todos os sistemas operacionais');
+      const hasIncidents = text.includes('Incidentes ativos');
+      const hasDegradation = text.includes('Desempenho degradado');
+      const hasOutage = text.includes('Desempenho degradado');
 
       // Extract incidents
       const incidents: string[] = [];
@@ -22,18 +22,18 @@ export class GroqStatusChecker extends BaseProviderChecker {
         incidents.push(`${date}: ${title.trim()} - ${status.trim()}`);
       }
 
-      let status: StatusCheckResult['status'] = 'operational';
-      let message = 'All systems operational';
+      let status: StatusCheckResult['status'] = 'operacional';
+      let message = 'Todos os sistemas operacionais';
 
       if (hasOutage) {
         status = 'down';
-        message = 'Service outage detected';
+        message = 'Desempenho degradado';
       } else if (hasDegradation || hasIncidents) {
-        status = 'degraded';
-        message = 'Service experiencing issues';
+        status = 'instavel';
+        message = 'Desempenho degradado';
       } else if (!isOperational) {
-        status = 'degraded';
-        message = 'Service status unknown';
+        status = 'instavel';
+        message = 'Status do serviço desconhecido';
       }
 
       // If status page check fails, fallback to endpoint check
@@ -43,9 +43,9 @@ export class GroqStatusChecker extends BaseProviderChecker {
         const apiStatus = await this.checkEndpoint(apiEndpoint);
 
         return {
-          status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-          message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-          incidents: ['Note: Limited status information due to CORS restrictions'],
+          status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+          message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+          incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
         };
       }
 
@@ -63,9 +63,9 @@ export class GroqStatusChecker extends BaseProviderChecker {
       const apiStatus = await this.checkEndpoint(apiEndpoint);
 
       return {
-        status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-        message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-        incidents: ['Note: Limited status information due to CORS restrictions'],
+        status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+        message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+        incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
       };
     }
   }

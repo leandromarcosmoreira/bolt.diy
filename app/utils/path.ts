@@ -1,10 +1,10 @@
-// Browser-compatible path utilities
+// Utilitários de caminho compatíveis com navegador
 import type { ParsedPath } from 'path';
 import pathBrowserify from 'path-browserify';
 
 /**
- * A browser-compatible path utility that mimics Node's path module
- * Using path-browserify for consistent behavior in browser environments
+ * Um utilitário de caminho compatível com navegador que imita o módulo path do Node
+ * Usando path-browserify para comportamento consistente em ambientes de navegador
  */
 export const path = {
   join: (...paths: string[]): string => pathBrowserify.join(...paths),

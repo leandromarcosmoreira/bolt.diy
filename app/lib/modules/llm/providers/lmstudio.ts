@@ -82,7 +82,7 @@ export default class LMStudioProvider extends BaseProvider {
       baseUrl = isDocker ? baseUrl.replace('127.0.0.1', 'host.docker.internal') : baseUrl;
     }
 
-    logger.debug('LMStudio Base Url used: ', baseUrl);
+    logger.debug('URL Base do LMStudio usada: ', baseUrl);
 
     const lmstudio = createOpenAI({
       baseURL: `${baseUrl}/v1`,

@@ -73,7 +73,7 @@ export class FilesStore {
         }
       }
     } catch (error) {
-      logger.error('Failed to load deleted paths from localStorage', error);
+      logger.error('Falha ao carregar caminhos deletados do localStorage', error);
     }
 
     if (import.meta.hot) {
@@ -134,7 +134,7 @@ export class FilesStore {
       const relativePath = path.relative(webcontainer.workdir, filePath);
 
       if (!relativePath) {
-        throw new Error(`EINVAL: invalid file path, write '${relativePath}'`);
+        throw new Error(`EINVAL: caminho de arquivo inválido, escrita '${relativePath}'`);
       }
 
       const oldContent = this.getFile(filePath)?.content;
@@ -152,9 +152,9 @@ export class FilesStore {
       // we immediately update the file and don't rely on the `change` event coming from the watcher
       this.files.setKey(filePath, { type: 'file', content, isBinary: false });
 
-      logger.info('File updated');
+      logger.info('Arquivo atualizado');
     } catch (error) {
-      logger.error('Failed to update file content\n\n', error);
+      logger.error('Falha ao atualizar conteúdo do arquivo\n\n', error);
 
       throw error;
     }
@@ -315,7 +315,7 @@ export class FilesStore {
       const relativePath = path.relative(webcontainer.workdir, filePath);
 
       if (!relativePath) {
-        throw new Error(`EINVAL: invalid file path, create '${relativePath}'`);
+        throw new Error(`EINVAL: caminho de arquivo inválido, criação '${relativePath}'`);
       }
 
       const dirPath = path.dirname(relativePath);
@@ -342,11 +342,11 @@ export class FilesStore {
         this.#modifiedFiles.set(filePath, content as string);
       }
 
-      logger.info(`File created: ${filePath}`);
+      logger.info(`Arquivo criado: ${filePath}`);
 
       return true;
     } catch (error) {
-      logger.error('Failed to create file\n\n', error);
+      logger.error('Falha ao criar arquivo\n\n', error);
       throw error;
     }
   }
@@ -358,18 +358,18 @@ export class FilesStore {
       const relativePath = path.relative(webcontainer.workdir, folderPath);
 
       if (!relativePath) {
-        throw new Error(`EINVAL: invalid folder path, create '${relativePath}'`);
+        throw new Error(`EINVAL: caminho de pasta inválido, criação '${relativePath}'`);
       }
 
       await webcontainer.fs.mkdir(relativePath, { recursive: true });
 
       this.files.setKey(folderPath, { type: 'folder' });
 
-      logger.info(`Folder created: ${folderPath}`);
+      logger.info(`Pasta criada: ${folderPath}`);
 
       return true;
     } catch (error) {
-      logger.error('Failed to create folder\n\n', error);
+      logger.error('Falha ao criar pasta\n\n', error);
       throw error;
     }
   }
@@ -381,7 +381,7 @@ export class FilesStore {
       const relativePath = path.relative(webcontainer.workdir, filePath);
 
       if (!relativePath) {
-        throw new Error(`EINVAL: invalid file path, delete '${relativePath}'`);
+        throw new Error(`EINVAL: caminho de arquivo inválido, exclusão '${relativePath}'`);
       }
 
       await webcontainer.fs.rm(relativePath);
@@ -397,11 +397,11 @@ export class FilesStore {
 
       this.#persistDeletedPaths();
 
-      logger.info(`File deleted: ${filePath}`);
+      logger.info(`Arquivo deletado: ${filePath}`);
 
       return true;
     } catch (error) {
-      logger.error('Failed to delete file\n\n', error);
+      logger.error('Falha ao deletar arquivo\n\n', error);
       throw error;
     }
   }
@@ -413,7 +413,7 @@ export class FilesStore {
       const relativePath = path.relative(webcontainer.workdir, folderPath);
 
       if (!relativePath) {
-        throw new Error(`EINVAL: invalid folder path, delete '${relativePath}'`);
+        throw new Error(`EINVAL: caminho de pasta inválido, exclusão '${relativePath}'`);
       }
 
       await webcontainer.fs.rm(relativePath, { recursive: true });
@@ -442,11 +442,11 @@ export class FilesStore {
 
       this.#persistDeletedPaths();
 
-      logger.info(`Folder deleted: ${folderPath}`);
+      logger.info(`Pasta deletada: ${folderPath}`);
 
       return true;
     } catch (error) {
-      logger.error('Failed to delete folder\n\n', error);
+      logger.error('Falha ao deletar pasta\n\n', error);
       throw error;
     }
   }
@@ -458,7 +458,7 @@ export class FilesStore {
         localStorage.setItem('bolt-deleted-paths', JSON.stringify([...this.#deletedPaths]));
       }
     } catch (error) {
-      logger.error('Failed to persist deleted paths to localStorage', error);
+      logger.error('Falha ao persistir caminhos deletados no localStorage', error);
     }
   }
 }

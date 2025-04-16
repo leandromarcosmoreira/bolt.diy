@@ -11,14 +11,14 @@ export class OpenAIStatusChecker extends BaseProviderChecker {
       // Check individual services
       const services = {
         api: {
-          operational: text.includes('API ?  Operational'),
-          degraded: text.includes('API ?  Degraded Performance'),
-          outage: text.includes('API ?  Major Outage') || text.includes('API ?  Partial Outage'),
+          operacional: text.includes('API ?  Operacional'),
+          instavel: text.includes('API ?  Desempenho degradado'),
+          outage: text.includes('API ?  Desempenho degradado') || text.includes('API ?  Desempenho degradado'),
         },
         chat: {
-          operational: text.includes('ChatGPT ?  Operational'),
-          degraded: text.includes('ChatGPT ?  Degraded Performance'),
-          outage: text.includes('ChatGPT ?  Major Outage') || text.includes('ChatGPT ?  Partial Outage'),
+          operacional: text.includes('ChatGPT ?  Operacional'),
+          instavel: text.includes('ChatGPT ?  Desempenho degradado'),
+          outage: text.includes('ChatGPT ?  Desempenho degradado') || text.includes('ChatGPT ?  Desempenho degradado'),
         },
       };
 
@@ -36,31 +36,31 @@ export class OpenAIStatusChecker extends BaseProviderChecker {
       }
 
       // Determine overall status
-      let status: StatusCheckResult['status'] = 'operational';
+      let status: StatusCheckResult['status'] = 'operacional';
       const messages: string[] = [];
 
       if (services.api.outage || services.chat.outage) {
         status = 'down';
 
         if (services.api.outage) {
-          messages.push('API: Major Outage');
+          messages.push('API: Desempenho degradado');
         }
 
         if (services.chat.outage) {
-          messages.push('ChatGPT: Major Outage');
+          messages.push('ChatGPT: Desempenho degradado');
         }
-      } else if (services.api.degraded || services.chat.degraded) {
-        status = 'degraded';
+      } else if (services.api.instavel || services.chat.instavel) {
+        status = 'instavel';
 
-        if (services.api.degraded) {
-          messages.push('API: Degraded Performance');
+        if (services.api.instavel) {
+          messages.push('API: Desempenho degradado');
         }
 
-        if (services.chat.degraded) {
-          messages.push('ChatGPT: Degraded Performance');
+        if (services.chat.instavel) {
+          messages.push('ChatGPT: Desempenho degradado');
         }
-      } else if (services.api.operational) {
-        messages.push('API: Operational');
+      } else if (services.api.operacional) {
+        messages.push('API: Operacional');
       }
 
       // If status page check fails, fallback to endpoint check
@@ -70,9 +70,9 @@ export class OpenAIStatusChecker extends BaseProviderChecker {
         const apiStatus = await this.checkEndpoint(apiEndpoint);
 
         return {
-          status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-          message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-          incidents: ['Note: Limited status information due to CORS restrictions'],
+          status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+          message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+          incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
         };
       }
 
@@ -90,9 +90,9 @@ export class OpenAIStatusChecker extends BaseProviderChecker {
       const apiStatus = await this.checkEndpoint(apiEndpoint);
 
       return {
-        status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-        message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-        incidents: ['Note: Limited status information due to CORS restrictions'],
+        status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+        message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+        incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
       };
     }
   }

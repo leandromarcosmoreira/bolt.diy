@@ -30,7 +30,7 @@ type ProviderName =
 
 type ServiceStatus = {
   provider: ProviderName;
-  status: 'operational' | 'degraded' | 'down';
+  status: 'operacional' | 'instavel' | 'down';
   lastChecked: string;
   statusUrl?: string;
   icon?: IconType;
@@ -383,7 +383,7 @@ const ServiceStatusTab = () => {
       incidents?: string[];
     }> => {
       try {
-        // Due to CORS restrictions, we can only check if the endpoints are reachable
+        // Due to CORS restrictions, we can only check if the endpoints are acessivel
         const checkEndpoint = async (url: string) => {
           try {
             const response = await fetch(url, {
@@ -394,10 +394,10 @@ const ServiceStatusTab = () => {
             });
 
             // With no-cors, we can only know if the request succeeded
-            return response.type === 'opaque' ? 'reachable' : 'unreachable';
+            return response.type === 'opaque' ? 'acessivel' : 'inacessivel';
           } catch (error) {
             console.error(`Error checking ${url}:`, error);
-            return 'unreachable';
+            return 'inacessivel';
           }
         };
 
@@ -410,9 +410,9 @@ const ServiceStatusTab = () => {
             const apiStatus = await checkEndpoint(apiEndpoint);
 
             return {
-              status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-              message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-              incidents: ['Note: Limited status information due to CORS restrictions'],
+              status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+              message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+              incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
             };
           }
 
@@ -422,9 +422,9 @@ const ServiceStatusTab = () => {
             const apiStatus = await checkEndpoint(apiEndpoint);
 
             return {
-              status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-              message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-              incidents: ['Note: Limited status information due to CORS restrictions'],
+              status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+              message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+              incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
             };
           }
 
@@ -434,24 +434,24 @@ const ServiceStatusTab = () => {
             const apiStatus = await checkEndpoint(apiEndpoint);
 
             return {
-              status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-              message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-              incidents: ['Note: Limited status information due to CORS restrictions'],
+              status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+              message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+              incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
             };
           }
 
           // Similar pattern for other providers...
           default:
             return {
-              status: 'operational',
-              message: 'Basic reachability check only',
-              incidents: ['Note: Limited status information due to CORS restrictions'],
+              status: 'operacional',
+              message: 'Apenas verificação básica de acessibilidade',
+              incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
             };
         }
       } catch (error) {
         console.error(`Error fetching status for ${provider}:`, error);
         return {
-          status: 'degraded',
+          status: 'instavel',
           message: 'Unable to fetch status due to CORS restrictions',
           incidents: ['Error: Unable to check service status'],
         };
@@ -501,13 +501,13 @@ const ServiceStatusTab = () => {
           if (!apiKey || !providerConfig) {
             return {
               provider,
-              status: 'operational',
+              status: 'operacional',
               lastChecked: new Date().toISOString(),
               statusUrl: config.statusUrl,
               icon: PROVIDER_ICONS[provider],
               message: !apiKey
-                ? 'Status operational (API key needed for usage)'
-                : 'Status operational (configuration needed for usage)',
+                ? 'Status operacional (Chave de API necessária para uso)'
+                : 'Status operacional (configuration needed for usage)',
               incidents: [],
             };
           }
@@ -526,11 +526,11 @@ const ServiceStatusTab = () => {
 
           return {
             provider,
-            status: ok ? 'operational' : 'degraded',
+            status: ok ? 'operacional' : 'instavel',
             lastChecked: new Date().toISOString(),
             statusUrl: providerConfig.statusUrl,
             icon: PROVIDER_ICONS[provider],
-            message: ok ? 'Service and API operational' : `Service operational (API: ${message || status})`,
+            message: ok ? 'Service and API operacional' : `Service operacional (API: ${message || status})`,
             responseTime,
             incidents: [],
           };
@@ -544,11 +544,11 @@ const ServiceStatusTab = () => {
 
           return {
             provider,
-            status: 'degraded',
+            status: 'instavel',
             lastChecked: new Date().toISOString(),
             statusUrl: config.statusUrl,
             icon: PROVIDER_ICONS[provider],
-            message: 'Service operational (Status check error)',
+            message: 'Service operacional (Status check error)',
             responseTime: 0,
             incidents: [],
           };
@@ -573,10 +573,10 @@ const ServiceStatusTab = () => {
 
       setServiceStatuses(statuses.sort((a, b) => a.provider.localeCompare(b.provider)));
       setLastRefresh(new Date());
-      success('Service statuses updated successfully');
+      success('Status dos serviços atualizado com sucesso!');
     } catch (err) {
-      console.error('Error fetching all statuses:', err);
-      error('Failed to update service statuses');
+      console.error('Erro ao atualizar status dos serviços:', err);
+      error('Falha ao atualizar status dos serviços');
     } finally {
       setLoading(false);
     }
@@ -662,9 +662,9 @@ const ServiceStatusTab = () => {
 
   const getStatusColor = (status: ServiceStatus['status']) => {
     switch (status) {
-      case 'operational':
+      case 'operacional':
         return 'text-green-500';
-      case 'degraded':
+      case 'instavel':
         return 'text-yellow-500';
       case 'down':
         return 'text-red-500';
@@ -675,9 +675,9 @@ const ServiceStatusTab = () => {
 
   const getStatusIcon = (status: ServiceStatus['status']) => {
     switch (status) {
-      case 'operational':
+      case 'operacional':
         return <BsCheckCircleFill className="w-4 h-4" />;
-      case 'degraded':
+      case 'instavel':
         return <BsExclamationCircleFill className="w-4 h-4" />;
       case 'down':
         return <BsXCircleFill className="w-4 h-4" />;
@@ -706,15 +706,15 @@ const ServiceStatusTab = () => {
               <TbActivityHeartbeat className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-md font-medium text-bolt-elements-textPrimary">Service Status</h4>
+              <h4 className="text-md font-medium text-bolt-elements-textPrimary">Status do Serviço</h4>
               <p className="text-sm text-bolt-elements-textSecondary">
-                Monitor and test the operational status of cloud LLM providers
+                Monitorar e testar o status operacional dos provedores de nuvem LLM
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-bolt-elements-textSecondary">
-              Last updated: {lastRefresh.toLocaleTimeString()}
+              Atualizado pela última vez: {lastRefresh.toLocaleTimeString()}
             </span>
             <button
               onClick={() => fetchAllStatuses()}
@@ -729,14 +729,14 @@ const ServiceStatusTab = () => {
               disabled={loading}
             >
               <div className={`i-ph:arrows-clockwise w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-              <span>{loading ? 'Refreshing...' : 'Refresh'}</span>
+              <span>{loading ? 'Atualizando...' : 'Atualizar'}</span>
             </button>
           </div>
         </div>
 
         {/* API Key Test Section */}
         <div className="p-4 bg-bolt-elements-background-depth-2 rounded-lg">
-          <h5 className="text-sm font-medium text-bolt-elements-textPrimary mb-2">Test API Key</h5>
+          <h5 className="text-sm font-medium text-bolt-elements-textPrimary mb-2">Testar API Key</h5>
           <div className="flex gap-2">
             <select
               value={testProvider}
@@ -748,7 +748,7 @@ const ServiceStatusTab = () => {
                 'focus:outline-none focus:ring-2 focus:ring-purple-500/30',
               )}
             >
-              <option value="">Select Provider</option>
+              <option value="">Selecionar Provedor</option>
               {Object.keys(PROVIDER_STATUS_URLS).map((provider) => (
                 <option key={provider} value={provider}>
                   {provider}
@@ -759,7 +759,7 @@ const ServiceStatusTab = () => {
               type="password"
               value={testApiKey}
               onChange={(e) => setTestApiKey(e.target.value)}
-              placeholder="Enter API key to test"
+              placeholder="Digite a API key para testar"
               className={classNames(
                 'flex-1 px-3 py-1.5 rounded-lg text-sm',
                 'bg-bolt-elements-background-depth-3 border border-bolt-elements-borderColor',
@@ -784,12 +784,12 @@ const ServiceStatusTab = () => {
               {testingStatus === 'testing' ? (
                 <>
                   <div className="i-ph:spinner-gap w-4 h-4 animate-spin" />
-                  <span>Testing...</span>
+                  <span>Testando...</span>
                 </>
               ) : (
                 <>
                   <div className="i-ph:key w-4 h-4" />
-                  <span>Test Key</span>
+                  <span>Testar Chave</span>
                 </>
               )}
             </button>
@@ -798,7 +798,7 @@ const ServiceStatusTab = () => {
 
         {/* Status Grid */}
         {loading && serviceStatuses.length === 0 ? (
-          <div className="text-center py-8 text-bolt-elements-textSecondary">Loading service statuses...</div>
+          <div className="text-center py-8 text-bolt-elements-textSecondary">Carregando status do serviço...</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {serviceStatuses.map((service, index) => (
@@ -838,11 +838,11 @@ const ServiceStatusTab = () => {
                         <h4 className="text-sm font-medium text-bolt-elements-textPrimary">{service.provider}</h4>
                         <div className="space-y-1">
                           <p className="text-xs text-bolt-elements-textSecondary">
-                            Last checked: {new Date(service.lastChecked).toLocaleTimeString()}
+                            Última verificação: {new Date(service.lastChecked).toLocaleTimeString()}
                           </p>
                           {service.responseTime && (
                             <p className="text-xs text-bolt-elements-textTertiary">
-                              Response time: {Math.round(service.responseTime)}ms
+                              Tempo de resposta: {Math.round(service.responseTime)}ms
                             </p>
                           )}
                           {service.message && (
@@ -858,7 +858,7 @@ const ServiceStatusTab = () => {
                   </div>
                   {service.incidents && service.incidents.length > 0 && (
                     <div className="mt-2 border-t border-bolt-elements-borderColor pt-2">
-                      <p className="text-xs font-medium text-bolt-elements-textSecondary mb-1">Recent Incidents:</p>
+                      <p className="text-xs font-medium text-bolt-elements-textSecondary mb-1">Incidentes Recentes:</p>
                       <ul className="text-xs text-bolt-elements-textTertiary space-y-1">
                         {service.incidents.map((incident, i) => (
                           <li key={i}>{incident}</li>
@@ -879,8 +879,8 @@ const ServiceStatusTab = () => {
 // Add tab metadata
 ServiceStatusTab.tabMetadata = {
   icon: 'i-ph:activity-bold',
-  description: 'Monitor and test LLM provider service status',
-  category: 'services',
+  description: 'Monitorar e testar o status operacional dos provedores de nuvem LLM',
+  category: 'serviços',
 };
 
 export default ServiceStatusTab;

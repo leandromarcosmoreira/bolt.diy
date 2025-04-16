@@ -87,7 +87,7 @@ export default function App() {
   const theme = useStore(themeStore);
 
   useEffect(() => {
-    logStore.logSystem('Application initialized', {
+    logStore.logSystem('Aplicação inicializada', {
       theme,
       platform: navigator.platform,
       userAgent: navigator.userAgent,

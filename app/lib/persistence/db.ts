@@ -182,14 +182,14 @@ export async function forkChat(db: IDBDatabase, chatId: string, messageId: strin
   const chat = await getMessages(db, chatId);
 
   if (!chat) {
-    throw new Error('Chat not found');
+    throw new Error('Conversa não encontrada');
   }
 
   // Find the index of the message to fork at
   const messageIndex = chat.messages.findIndex((msg) => msg.id === messageId);
 
   if (messageIndex === -1) {
-    throw new Error('Message not found');
+    throw new Error('Mensagem não encontrada');
   }
 
   // Get messages up to and including the selected message
@@ -202,7 +202,7 @@ export async function duplicateChat(db: IDBDatabase, id: string): Promise<string
   const chat = await getMessages(db, id);
 
   if (!chat) {
-    throw new Error('Chat not found');
+    throw new Error('Conversa não encontrada');
   }
 
   return createChatFromMessages(db, `${chat.description || 'Chat'} (copy)`, chat.messages);
@@ -234,11 +234,11 @@ export async function updateChatDescription(db: IDBDatabase, id: string, descrip
   const chat = await getMessages(db, id);
 
   if (!chat) {
-    throw new Error('Chat not found');
+    throw new Error('Conversa não encontrada');
   }
 
   if (!description.trim()) {
-    throw new Error('Description cannot be empty');
+    throw new Error('Descrição não pode estar vazia');
   }
 
   await setMessages(db, id, chat.messages, chat.urlId, description, chat.timestamp, chat.metadata);
@@ -252,7 +252,7 @@ export async function updateChatMetadata(
   const chat = await getMessages(db, id);
 
   if (!chat) {
-    throw new Error('Chat not found');
+    throw new Error('Conversa não encontrada');
   }
 
   await setMessages(db, id, chat.messages, chat.urlId, chat.description, chat.timestamp, metadata);

@@ -53,7 +53,7 @@ export async function loader({
 }): Promise<Response> {
   const llmManager = LLMManager.getInstance(context.cloudflare?.env);
 
-  // Get client side maintained API keys and provider settings from cookies
+  // Obter chaves de API e configurações de provedor mantidas no lado do cliente a partir de cookies
   const cookieHeader = request.headers.get('Cookie');
   const apiKeys = getApiKeysFromCookie(cookieHeader);
   const providerSettings = getProviderSettingsFromCookie(cookieHeader);
@@ -63,7 +63,7 @@ export async function loader({
   let modelList: ModelInfo[] = [];
 
   if (params.provider) {
-    // Only update models for the specific provider
+    // Atualizar apenas modelos para o provedor específico
     const provider = llmManager.getProvider(params.provider);
 
     if (provider) {
@@ -74,7 +74,7 @@ export async function loader({
       });
     }
   } else {
-    // Update all models
+    // Atualizar todos os modelos
     modelList = await llmManager.updateModelList({
       apiKeys,
       providerSettings,

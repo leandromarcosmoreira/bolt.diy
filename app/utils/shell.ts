@@ -6,7 +6,7 @@ import { atom } from 'nanostores';
 export async function newShellProcess(webcontainer: WebContainer, terminal: ITerminal) {
   const args: string[] = [];
 
-  // we spawn a JSH process with a fallback cols and rows in case the process is not attached yet to a visible terminal
+  // iniciamos um processo JSH com colunas e linhas de fallback caso o processo ainda não esteja anexado a um terminal visível
   const process = await webcontainer.spawn('/bin/jsh', ['--osc', ...args], {
     terminal: {
       cols: terminal.cols ?? 80,
@@ -131,7 +131,7 @@ export class BoltShell {
       try {
         resp.output = cleanTerminalOutput(resp.output);
       } catch (error) {
-        console.log('failed to format terminal output', error);
+        console.log('falha ao formatar saída do terminal', error);
       }
     }
 
@@ -141,7 +141,7 @@ export class BoltShell {
   async newBoltShellProcess(webcontainer: WebContainer, terminal: ITerminal) {
     const args: string[] = [];
 
-    // we spawn a JSH process with a fallback cols and rows in case the process is not attached yet to a visible terminal
+    // iniciamos um processo JSH com colunas e linhas de fallback caso o processo ainda não esteja anexado a um terminal visível
     const process = await webcontainer.spawn('/bin/jsh', ['--osc', ...args], {
       terminal: {
         cols: terminal.cols ?? 80,
@@ -231,62 +231,61 @@ export class BoltShell {
 }
 
 /**
- * Cleans and formats terminal output while preserving structure and paths
- * Handles ANSI, OSC, and various terminal control sequences
+ * Formata a saída do terminal para melhor legibilidade
  */
 export function cleanTerminalOutput(input: string): string {
-  // Step 1: Remove OSC sequences (including those with parameters)
+  // Etapa 1: Remover sequências OSC (incluindo aquelas com parâmetros)
   const removeOsc = input
     .replace(/\x1b\](\d+;[^\x07\x1b]*|\d+[^\x07\x1b]*)\x07/g, '')
     .replace(/\](\d+;[^\n]*|\d+[^\n]*)/g, '');
 
-  // Step 2: Remove ANSI escape sequences and color codes more thoroughly
+  // Etapa 2: Remover sequências de escape ANSI e códigos de cor mais completamente
   const removeAnsi = removeOsc
-    // Remove all escape sequences with parameters
+    // Remover todas as sequências de escape com parâmetros
     .replace(/\u001b\[[\?]?[0-9;]*[a-zA-Z]/g, '')
     .replace(/\x1b\[[\?]?[0-9;]*[a-zA-Z]/g, '')
-    // Remove color codes
+    // Remover códigos de cor
     .replace(/\u001b\[[0-9;]*m/g, '')
     .replace(/\x1b\[[0-9;]*m/g, '')
-    // Clean up any remaining escape characters
+    // Limpar quaisquer caracteres de escape restantes
     .replace(/\u001b/g, '')
     .replace(/\x1b/g, '');
 
-  // Step 3: Clean up carriage returns and newlines
+  // Etapa 3: Limpar retornos de carro e novas linhas
   const cleanNewlines = removeAnsi
     .replace(/\r\n/g, '\n')
     .replace(/\r/g, '\n')
     .replace(/\n{3,}/g, '\n\n');
 
-  // Step 4: Add newlines at key breakpoints while preserving paths
+  // Etapa 4: Adicionar novas linhas em pontos-chave preservando caminhos
   const formatOutput = cleanNewlines
-    // Preserve prompt line
+    // Preservar linha de prompt
     .replace(/^([~\/][^\n❯]+)❯/m, '$1\n❯')
-    // Add newline before command output indicators
+    // Adicionar nova linha antes dos indicadores de saída do comando
     .replace(/(?<!^|\n)>/g, '\n>')
-    // Add newline before error keywords without breaking paths
+    // Adicionar nova linha antes das palavras-chave de erro sem quebrar caminhos
     .replace(/(?<!^|\n|\w)(error|failed|warning|Error|Failed|Warning):/g, '\n$1:')
-    // Add newline before 'at' in stack traces without breaking paths
+    // Adicionar nova linha antes de 'at' em rastreamentos de pilha sem quebrar caminhos
     .replace(/(?<!^|\n|\/)(at\s+(?!async|sync))/g, '\nat ')
-    // Ensure 'at async' stays on same line
+    // Garantir que 'at async' permaneça na mesma linha
     .replace(/\bat\s+async/g, 'at async')
-    // Add newline before npm error indicators
+    // Adicionar nova linha antes dos indicadores de erro npm
     .replace(/(?<!^|\n)(npm ERR!)/g, '\n$1');
 
-  // Step 5: Clean up whitespace while preserving intentional spacing
+  // Etapa 5: Limpar espaços em branco preservando espaçamento intencional
   const cleanSpaces = formatOutput
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.length > 0)
     .join('\n');
 
-  // Step 6: Final cleanup
+  // Etapa 6: Limpeza final
   return cleanSpaces
-    .replace(/\n{3,}/g, '\n\n') // Replace multiple newlines with double newlines
-    .replace(/:\s+/g, ': ') // Normalize spacing after colons
-    .replace(/\s{2,}/g, ' ') // Remove multiple spaces
-    .replace(/^\s+|\s+$/g, '') // Trim start and end
-    .replace(/\u0000/g, ''); // Remove null characters
+    .replace(/\n{3,}/g, '\n\n') // Substituir múltiplas novas linhas por novas linhas duplas
+    .replace(/:\s+/g, ': ') // Normalizar espaçamento após dois pontos
+    .replace(/\s{2,}/g, ' ') // Remover múltiplos espaços
+    .replace(/^\s+|\s+$/g, '') // Aparar início e fim
+    .replace(/\u0000/g, ''); // Remover caracteres nulos
 }
 
 export function newBoltShellProcess() {

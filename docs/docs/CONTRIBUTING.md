@@ -1,242 +1,103 @@
-# Contribution Guidelines
+# Guia de Contribuição
 
-Welcome! This guide provides all the details you need to contribute effectively to the project. Thank you for helping us make **bolt.diy** a better tool for developers worldwide. 💡
+Bem-vindo ao guia de contribuição do bolt.diy! Este documento fornece informações sobre como você pode contribuir para o projeto.
 
----
+## Índice
 
-## 📋 Table of Contents
+- [Código de Conduta](#código-de-conduta)
+- [Como Contribuir](#como-contribuir)
+- [Diretrizes para Pull Requests](#diretrizes-para-pull-requests)
+- [Padrões de Código](#padrões-de-código)
+- [Configuração do Ambiente de Desenvolvimento](#configuração-do-ambiente-de-desenvolvimento)
+- [Testes](#testes)
+- [Implantação](#implantação)
+- [Implantação com Docker](#implantação-com-docker)
+- [Integração com VS Code Dev Containers](#integração-com-vs-code-dev-containers)
 
-1. [Code of Conduct](#code-of-conduct)
-2. [How Can I Contribute?](#how-can-i-contribute)
-3. [Pull Request Guidelines](#pull-request-guidelines)
-4. [Coding Standards](#coding-standards)
-5. [Development Setup](#development-setup)
-6. [Testing](#testing)
-7. [Deployment](#deployment)
-8. [Docker Deployment](#docker-deployment)
-9. [VS Code Dev Containers Integration](#vs-code-dev-containers-integration)
+## Código de Conduta
 
----
+Ao contribuir para este projeto, você concorda em seguir nosso [Código de Conduta](CODE_OF_CONDUCT.md).
 
-## 🛡️ Code of Conduct
+## Como Contribuir
 
-This project is governed by our **Code of Conduct**. By participating, you agree to uphold this code. Report unacceptable behavior to the project maintainers.
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Faça commit das suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Faça push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
----
+## Diretrizes para Pull Requests
 
-## 🛠️ How Can I Contribute?
+- Mantenha os PRs pequenos e focados
+- Inclua testes para novas funcionalidades
+- Atualize a documentação conforme necessário
+- Siga os padrões de código estabelecidos
+- Adicione uma descrição clara das mudanças
 
-### 1️⃣ Reporting Bugs or Feature Requests
+## Padrões de Código
 
-- Check the [issue tracker](#) to avoid duplicates.
-- Use issue templates (if available).
-- Provide detailed, relevant information and steps to reproduce bugs.
+- Use TypeScript para todo o código novo
+- Siga o estilo de código existente
+- Mantenha o código limpo e bem documentado
+- Use nomes descritivos para variáveis e funções
+- Escreva testes para novas funcionalidades
 
-### 2️⃣ Code Contributions
+## Configuração do Ambiente de Desenvolvimento
 
-1. Fork the repository.
-2. Create a feature or fix branch.
-3. Write and test your code.
-4. Submit a pull request (PR).
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/stackblitz-labs/bolt.diy.git
+   cd bolt.diy
+   ```
 
-### 3️⃣ Join as a Core Contributor
+2. Instale as dependências:
+   ```bash
+   pnpm install
+   ```
 
-Interested in maintaining and growing the project? Fill out our [Contributor Application Form](https://forms.gle/TBSteXSDCtBDwr5m7).
+3. Configure as variáveis de ambiente:
+   - Copie `.env.example` para `.env.local`
+   - Preencha as variáveis necessárias
 
----
+4. Inicie o servidor de desenvolvimento:
+   ```bash
+   pnpm run dev
+   ```
 
-## ✅ Pull Request Guidelines
+## Testes
 
-### PR Checklist
-
-- Branch from the **main** branch.
-- Update documentation, if needed.
-- Test all functionality manually.
-- Focus on one feature/bug per PR.
-
-### Review Process
-
-1. Manual testing by reviewers.
-2. At least one maintainer review required.
-3. Address review comments.
-4. Maintain a clean commit history.
-
----
-
-## 📏 Coding Standards
-
-### General Guidelines
-
-- Follow existing code style.
-- Comment complex logic.
-- Keep functions small and focused.
-- Use meaningful variable names.
-
----
-
-## 🖥️ Development Setup
-
-### 1️⃣ Initial Setup
-
-- Clone the repository:
-  ```bash
-  git clone https://github.com/stackblitz-labs/bolt.diy.git
-  ```
-- Install dependencies:
-  ```bash
-  pnpm install
-  ```
-- Set up environment variables:
-  1. Rename `.env.example` to `.env.local`.
-  2. Add your API keys:
-     ```bash
-     GROQ_API_KEY=XXX
-     HuggingFace_API_KEY=XXX
-     OPENAI_API_KEY=XXX
-     ...
-     ```
-  3. Optionally set:
-     - Debug level: `VITE_LOG_LEVEL=debug`
-     - Context size: `DEFAULT_NUM_CTX=32768`
-
-**Note**: Never commit your `.env.local` file to version control. It’s already in `.gitignore`.
-
-### 2️⃣ Run Development Server
-
-```bash
-pnpm run dev
-```
-
-**Tip**: Use **Google Chrome Canary** for local testing.
-
----
-
-## 🧪 Testing
-
-Run the test suite with:
-
+Execute os testes com:
 ```bash
 pnpm test
 ```
 
----
+## Implantação
 
-## 🚀 Deployment
+Para implantar suas mudanças:
 
-### Deploy to Cloudflare Pages
-
-```bash
-pnpm run deploy
-```
-
-Ensure you have required permissions and that Wrangler is configured.
-
----
-
-## 🐳 Docker Deployment
-
-This section outlines the methods for deploying the application using Docker. The processes for **Development** and **Production** are provided separately for clarity.
-
----
-
-### 🧑‍💻 Development Environment
-
-#### Build Options
-
-**Option 1: Helper Scripts**
-
-```bash
-# Development build
-npm run dockerbuild
-```
-
-**Option 2: Direct Docker Build Command**
-
-```bash
-docker build . --target bolt-ai-development
-```
-
-**Option 3: Docker Compose Profile**
-
-```bash
-docker compose --profile development up
-```
-
-#### Running the Development Container
-
-```bash
-docker run -p 5173:5173 --env-file .env.local bolt-ai:development
-```
-
----
-
-### 🏭 Production Environment
-
-#### Build Options
-
-**Option 1: Helper Scripts**
-
-```bash
-# Production build
-npm run dockerbuild:prod
-```
-
-**Option 2: Direct Docker Build Command**
-
-```bash
-docker build . --target bolt-ai-production
-```
-
-**Option 3: Docker Compose Profile**
-
-```bash
-docker compose --profile production up
-```
-
-#### Running the Production Container
-
-```bash
-docker run -p 5173:5173 --env-file .env.local bolt-ai:production
-```
-
----
-
-### Coolify Deployment
-
-For an easy deployment process, use [Coolify](https://github.com/coollabsio/coolify):
-
-1. Import your Git repository into Coolify.
-2. Choose **Docker Compose** as the build pack.
-3. Configure environment variables (e.g., API keys).
-4. Set the start command:
+1. Certifique-se de que todos os testes passam
+2. Atualize a versão no `package.json`
+3. Execute o script de implantação:
    ```bash
-   docker compose --profile production up
+   pnpm run deploy
    ```
 
----
+## Implantação com Docker
 
-## 🛠️ VS Code Dev Containers Integration
+1. Construa a imagem:
+   ```bash
+   docker build -t bolt-diy .
+   ```
 
-The `docker-compose.yaml` configuration is compatible with **VS Code Dev Containers**, making it easy to set up a development environment directly in Visual Studio Code.
+2. Execute o container:
+   ```bash
+   docker run -p 3000:3000 bolt-diy
+   ```
 
-### Steps to Use Dev Containers
+## Integração com VS Code Dev Containers
 
-1. Open the command palette in VS Code (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS).
-2. Select **Dev Containers: Reopen in Container**.
-3. Choose the **development** profile when prompted.
-4. VS Code will rebuild the container and open it with the pre-configured environment.
+1. Instale a extensão "Remote - Containers" no VS Code
+2. Abra o projeto no VS Code
+3. Clique em "Reopen in Container" quando solicitado
 
----
-
-## 🔑 Environment Variables
-
-Ensure `.env.local` is configured correctly with:
-
-- API keys.
-- Context-specific configurations.
-
-Example for the `DEFAULT_NUM_CTX` variable:
-
-```bash
-DEFAULT_NUM_CTX=24576 # Uses 32GB VRAM
-```
+O ambiente de desenvolvimento será configurado automaticamente dentro do container.

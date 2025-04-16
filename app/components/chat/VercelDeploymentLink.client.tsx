@@ -36,7 +36,7 @@ export function VercelDeploymentLink() {
         });
 
         if (!projectsResponse.ok) {
-          throw new Error(`Failed to fetch projects: ${projectsResponse.status}`);
+          throw new Error(`Falha ao buscar projetos: ${projectsResponse.status}`);
         }
 
         const projectsData = (await projectsResponse.json()) as any;
@@ -140,18 +140,9 @@ export function VercelDeploymentLink() {
               e.stopPropagation();
             }}
           >
-            <div className={`i-ph:link w-4 h-4 hover:text-blue-400 ${isLoading ? 'animate-pulse' : ''}`} />
+            <div className={`i-ph:link w-4 h-4 hover:text-blue-400 ${isLoading ? 'animate-pulse' : ''}`}></div>
           </a>
         </Tooltip.Trigger>
-        <Tooltip.Portal>
-          <Tooltip.Content
-            className="px-3 py-2 rounded bg-bolt-elements-background-depth-3 text-bolt-elements-textPrimary text-xs z-50"
-            sideOffset={5}
-          >
-            {deploymentUrl}
-            <Tooltip.Arrow className="fill-bolt-elements-background-depth-3" />
-          </Tooltip.Content>
-        </Tooltip.Portal>
       </Tooltip.Root>
     </Tooltip.Provider>
   );

@@ -41,15 +41,15 @@ const viewTransition = { ease: cubicEasingFn };
 const sliderOptions: SliderOptions<WorkbenchViewType> = {
   left: {
     value: 'code',
-    text: 'Code',
+    text: 'Código',
   },
   middle: {
     value: 'diff',
-    text: 'Diff',
+    text: 'Diferenças',
   },
   right: {
     value: 'preview',
-    text: 'Preview',
+    text: 'Prévia',
   },
 };
 
@@ -92,7 +92,7 @@ const FileModifiedDropdown = memo(
           {({ open }: { open: boolean }) => (
             <>
               <Popover.Button className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg bg-bolt-elements-background-depth-2 hover:bg-bolt-elements-background-depth-3 transition-colors text-bolt-elements-textPrimary border border-bolt-elements-borderColor">
-                <span className="font-medium">File Changes</span>
+                <span className="font-medium">Alterações de Arquivo</span>
                 {hasChanges && (
                   <span className="w-5 h-5 rounded-full bg-accent-500/20 text-accent-500 text-xs flex items-center justify-center border border-accent-500/30">
                     {modifiedFiles.length}
@@ -113,7 +113,7 @@ const FileModifiedDropdown = memo(
                     <div className="relative mx-2 mb-2">
                       <input
                         type="text"
-                        placeholder="Search files..."
+                        placeholder="Pesquisar arquivos..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="w-full pl-8 pr-3 py-1.5 text-sm rounded-lg bg-bolt-elements-background-depth-1 border border-bolt-elements-borderColor focus:outline-none focus:ring-2 focus:ring-blue-500/50"
@@ -179,7 +179,7 @@ const FileModifiedDropdown = memo(
                                       </span>
                                     </div>
                                     {(() => {
-                                      // Calculate diff stats
+                                      // Calcular estatísticas de diff
                                       const { additions, deletions } = (() => {
                                         if (!history.originalContent) {
                                           return { additions: 0, deletions: 0 };
@@ -241,10 +241,10 @@ const FileModifiedDropdown = memo(
                             <div className="i-ph:file-dashed" />
                           </div>
                           <p className="text-sm font-medium text-bolt-elements-textPrimary">
-                            {searchQuery ? 'No matching files' : 'No modified files'}
+                            {searchQuery ? 'Nenhum arquivo encontrado' : 'Nenhum arquivo modificado'}
                           </p>
                           <p className="text-xs text-bolt-elements-textTertiary mt-1">
-                            {searchQuery ? 'Try another search' : 'Changes will appear here as you edit'}
+                            {searchQuery ? 'Tente outra pesquisa' : 'As alterações aparecerão aqui conforme você edita'}
                           </p>
                         </div>
                       )}
@@ -256,13 +256,13 @@ const FileModifiedDropdown = memo(
                       <button
                         onClick={() => {
                           navigator.clipboard.writeText(filteredFiles.map(([filePath]) => filePath).join('\n'));
-                          toast('File list copied to clipboard', {
+                          toast('Lista de arquivos copiada para a área de transferência', {
                             icon: <div className="i-ph:check-circle text-accent-500" />,
                           });
                         }}
                         className="w-full flex items-center justify-center gap-2 px-3 py-1.5 text-sm rounded-lg bg-bolt-elements-background-depth-1 hover:bg-bolt-elements-background-depth-3 transition-colors text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary"
                       >
-                        Copy File List
+                        Copiar Lista de Arquivos
                       </button>
                     </div>
                   )}
@@ -278,13 +278,13 @@ const FileModifiedDropdown = memo(
 
 export const Workbench = memo(
   ({ chatStarted, isStreaming, actionRunner, metadata, updateChatMestaData }: WorkspaceProps) => {
-    renderLogger.trace('Workbench');
+    renderLogger.trace('Área de Trabalho');
 
     const [isSyncing, setIsSyncing] = useState(false);
     const [isPushDialogOpen, setIsPushDialogOpen] = useState(false);
     const [fileHistory, setFileHistory] = useState<Record<string, FileHistory>>({});
 
-    // const modifiedFiles = Array.from(useStore(workbenchStore.unsavedFiles).keys());
+    // const arquivosModificados = Array.from(useStore(workbenchStore.unsavedFiles).keys());
 
     const hasPreview = useStore(computed(workbenchStore.previews, (previews) => previews.length > 0));
     const showWorkbench = useStore(workbenchStore.showWorkbench);
@@ -324,7 +324,7 @@ export const Workbench = memo(
 
     const onFileSave = useCallback(() => {
       workbenchStore.saveCurrentDocument().catch(() => {
-        toast.error('Failed to update file content');
+        toast.error('Falha ao atualizar conteúdo do arquivo');
       });
     }, []);
 
@@ -338,10 +338,10 @@ export const Workbench = memo(
       try {
         const directoryHandle = await window.showDirectoryPicker();
         await workbenchStore.syncFiles(directoryHandle);
-        toast.success('Files synced successfully');
+        toast.success('Arquivos sincronizados');
       } catch (error) {
-        console.error('Error syncing files:', error);
-        toast.error('Failed to sync files');
+        console.error('Erro ao sincronizar arquivos:', error);
+        toast.error('Falha ao sincronizar arquivos');
       } finally {
         setIsSyncing(false);
       }
@@ -385,12 +385,12 @@ export const Workbench = memo(
                         }}
                       >
                         <div className="i-ph:terminal" />
-                        Toggle Terminal
+                        Terminal
                       </PanelHeaderButton>
                       <DropdownMenu.Root>
                         <DropdownMenu.Trigger className="text-sm flex items-center gap-1 text-bolt-elements-item-contentDefault bg-transparent enabled:hover:text-bolt-elements-item-contentActive rounded-md p-1 enabled:hover:bg-bolt-elements-item-backgroundActive disabled:cursor-not-allowed">
                           <div className="i-ph:box-arrow-up" />
-                          Sync & Export
+                          Sincronizar
                         </DropdownMenu.Trigger>
                         <DropdownMenu.Content
                           className={classNames(
@@ -414,7 +414,7 @@ export const Workbench = memo(
                           >
                             <div className="flex items-center gap-2">
                               <div className="i-ph:download-simple"></div>
-                              <span>Download Code</span>
+                              <span>Baixar Código</span>
                             </div>
                           </DropdownMenu.Item>
                           <DropdownMenu.Item
@@ -426,7 +426,7 @@ export const Workbench = memo(
                           >
                             <div className="flex items-center gap-2">
                               {isSyncing ? <div className="i-ph:spinner" /> : <div className="i-ph:cloud-arrow-down" />}
-                              <span>{isSyncing ? 'Syncing...' : 'Sync Files'}</span>
+                              <span>{isSyncing ? 'Sincronizando...' : 'Sincronizar'}</span>
                             </div>
                           </DropdownMenu.Item>
                           <DropdownMenu.Item
@@ -437,7 +437,7 @@ export const Workbench = memo(
                           >
                             <div className="flex items-center gap-2">
                               <div className="i-ph:git-branch" />
-                              Push to GitHub
+                              Enviar para GitHub
                             </div>
                           </DropdownMenu.Item>
                         </DropdownMenu.Content>
@@ -491,9 +491,10 @@ export const Workbench = memo(
             onClose={() => setIsPushDialogOpen(false)}
             onPush={async (repoName, username, token, isPrivate) => {
               try {
-                console.log('Dialog onPush called with isPrivate =', isPrivate);
+                console.log('Diálogo onPush chamado com isPrivate =', isPrivate);
 
-                const commitMessage = prompt('Please enter a commit message:', 'Initial commit') || 'Initial commit';
+                const commitMessage =
+                  prompt('Digite uma mensagem para o commit:', 'Commit inicial') || 'Commit inicial';
                 const repoUrl = await workbenchStore.pushToGitHub(repoName, commitMessage, username, token, isPrivate);
 
                 if (updateChatMestaData && !metadata?.gitUrl) {
@@ -505,8 +506,8 @@ export const Workbench = memo(
 
                 return repoUrl;
               } catch (error) {
-                console.error('Error pushing to GitHub:', error);
-                toast.error('Failed to push to GitHub');
+                console.error('Erro ao enviar para GitHub:', error);
+                toast.error('Falha ao enviar para GitHub');
                 throw error;
               }
             }}
@@ -517,7 +518,7 @@ export const Workbench = memo(
   },
 );
 
-// View component for rendering content with motion transitions
+// Componente de visualização para renderizar conteúdo com transições de movimento
 interface ViewProps extends HTMLMotionProps<'div'> {
   children: JSX.Element;
 }

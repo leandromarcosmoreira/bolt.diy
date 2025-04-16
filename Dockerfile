@@ -3,7 +3,7 @@ FROM ${BASE} AS base
 
 WORKDIR /app
 
-# Install dependencies (this step is cached as long as the dependencies don't change)
+# Instala dependências (este passo é cacheado enquanto as dependências não mudarem)
 COPY package.json pnpm-lock.yaml ./
 
 #RUN npm install -g corepack@latest
@@ -11,16 +11,16 @@ COPY package.json pnpm-lock.yaml ./
 #RUN corepack enable pnpm && pnpm install
 RUN npm install -g pnpm && pnpm install
 
-# Copy the rest of your app's source code
+# Copia o resto do código fonte do seu app
 COPY . .
 
-# Expose the port the app runs on
+# Expõe a porta que o app usa
 EXPOSE 5173
 
-# Production image
+# Imagem de produção
 FROM base AS bolt-ai-production
 
-# Define environment variables with default values or let them be overridden
+# Define variáveis de ambiente com valores padrão ou permite que sejam sobrescritas
 ARG GROQ_API_KEY
 ARG HuggingFace_API_KEY
 ARG OPENAI_API_KEY
@@ -51,7 +51,7 @@ ENV WRANGLER_SEND_METRICS=false \
     DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX}\
     RUNNING_IN_DOCKER=true
 
-# Pre-configure wrangler to disable metrics
+# Pré-configura o wrangler para desabilitar métricas
 RUN mkdir -p /root/.config/.wrangler && \
     echo '{"enabled":false}' > /root/.config/.wrangler/metrics.json
 
@@ -59,10 +59,10 @@ RUN pnpm run build
 
 CMD [ "pnpm", "run", "dockerstart"]
 
-# Development image
+# Imagem de desenvolvimento
 FROM base AS bolt-ai-development
 
-# Define the same environment variables for development
+# Define as mesmas variáveis de ambiente para desenvolvimento
 ARG GROQ_API_KEY
 ARG HuggingFace 
 ARG OPENAI_API_KEY

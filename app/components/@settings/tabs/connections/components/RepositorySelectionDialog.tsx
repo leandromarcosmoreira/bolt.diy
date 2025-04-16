@@ -167,18 +167,18 @@ function GitHubAuthDialog({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
         Cookies.set('githubUsername', userData.login);
         Cookies.set('git:github.com', JSON.stringify({ username: token, password: 'x-oauth-basic' }));
 
-        toast.success(`Successfully connected as ${userData.login}`);
+        toast.success(`Conectado com sucesso como ${userData.login}`);
         onClose();
       } else {
         if (response.status === 401) {
-          toast.error('Invalid GitHub token. Please check and try again.');
+          toast.error('Token inválido. Por favor, verifique e tente novamente.');
         } else {
-          toast.error(`GitHub API error: ${response.status} ${response.statusText}`);
+          toast.error(`Erro na API do GitHub: ${response.status} ${response.statusText}`);
         }
       }
     } catch (error) {
-      console.error('Error connecting to GitHub:', error);
-      toast.error('Failed to connect to GitHub. Please try again.');
+      console.error('Erro ao conectar ao GitHub:', error);
+      toast.error('Falha ao conectar ao GitHub. Por favor, tente novamente.');
     } finally {
       setIsSubmitting(false);
     }
@@ -200,8 +200,8 @@ function GitHubAuthDialog({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
                 <h2 className="text-lg font-semibold text-[#111111] dark:text-white">Access Private Repositories</h2>
 
                 <p className="text-sm text-[#666666] dark:text-[#999999]">
-                  To access private repositories, you need to connect your GitHub account by providing a personal access
-                  token.
+                  Para acessar repositórios privados, você precisa conectar sua conta do GitHub fornecendo um token de
+                  acesso pessoal.
                 </p>
 
                 <div className="bg-[#F9F9F9] dark:bg-[#252525] p-4 rounded-lg space-y-3">
@@ -210,7 +210,7 @@ function GitHubAuthDialog({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
                   <form onSubmit={handleSubmit} className="space-y-3">
                     <div>
                       <label className="block text-sm text-[#666666] dark:text-[#999999] mb-1">
-                        GitHub Personal Access Token
+                        Token de Acesso Pessoal do GitHub
                       </label>
                       <input
                         type="password"
@@ -220,7 +220,7 @@ function GitHubAuthDialog({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
                         className="w-full px-3 py-1.5 rounded-lg border border-[#E5E5E5] dark:border-[#333333] bg-white dark:bg-[#1A1A1A] text-[#111111] dark:text-white placeholder-[#999999] text-sm"
                       />
                       <div className="mt-1 text-xs text-[#666666] dark:text-[#999999]">
-                        Get your token at{' '}
+                        Obtenha seu token em{' '}
                         <a
                           href="https://github.com/settings/tokens"
                           target="_blank"
@@ -269,16 +269,16 @@ function GitHubAuthDialog({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
                 <div className="bg-amber-50 dark:bg-amber-900/20 p-3 rounded-lg space-y-1.5">
                   <h3 className="text-sm text-amber-800 dark:text-amber-300 font-medium flex items-center gap-1.5">
                     <span className="i-ph:warning-circle w-4 h-4" />
-                    Accessing Private Repositories
+                    Acessando Repositórios Privados
                   </h3>
                   <p className="text-xs text-amber-700 dark:text-amber-400">
-                    Important things to know about accessing private repositories:
+                    Coisas importantes sobre acessar repositórios privados:
                   </p>
                   <ul className="list-disc pl-4 text-xs text-amber-700 dark:text-amber-400 space-y-0.5">
-                    <li>You must be granted access to the repository by its owner</li>
-                    <li>Your GitHub token must have the 'repo' scope</li>
-                    <li>For organization repositories, you may need additional permissions</li>
-                    <li>No token can give you access to repositories you don't have permission for</li>
+                    <li>Você deve ter acesso ao repositório por seu proprietário</li>
+                    <li>Seu token do GitHub deve ter o escopo 'repo'</li>
+                    <li>Para repositórios de organização, você pode precisar de permissões adicionais</li>
+                    <li>O token pode fornecer acesso a repositórios que você não tem permissão</li>
                   </ul>
                 </div>
               </div>
@@ -409,7 +409,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch repositories');
+        throw new Error('Falha ao buscar repositórios');
       }
 
       const data = await response.json();
@@ -421,7 +421,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       ) {
         setRepositories(data as GitHubRepoInfo[]);
       } else {
-        throw new Error('Invalid repository data format');
+        throw new Error('Formato de dados do repositório inválido');
       }
     } catch (error) {
       console.error('Error fetching repos:', error);
@@ -460,7 +460,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       );
 
       if (!response.ok) {
-        throw new Error('Failed to search repositories');
+        throw new Error('Falha ao pesquisar repositórios');
       }
 
       const data = await response.json();
@@ -469,7 +469,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       if (typeof data === 'object' && data !== null && 'items' in data && Array.isArray(data.items)) {
         setSearchResults(data.items as GitHubRepoInfo[]);
       } else {
-        throw new Error('Invalid search results format');
+        throw new Error('Formato de resultados da pesquisa inválido');
       }
     } catch (error) {
       console.error('Error searching repos:', error);
@@ -495,7 +495,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch branches');
+        throw new Error('Falha ao buscar branches');
       }
 
       const data = await response.json();
@@ -509,7 +509,7 @@ export function RepositorySelectionDialog({ isOpen, onClose, onSelect }: Reposit
           })),
         );
       } else {
-        throw new Error('Invalid branch data format');
+        throw new Error('Formato de dados do branch inválido');
       }
     } catch (error) {
       console.error('Error fetching branches:', error);

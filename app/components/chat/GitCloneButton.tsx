@@ -33,8 +33,8 @@ const IGNORE_PATTERNS = [
 
 const ig = ignore().add(IGNORE_PATTERNS);
 
-const MAX_FILE_SIZE = 100 * 1024; // 100KB limit per file
-const MAX_TOTAL_SIZE = 500 * 1024; // 500KB total limit
+const MAX_FILE_SIZE = 100 * 1024; // Limite de 100KB por arquivo
+const MAX_TOTAL_SIZE = 500 * 1024; // Limite total de 500KB
 
 interface GitCloneButtonProps {
   className?: string;
@@ -67,7 +67,7 @@ export default function GitCloneButton({ importChat, className }: GitCloneButton
         for (const filePath of filePaths) {
           const { data: content, encoding } = data[filePath];
 
-          // Skip binary files
+          // Ignorar arquivos binários
           if (
             content instanceof Uint8Array &&
             !filePath.match(/\.(txt|md|astro|mjs|js|jsx|ts|tsx|json|html|css|scss|less|yml|yaml|xml|svg|vue|svelte)$/i)
@@ -84,17 +84,17 @@ export default function GitCloneButton({ importChat, className }: GitCloneButton
               continue;
             }
 
-            // Check file size
+            // Verificar tamanho do arquivo
             const fileSize = new TextEncoder().encode(textContent).length;
 
             if (fileSize > MAX_FILE_SIZE) {
-              skippedFiles.push(`${filePath} (too large: ${Math.round(fileSize / 1024)}KB)`);
+              skippedFiles.push(`${filePath} (muito grande: ${Math.round(fileSize / 1024)}KB)`);
               continue;
             }
 
-            // Check total size
+            // Verificar tamanho total
             if (totalSize + fileSize > MAX_TOTAL_SIZE) {
-              skippedFiles.push(`${filePath} (would exceed total size limit)`);
+              skippedFiles.push(`${filePath} (excederia o limite de tamanho total)`);
               continue;
             }
 
@@ -104,7 +104,7 @@ export default function GitCloneButton({ importChat, className }: GitCloneButton
               content: textContent,
             });
           } catch (e: any) {
-            skippedFiles.push(`${filePath} (error: ${e.message})`);
+            skippedFiles.push(`${filePath} (erro: ${e.message})`);
           }
         }
 
@@ -113,15 +113,15 @@ export default function GitCloneButton({ importChat, className }: GitCloneButton
 
         const filesMessage: Message = {
           role: 'assistant',
-          content: `Cloning the repo ${repoUrl} into ${workdir}
+          content: `Clonando o repositório ${repoUrl} em ${workdir}
 ${
   skippedFiles.length > 0
-    ? `\nSkipped files (${skippedFiles.length}):
+    ? `\nArquivos ignorados (${skippedFiles.length}):
 ${skippedFiles.map((f) => `- ${f}`).join('\n')}`
     : ''
 }
 
-<boltArtifact id="imported-files" title="Git Cloned Files" type="bundled">
+<boltArtifact id="imported-files" title="Arquivos Clonados do Git" type="bundled">
 ${fileContents
   .map(
     (file) =>
@@ -141,11 +141,11 @@ ${escapeBoltTags(file.content)}
           messages.push(commandsMessage);
         }
 
-        await importChat(`Git Project:${repoUrl.split('/').slice(-1)[0]}`, messages);
+        await importChat(`Projeto Git:${repoUrl.split('/').slice(-1)[0]}`, messages);
       }
     } catch (error) {
-      console.error('Error during import:', error);
-      toast.error('Failed to import repository');
+      console.error('Erro durante a importação:', error);
+      toast.error('Falha ao importar repositório');
     } finally {
       setLoading(false);
     }
@@ -155,7 +155,7 @@ ${escapeBoltTags(file.content)}
     <>
       <Button
         onClick={() => setIsDialogOpen(true)}
-        title="Clone a Git Repo"
+        title="Clonar Repositório Git"
         variant="outline"
         size="lg"
         className={classNames(
@@ -170,12 +170,12 @@ ${escapeBoltTags(file.content)}
         disabled={!ready || loading}
       >
         <span className="i-ph:git-branch w-4 h-4" />
-        Clone a Git Repo
+        Clonar Repositório Git
       </Button>
 
       <RepositorySelectionDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} onSelect={handleClone} />
 
-      {loading && <LoadingOverlay message="Please wait while we clone the repository..." />}
+      {loading && <LoadingOverlay message="Aguarde enquanto clonamos o repositório..." />}
     </>
   );
 }

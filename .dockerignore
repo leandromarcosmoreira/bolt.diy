@@ -1,21 +1,21 @@
-# Ignore Git and GitHub files
+# Ignora arquivos Git e GitHub
 .git
 .github/
 
-# Ignore Husky configuration files
+# Ignora arquivos de configuração do Husky
 .husky/
 
-# Ignore documentation and metadata files
+# Ignora documentação e arquivos de metadados
 CONTRIBUTING.md
 LICENSE
 README.md
 
-# Ignore environment examples and sensitive info
+# Ignora exemplos de ambiente e informações sensíveis
 .env
 *.local
 *.example
 
-# Ignore node modules, logs and cache files
+# Ignora módulos node, logs e arquivos de cache
 **/*.log
 **/node_modules
 **/dist

@@ -18,23 +18,23 @@ export class HuggingFaceStatusChecker extends BaseProviderChecker {
       // Check individual services and their uptime percentages
       const services = {
         'Huggingface Hub': {
-          operational: text.includes('Huggingface Hub') && text.includes('Operational'),
+          operacional: text.includes('Huggingface Hub') && text.includes('Operacional'),
           uptime: text.match(/Huggingface Hub[\s\S]*?(\d+\.\d+)%\s*uptime/)?.[1],
         },
         'Git Hosting and Serving': {
-          operational: text.includes('Git Hosting and Serving') && text.includes('Operational'),
+          operacional: text.includes('Git Hosting and Serving') && text.includes('Operacional'),
           uptime: text.match(/Git Hosting and Serving[\s\S]*?(\d+\.\d+)%\s*uptime/)?.[1],
         },
         'Inference API': {
-          operational: text.includes('Inference API') && text.includes('Operational'),
+          operacional: text.includes('Inference API') && text.includes('Operacional'),
           uptime: text.match(/Inference API[\s\S]*?(\d+\.\d+)%\s*uptime/)?.[1],
         },
         'HF Endpoints': {
-          operational: text.includes('HF Endpoints') && text.includes('Operational'),
+          operacional: text.includes('HF Endpoints') && text.includes('Operacional'),
           uptime: text.match(/HF Endpoints[\s\S]*?(\d+\.\d+)%\s*uptime/)?.[1],
         },
         Spaces: {
-          operational: text.includes('Spaces') && text.includes('Operational'),
+          operacional: text.includes('Spaces') && text.includes('Operacional'),
           uptime: text.match(/Spaces[\s\S]*?(\d+\.\d+)%\s*uptime/)?.[1],
         },
       };
@@ -45,21 +45,21 @@ export class HuggingFaceStatusChecker extends BaseProviderChecker {
           return `${name}: ${info.uptime}% uptime`;
         }
 
-        return `${name}: ${info.operational ? 'Operational' : 'Issues detected'}`;
+        return `${name}: ${info.operacional ? 'Operacional' : 'Desempenho degradado'}`;
       });
 
       // Determine overall status
-      let status: StatusCheckResult['status'] = 'operational';
+      let status: StatusCheckResult['status'] = 'operacional';
       let message = allServicesOnline
-        ? `All services are online (Last updated on ${lastUpdate})`
-        : 'Checking individual services';
+        ? `Todos os serviços estão online (Última atualização em ${lastUpdate})`
+        : 'Verificando serviços individuais';
 
-      // Only mark as degraded if we explicitly detect issues
-      const hasIssues = Object.values(services).some((service) => !service.operational);
+      // Only mark as instavel if we explicitly detect issues
+      const hasIssues = Object.values(services).some((service) => !service.operacional);
 
       if (hasIssues) {
-        status = 'degraded';
-        message = `Service issues detected (Last updated on ${lastUpdate})`;
+        status = 'instavel';
+        message = `Problemas detectados (Última atualização em ${lastUpdate})`;
       }
 
       // If status page check fails, fallback to endpoint check
@@ -69,9 +69,9 @@ export class HuggingFaceStatusChecker extends BaseProviderChecker {
         const apiStatus = await this.checkEndpoint(apiEndpoint);
 
         return {
-          status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-          message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-          incidents: ['Note: Limited status information due to CORS restrictions'],
+          status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+          message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+          incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
         };
       }
 
@@ -89,9 +89,9 @@ export class HuggingFaceStatusChecker extends BaseProviderChecker {
       const apiStatus = await this.checkEndpoint(apiEndpoint);
 
       return {
-        status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-        message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-        incidents: ['Note: Limited status information due to CORS restrictions'],
+        status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+        message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+        incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
       };
     }
   }

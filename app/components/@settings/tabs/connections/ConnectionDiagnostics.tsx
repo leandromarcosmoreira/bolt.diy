@@ -249,7 +249,7 @@ export default function ConnectionDiagnostics() {
           <div className="flex items-center gap-2">
             <div className="i-ph:github-logo text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent w-4 h-4" />
             <div className="text-sm font-medium text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary">
-              GitHub Connection
+              Conexão GitHub
             </div>
           </div>
           {diagnosticResults ? (
@@ -263,14 +263,14 @@ export default function ConnectionDiagnostics() {
                       : 'text-red-500 dark:text-red-400',
                   )}
                 >
-                  {diagnosticResults.localStorage.hasGithubConnection ? 'Connected' : 'Not Connected'}
+                  {diagnosticResults.localStorage.hasGithubConnection ? 'Conectado' : 'Não Conectado'}
                 </span>
               </div>
               {diagnosticResults.localStorage.hasGithubConnection && (
                 <>
                   <div className="text-xs text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5">
                     <div className="i-ph:user w-3.5 h-3.5 text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent" />
-                    User: {diagnosticResults.localStorage.githubConnectionParsed?.user?.login || 'N/A'}
+                    Usuário: {diagnosticResults.localStorage.githubConnectionParsed?.user?.login || 'N/A'}
                   </div>
                   <div className="text-xs text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5">
                     <div className="i-ph:check-circle w-3.5 h-3.5 text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent" />
@@ -296,7 +296,7 @@ export default function ConnectionDiagnostics() {
                   className="mt-auto self-start hover:bg-bolt-elements-item-backgroundActive/10 hover:text-bolt-elements-textPrimary dark:hover:bg-bolt-elements-item-backgroundActive/10 dark:hover:text-bolt-elements-textPrimary transition-colors"
                 >
                   <div className="i-ph:plug w-3.5 h-3.5 mr-1" />
-                  Connect Now
+                  Conectar Agora
                 </Button>
               )}
             </>
@@ -304,7 +304,7 @@ export default function ConnectionDiagnostics() {
             <div className="flex items-center justify-center h-full">
               <div className="text-sm text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary flex items-center gap-2">
                 <div className="i-ph:info w-4 h-4" />
-                Run diagnostics to check connection status
+                Executar diagnósticos para verificar o status da conexão
               </div>
             </div>
           )}
@@ -315,7 +315,7 @@ export default function ConnectionDiagnostics() {
           <div className="flex items-center gap-2">
             <div className="i-si:netlify text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent w-4 h-4" />
             <div className="text-sm font-medium text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary">
-              Netlify Connection
+              Conexão Netlify
             </div>
           </div>
           {diagnosticResults ? (
@@ -329,14 +329,14 @@ export default function ConnectionDiagnostics() {
                       : 'text-red-500 dark:text-red-400',
                   )}
                 >
-                  {diagnosticResults.localStorage.hasNetlifyConnection ? 'Connected' : 'Not Connected'}
+                  {diagnosticResults.localStorage.hasNetlifyConnection ? 'Conectado' : 'Não Conectado'}
                 </span>
               </div>
               {diagnosticResults.localStorage.hasNetlifyConnection && (
                 <>
                   <div className="text-xs text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5">
                     <div className="i-ph:user w-3.5 h-3.5 text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent" />
-                    User:{' '}
+                    Usuário:{' '}
                     {diagnosticResults.localStorage.netlifyConnectionParsed?.user?.full_name ||
                       diagnosticResults.localStorage.netlifyConnectionParsed?.user?.email ||
                       'N/A'}
@@ -361,7 +361,7 @@ export default function ConnectionDiagnostics() {
                   className="mt-auto self-start hover:bg-bolt-elements-item-backgroundActive/10 hover:text-bolt-elements-textPrimary dark:hover:bg-bolt-elements-item-backgroundActive/10 dark:hover:text-bolt-elements-textPrimary transition-colors"
                 >
                   <div className="i-ph:plug w-3.5 h-3.5 mr-1" />
-                  Connect Now
+                  Conectar Agora
                 </Button>
               )}
             </>
@@ -369,7 +369,7 @@ export default function ConnectionDiagnostics() {
             <div className="flex items-center justify-center h-full">
               <div className="text-sm text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary flex items-center gap-2">
                 <div className="i-ph:info w-4 h-4" />
-                Run diagnostics to check connection status
+                Executar diagnósticos para verificar o status da conexão
               </div>
             </div>
           )}
@@ -380,7 +380,7 @@ export default function ConnectionDiagnostics() {
           <div className="flex items-center gap-2">
             <div className="i-si:vercel text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent w-4 h-4" />
             <div className="text-sm font-medium text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary">
-              Vercel Connection
+              Conexão Vercel
             </div>
           </div>
           {diagnosticResults ? (
@@ -394,14 +394,14 @@ export default function ConnectionDiagnostics() {
                       : 'text-red-500 dark:text-red-400',
                   )}
                 >
-                  {diagnosticResults.localStorage.hasVercelConnection ? 'Connected' : 'Not Connected'}
+                  {diagnosticResults.localStorage.hasVercelConnection ? 'Conectado' : 'Não Conectado'}
                 </span>
               </div>
               {diagnosticResults.localStorage.hasVercelConnection && (
                 <>
                   <div className="text-xs text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5">
                     <div className="i-ph:user w-3.5 h-3.5 text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent" />
-                    User:{' '}
+                    Usuário:{' '}
                     {diagnosticResults.localStorage.vercelConnectionParsed?.user?.username ||
                       diagnosticResults.localStorage.vercelConnectionParsed?.user?.user?.username ||
                       'N/A'}
@@ -426,7 +426,7 @@ export default function ConnectionDiagnostics() {
                   className="mt-auto self-start hover:bg-bolt-elements-item-backgroundActive/10 hover:text-bolt-elements-textPrimary dark:hover:bg-bolt-elements-item-backgroundActive/10 dark:hover:text-bolt-elements-textPrimary transition-colors"
                 >
                   <div className="i-ph:plug w-3.5 h-3.5 mr-1" />
-                  Connect Now
+                  Conectar Agora
                 </Button>
               )}
             </>
@@ -434,7 +434,7 @@ export default function ConnectionDiagnostics() {
             <div className="flex items-center justify-center h-full">
               <div className="text-sm text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary flex items-center gap-2">
                 <div className="i-ph:info w-4 h-4" />
-                Run diagnostics to check connection status
+                Executar diagnósticos para verificar o status da conexão
               </div>
             </div>
           )}
@@ -445,7 +445,7 @@ export default function ConnectionDiagnostics() {
           <div className="flex items-center gap-2">
             <div className="i-si:supabase text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent w-4 h-4" />
             <div className="text-sm font-medium text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary">
-              Supabase Connection
+              Conexão Supabase
             </div>
           </div>
           {diagnosticResults ? (
@@ -459,14 +459,14 @@ export default function ConnectionDiagnostics() {
                       : 'text-red-500 dark:text-red-400',
                   )}
                 >
-                  {diagnosticResults.localStorage.hasSupabaseConnection ? 'Configured' : 'Not Configured'}
+                  {diagnosticResults.localStorage.hasSupabaseConnection ? 'Configurado' : 'Não Configurado'}
                 </span>
               </div>
               {diagnosticResults.localStorage.hasSupabaseConnection && (
                 <>
                   <div className="text-xs text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5 truncate">
                     <div className="i-ph:link w-3.5 h-3.5 text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent flex-shrink-0" />
-                    Project URL: {diagnosticResults.localStorage.supabaseConnectionParsed?.projectUrl || 'N/A'}
+                    URL do Projeto: {diagnosticResults.localStorage.supabaseConnectionParsed?.projectUrl || 'N/A'}
                   </div>
                   <div className="text-xs text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary mt-2 flex items-center gap-1.5">
                     <div className="i-ph:check-circle w-3.5 h-3.5 text-bolt-elements-item-contentAccent dark:text-bolt-elements-item-contentAccent" />
@@ -488,7 +488,7 @@ export default function ConnectionDiagnostics() {
                   className="mt-auto self-start hover:bg-bolt-elements-item-backgroundActive/10 hover:text-bolt-elements-textPrimary dark:hover:bg-bolt-elements-item-backgroundActive/10 dark:hover:text-bolt-elements-textPrimary transition-colors"
                 >
                   <div className="i-ph:plug w-3.5 h-3.5 mr-1" />
-                  Configure Now
+                  Configurar Agora
                 </Button>
               )}
             </>
@@ -496,7 +496,7 @@ export default function ConnectionDiagnostics() {
             <div className="flex items-center justify-center h-full">
               <div className="text-sm text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary flex items-center gap-2">
                 <div className="i-ph:info w-4 h-4" />
-                Run diagnostics to check connection status
+                Executar diagnósticos para verificar o status da conexão
               </div>
             </div>
           )}
@@ -516,7 +516,7 @@ export default function ConnectionDiagnostics() {
           ) : (
             <div className="i-ph:activity w-4 h-4" />
           )}
-          {isRunning ? 'Running Diagnostics...' : 'Run Diagnostics'}
+          {isRunning ? 'Executando Diagnósticos...' : 'Executar Diagnósticos'}
         </Button>
 
         <Button
@@ -526,7 +526,7 @@ export default function ConnectionDiagnostics() {
           className="flex items-center gap-2 hover:bg-bolt-elements-item-backgroundActive/10 hover:text-bolt-elements-textPrimary dark:hover:bg-bolt-elements-item-backgroundActive/10 dark:hover:text-bolt-elements-textPrimary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <div className="i-ph:github-logo w-4 h-4" />
-          Reset GitHub
+          Reiniciar GitHub
         </Button>
 
         <Button
@@ -536,7 +536,7 @@ export default function ConnectionDiagnostics() {
           className="flex items-center gap-2 hover:bg-bolt-elements-item-backgroundActive/10 hover:text-bolt-elements-textPrimary dark:hover:bg-bolt-elements-item-backgroundActive/10 dark:hover:text-bolt-elements-textPrimary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <div className="i-si:netlify w-4 h-4" />
-          Reset Netlify
+          Reiniciar Netlify
         </Button>
 
         <Button
@@ -546,7 +546,7 @@ export default function ConnectionDiagnostics() {
           className="flex items-center gap-2 hover:bg-bolt-elements-item-backgroundActive/10 hover:text-bolt-elements-textPrimary dark:hover:bg-bolt-elements-item-backgroundActive/10 dark:hover:text-bolt-elements-textPrimary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <div className="i-si:vercel w-4 h-4" />
-          Reset Vercel
+          Reiniciar Vercel
         </Button>
 
         <Button
@@ -556,7 +556,7 @@ export default function ConnectionDiagnostics() {
           className="flex items-center gap-2 hover:bg-bolt-elements-item-backgroundActive/10 hover:text-bolt-elements-textPrimary dark:hover:bg-bolt-elements-item-backgroundActive/10 dark:hover:text-bolt-elements-textPrimary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <div className="i-si:supabase w-4 h-4" />
-          Reset Supabase
+          Reiniciar Supabase
         </Button>
       </div>
 
@@ -569,7 +569,7 @@ export default function ConnectionDiagnostics() {
                 <div className="flex items-center gap-2">
                   <CodeBracketIcon className="w-4 h-4 text-blue-500" />
                   <span className="text-sm font-medium text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary">
-                    Diagnostic Details
+                    Detalhes do Diagnóstico
                   </span>
                 </div>
                 <ChevronDownIcon

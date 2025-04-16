@@ -36,10 +36,10 @@ export const CodeBlock = memo(
 
     useEffect(() => {
       if (language && !isSpecialLang(language) && !(language in bundledLanguages)) {
-        logger.warn(`Unsupported language '${language}'`);
+        logger.warn(`Linguagem não suportada '${language}'`);
       }
 
-      logger.trace(`Language = ${language}`);
+      logger.trace(`Linguagem = ${language}`);
 
       const processCode = async () => {
         setHTML(await codeToHtml(code, { lang: language, theme }));
@@ -68,7 +68,7 @@ export const CodeBlock = memo(
                   'before:opacity-100': copied,
                 },
               )}
-              title="Copy Code"
+              title="Copiar código"
               onClick={() => copyToClipboard()}
             >
               <div className="i-ph:clipboard-text-duotone"></div>

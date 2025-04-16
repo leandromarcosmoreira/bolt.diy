@@ -613,7 +613,7 @@ export class WorkbenchStore {
       const owner = githubUsername || Cookies.get('githubUsername');
 
       if (!githubToken || !owner) {
-        throw new Error('GitHub token or username is not set in cookies or provided.');
+        throw new Error('Token do GitHub ou nome de usuário não definido nos cookies ou fornecido.');
       }
 
       // Log the isPrivate flag to verify it's being properly passed
@@ -690,7 +690,7 @@ export class WorkbenchStore {
       const files = this.files.get();
 
       if (!files || Object.keys(files).length === 0) {
-        throw new Error('No files found to push');
+        throw new Error('Nenhum arquivo encontrado para enviar');
       }
 
       // Function to push files with retry logic
@@ -720,7 +720,7 @@ export class WorkbenchStore {
           const validBlobs = blobs.filter(Boolean); // Filter out any undefined blobs
 
           if (validBlobs.length === 0) {
-            throw new Error('No valid files to push');
+            throw new Error('Nenhum arquivo válido para enviar');
           }
 
           // Refresh repository reference to ensure we have the latest data

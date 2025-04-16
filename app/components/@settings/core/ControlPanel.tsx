@@ -34,7 +34,6 @@ import DebugTab from '~/components/@settings/tabs/debug/DebugTab';
 import { EventLogsTab } from '~/components/@settings/tabs/event-logs/EventLogsTab';
 import UpdateTab from '~/components/@settings/tabs/update/UpdateTab';
 import ConnectionsTab from '~/components/@settings/tabs/connections/ConnectionsTab';
-import CloudProvidersTab from '~/components/@settings/tabs/providers/cloud/CloudProvidersTab';
 import ServiceStatusTab from '~/components/@settings/tabs/providers/status/ServiceStatusTab';
 import LocalProvidersTab from '~/components/@settings/tabs/providers/local/LocalProvidersTab';
 import TaskManagerTab from '~/components/@settings/tabs/task-manager/TaskManagerTab';
@@ -67,20 +66,19 @@ interface AnimatedSwitchProps {
 }
 
 const TAB_DESCRIPTIONS: Record<TabType, string> = {
-  profile: 'Manage your profile and account settings',
-  settings: 'Configure application preferences',
-  notifications: 'View and manage your notifications',
-  features: 'Explore new and upcoming features',
-  data: 'Manage your data and storage',
-  'cloud-providers': 'Configure cloud AI providers and models',
-  'local-providers': 'Configure local AI providers and models',
-  'service-status': 'Monitor cloud LLM service status',
+  profile: 'Manage your profile and account',
+  settings: 'Adjust app preferences',
+  notifications: 'Manage your notifications',
+  features: 'Discover new features and functions',
+  data: 'Manage data and files',
+  'local-providers': 'Configure local AI and models',
+  'service-status': 'Monitor cloud AI status',
   connection: 'Check connection status and settings',
-  debug: 'Debug tools and system information',
+  debug: 'System tools and information',
   'event-logs': 'View system events and logs',
-  update: 'Check for updates and release notes',
-  'task-manager': 'Monitor system resources and processes',
-  'tab-management': 'Configure visible tabs and their order',
+  update: 'Check for updates and news',
+  'task-manager': 'Manage resources and processes',
+  'tab-management': 'Configure tabs and order',
 };
 
 // Beta status for experimental features
@@ -319,8 +317,6 @@ export const ControlPanel = ({ open, onClose }: ControlPanelProps) => {
         return <FeaturesTab />;
       case 'data':
         return <DataTab />;
-      case 'cloud-providers':
-        return <CloudProvidersTab />;
       case 'local-providers':
         return <LocalProvidersTab />;
       case 'connection':

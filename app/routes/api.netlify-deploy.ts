@@ -13,7 +13,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const { siteId, files, token, chatId } = (await request.json()) as DeployRequestBody & { token: string };
 
     if (!token) {
-      return json({ error: 'Not connected to Netlify' }, { status: 401 });
+      return json({ error: 'Não conectado ao Netlify' }, { status: 401 });
     }
 
     let targetSiteId = siteId;

@@ -42,7 +42,7 @@ export const shortcutsStore = map<Shortcuts>({
     altKey: true,
     shiftKey: true,
     action: () => toggleTheme(),
-    description: 'Toggle theme',
+    description: 'Mudar tema',
     isPreventDefault: true,
   },
   toggleTerminal: {

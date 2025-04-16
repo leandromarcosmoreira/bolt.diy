@@ -19,16 +19,16 @@ export const loader: LoaderFunction = async ({ context, request }) => {
 
   const envVarName = providerInstance.config.apiTokenKey;
 
-  // Get API keys from cookie
+  // Obter chaves de API do cookie
   const cookieHeader = request.headers.get('Cookie');
   const apiKeys = getApiKeysFromCookie(cookieHeader);
 
   /*
-   * Check API key in order of precedence:
-   * 1. Client-side API keys (from cookies)
-   * 2. Server environment variables (from Cloudflare env)
-   * 3. Process environment variables (from .env.local)
-   * 4. LLMManager environment variables
+   * Verificar chave de API em ordem de precedência:
+   * 1. Chaves de API do lado do cliente (dos cookies)
+   * 2. Variáveis de ambiente do servidor (do ambiente Cloudflare)
+   * 3. Variáveis de ambiente do processo (do .env.local)
+   * 4. Variáveis de ambiente do LLMManager
    */
   const isSet = !!(
     apiKeys?.[provider] ||

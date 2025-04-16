@@ -36,7 +36,7 @@ export async function detectProjectCommands(files: FileContent[]): Promise<Proje
           type: 'Node.js',
           setupCommand: `npm install`,
           startCommand: `npm run ${availableCommand}`,
-          followupMessage: `Found "${availableCommand}" script in package.json. Running "npm run ${availableCommand}" after installation.`,
+          followupMessage: `Encontrei o script "${availableCommand}" no package.json. Executando "npm run ${availableCommand}" após a instalação.`,
         };
       }
 
@@ -44,10 +44,10 @@ export async function detectProjectCommands(files: FileContent[]): Promise<Proje
         type: 'Node.js',
         setupCommand: 'npm install',
         followupMessage:
-          'Would you like me to inspect package.json to determine the available scripts for running this project?',
+          'Gostaria de me inspecionar o package.json para determinar os scripts disponíveis para executar este projeto?',
       };
     } catch (error) {
-      console.error('Error parsing package.json:', error);
+      console.error('Erro ao analisar o package.json:', error);
       return { type: '', setupCommand: '', followupMessage: '' };
     }
   }

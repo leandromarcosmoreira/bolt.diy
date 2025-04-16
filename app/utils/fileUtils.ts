@@ -1,6 +1,6 @@
 import ignore from 'ignore';
 
-// Common patterns to ignore, similar to .gitignore
+// Padrões comuns para ignorar, similar ao .gitignore
 export const IGNORE_PATTERNS = [
   'node_modules/**',
   '.git/**',
@@ -59,7 +59,7 @@ const readPackageJson = async (files: File[]): Promise<{ scripts?: Record<string
 
     return JSON.parse(content);
   } catch (error) {
-    console.error('Error reading package.json:', error);
+    console.error('Erro ao ler package.json:', error);
     return null;
   }
 };
@@ -73,7 +73,7 @@ export const detectProjectType = async (
     const packageJson = await readPackageJson(files);
     const scripts = packageJson?.scripts || {};
 
-    // Check for preferred commands in priority order
+    // Verifica comandos preferidos em ordem de prioridade
     const preferredCommands = ['dev', 'start', 'preview'];
     const availableCommand = preferredCommands.find((cmd) => scripts[cmd]);
 
@@ -81,7 +81,7 @@ export const detectProjectType = async (
       return {
         type: 'Node.js',
         setupCommand: `npm install && npm run ${availableCommand}`,
-        followupMessage: `Found "${availableCommand}" script in package.json. Running "npm run ${availableCommand}" after installation.`,
+        followupMessage: `Encontrei o script "${availableCommand}" no package.json. Executando "npm run ${availableCommand}" após a instalação.`,
       };
     }
 
@@ -89,7 +89,7 @@ export const detectProjectType = async (
       type: 'Node.js',
       setupCommand: 'npm install',
       followupMessage:
-        'Would you like me to inspect package.json to determine the available scripts for running this project?',
+        'Gostaria de me inspecionar o package.json para determinar os scripts disponíveis para executar este projeto?',
     };
   }
 
@@ -106,7 +106,7 @@ export const detectProjectType = async (
 
 export const filesToArtifacts = (files: { [path: string]: { content: string } }, id: string): string => {
   return `
-<boltArtifact id="${id}" title="User Updated Files">
+<boltArtifact id="${id}" title="Arquivos Atualizados pelo Usuário">
 ${Object.keys(files)
   .map(
     (filePath) => `

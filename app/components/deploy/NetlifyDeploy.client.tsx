@@ -15,12 +15,12 @@ export function useNetlifyDeploy() {
 
   const handleNetlifyDeploy = async () => {
     if (!netlifyConn.user || !netlifyConn.token) {
-      toast.error('Please connect to Netlify first in the settings tab!');
+      toast.error('Por favor, conecte-se ao Netlify primeiro na aba de configurações!');
       return false;
     }
 
     if (!currentChatId) {
-      toast.error('No active chat found');
+      toast.error('Nenhum chat ativo encontrado');
       return false;
     }
 
@@ -30,7 +30,7 @@ export function useNetlifyDeploy() {
       const artifact = workbenchStore.firstArtifact;
 
       if (!artifact) {
-        throw new Error('No active project found');
+        throw new Error('Nenhum projeto ativo encontrado');
       }
 
       // Create a deployment artifact for visual feedback
@@ -68,10 +68,10 @@ export function useNetlifyDeploy() {
       if (!artifact.runner.buildOutput) {
         // Notify that build failed
         deployArtifact.runner.handleDeployAction('building', 'failed', {
-          error: 'Build failed. Check the terminal for details.',
+          error: 'Build falhou. Verifique o terminal para detalhes.',
           source: 'netlify',
         });
-        throw new Error('Build failed');
+        throw new Error('Build falhou');
       }
 
       // Notify that build succeeded and deployment is starting
@@ -224,9 +224,11 @@ export function useNetlifyDeploy() {
         source: 'netlify',
       });
 
+      toast.success('Deploy no Netlify iniciado com sucesso!');
+
       return true;
     } catch (error) {
-      console.error('Deploy error:', error);
+      console.error('Erro ao iniciar deploy no Netlify:', error);
       toast.error(error instanceof Error ? error.message : 'Deployment failed');
 
       return false;

@@ -16,7 +16,7 @@ export type ProviderName =
 
 export type ServiceStatus = {
   provider: ProviderName;
-  status: 'operational' | 'degraded' | 'down';
+  status: 'operacional' | 'instavel' | 'down';
   lastChecked: string;
   statusUrl?: string;
   icon?: IconType;
@@ -49,7 +49,7 @@ export type ApiResponse = {
 };
 
 export type StatusCheckResult = {
-  status: 'operational' | 'degraded' | 'down';
+  status: 'operacional' | 'instavel' | 'down';
   message: string;
   incidents: string[];
 };

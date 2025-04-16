@@ -29,14 +29,14 @@ export class AmazonBedrockStatusChecker extends BaseProviderChecker {
         }
       }
 
-      let status: StatusCheckResult['status'] = 'operational';
-      let message = 'All services operational';
+      let status: StatusCheckResult['status'] = 'operacional';
+      let message = 'All services operacional';
 
       if (hasBedrockIssues) {
-        status = 'degraded';
+        status = 'instavel';
         message = 'Amazon Bedrock service issues reported';
       } else if (hasGeneralIssues) {
-        status = 'degraded';
+        status = 'instavel';
         message = 'AWS experiencing general issues';
       }
 
@@ -47,9 +47,9 @@ export class AmazonBedrockStatusChecker extends BaseProviderChecker {
         const apiStatus = await this.checkEndpoint(apiEndpoint);
 
         return {
-          status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-          message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-          incidents: ['Note: Limited status information due to CORS restrictions'],
+          status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+          message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+          incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
         };
       }
 
@@ -67,9 +67,9 @@ export class AmazonBedrockStatusChecker extends BaseProviderChecker {
       const apiStatus = await this.checkEndpoint(apiEndpoint);
 
       return {
-        status: endpointStatus === 'reachable' && apiStatus === 'reachable' ? 'operational' : 'degraded',
-        message: `Status page: ${endpointStatus}, API: ${apiStatus}`,
-        incidents: ['Note: Limited status information due to CORS restrictions'],
+        status: endpointStatus === 'acessivel' && apiStatus === 'acessivel' ? 'operacional' : 'instavel',
+        message: `Página de status: ${endpointStatus}, API: ${apiStatus}`,
+        incidents: ['Nota: Informações de status limitadas devido a restrições de CORS'],
       };
     }
   }

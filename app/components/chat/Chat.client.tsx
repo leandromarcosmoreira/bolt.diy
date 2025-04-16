@@ -179,7 +179,7 @@ export const ChatImpl = memo(
       },
       sendExtraMessageFields: true,
       onError: (e) => {
-        logger.error('Request failed\n\n', e, error);
+        logger.error('Falha na requisição\n\n', e, error);
         logStore.logError('Chat request failed', e, {
           component: 'Chat',
           action: 'request',
@@ -205,7 +205,7 @@ export const ChatImpl = memo(
           });
         }
 
-        logger.debug('Finished streaming');
+        logger.debug('Streaming finalizado');
       },
       initialMessages,
       initialInput: Cookies.get(PROMPT_COOKIE_KEY) || '',
@@ -325,9 +325,9 @@ export const ChatImpl = memo(
           if (template !== 'blank') {
             const temResp = await getTemplates(template, title).catch((e) => {
               if (e.message.includes('rate limit')) {
-                toast.warning('Rate limit exceeded. Skipping starter template\n Continuing with blank template');
+                toast.warning('Limite de taxa excedido. Pulando template inicial\n Continuando com template em branco');
               } else {
-                toast.warning('Failed to import starter template\n Continuing with blank template');
+                toast.warning('Falha ao importar template inicial\n Continuando com template em branco');
               }
 
               return null;

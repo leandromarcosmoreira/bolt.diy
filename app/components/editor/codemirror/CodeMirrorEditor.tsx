@@ -233,7 +233,7 @@ export const CodeMirrorEditor = memo(
       }
 
       if (doc.filePath === '') {
-        logger.warn('File path should not be empty');
+        logger.warn('O caminho do arquivo não deve estar vazio');
       }
 
       let state = editorStates.get(doc.filePath);

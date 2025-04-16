@@ -1,73 +1,73 @@
-name: 'Bug report'
-description: Create a report to help us improve
+name: 'Relatório de bug'
+description: Crie um relatório para nos ajudar a melhorar
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for reporting an issue :pray:.
+        Obrigado por reportar um problema :pray:.
 
-        This issue tracker is for bugs and issues found with [Bolt.diy](https://bolt.diy).
-        If you experience issues related to WebContainer, please file an issue in the official [StackBlitz WebContainer repo](https://github.com/stackblitz/webcontainer-core).
+        Este rastreador de problemas é para bugs e questões encontradas no [Bolt.diy](https://bolt.diy).
+        Se você encontrar problemas relacionados ao WebContainer, por favor, abra uma issue no repositório oficial [StackBlitz WebContainer](https://github.com/stackblitz/webcontainer-core).
 
-        The more information you fill in, the better we can help you.
+        Quanto mais informações você preencher, melhor poderemos ajudá-lo.
   - type: textarea
     id: description
     attributes:
-      label: Describe the bug
-      description: Provide a clear and concise description of what you're running into.
+      label: Descreva o bug
+      description: Forneça uma descrição clara e concisa do que você está encontrando.
     validations:
       required: true
   - type: input
     id: link
     attributes:
-      label: Link to the Bolt URL that caused the error
-      description: Please do not delete it after reporting!
+      label: Link para a URL do Bolt que causou o erro
+      description: Por favor, não a delete após reportar!
     validations:
       required: true
   - type: textarea
     id: steps
     attributes:
-      label: Steps to reproduce
-      description: Describe the steps we have to take to reproduce the behavior.
+      label: Passos para reproduzir
+      description: Descreva os passos que temos que seguir para reproduzir o comportamento.
       placeholder: |
-        1. Go to '...'
-        2. Click on '....'
-        3. Scroll down to '....'
-        4. See error
+        1. Vá para '...'
+        2. Clique em '....'
+        3. Role para baixo até '....'
+        4. Veja o erro
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: Expected behavior
-      description: Provide a clear and concise description of what you expected to happen.
+      label: Comportamento esperado
+      description: Forneça uma descrição clara e concisa do que você esperava que acontecesse.
     validations:
       required: true
   - type: textarea
     id: screenshots
     attributes:
-      label: Screen Recording / Screenshot
-      description: If applicable, **please include a screen recording** (preferably) or screenshot showcasing the issue. This will assist us in resolving your issue <u>quickly</u>.
+      label: Gravação de Tela / Captura de Tela
+      description: Se aplicável, **por favor inclua uma gravação de tela** (preferencialmente) ou captura de tela mostrando o problema. Isso nos ajudará a resolver seu problema <u>rapidamente</u>.
   - type: textarea
     id: platform
     attributes:
-      label: Platform
+      label: Plataforma
       value: |
-        - OS: [e.g. macOS, Windows, Linux]
-        - Browser: [e.g. Chrome, Safari, Firefox]
-        - Version: [e.g. 91.1]
+        - Sistema Operacional: [ex: macOS, Windows, Linux]
+        - Navegador: [ex: Chrome, Safari, Firefox]
+        - Versão: [ex: 91.1]
   - type: input
     id: provider
     attributes:
-      label: Provider Used
-      description: Tell us the provider you are using.
+      label: Provedor Utilizado
+      description: Diga-nos qual provedor você está usando.
   - type: input
     id: model
     attributes:
-      label: Model Used
-      description: Tell us the model you are using.
+      label: Modelo Utilizado
+      description: Diga-nos qual modelo você está usando.
   - type: textarea
     id: additional
     attributes:
-      label: Additional context
-      description: Add any other context about the problem here.
+      label: Contexto adicional
+      description: Adicione qualquer outro contexto sobre o problema aqui.

@@ -36,75 +36,75 @@ interface ModelInfo {
 const POPULAR_MODELS: ModelInfo[] = [
   {
     name: 'deepseek-coder:6.7b',
-    desc: "DeepSeek's code generation model",
+    desc: 'Modelo de geração de código da DeepSeek',
     size: '4.1GB',
-    tags: ['coding', 'popular'],
+    tags: ['codificação', 'popular'],
   },
   {
     name: 'llama2:7b',
-    desc: "Meta's Llama 2 (7B parameters)",
+    desc: 'Llama 2 da Meta (7 bilhões de parâmetros)',
     size: '3.8GB',
-    tags: ['general', 'popular'],
+    tags: ['geral', 'popular'],
   },
   {
     name: 'mistral:7b',
-    desc: "Mistral's 7B model",
+    desc: 'Modelo 7B da Mistral',
     size: '4.1GB',
-    tags: ['general', 'popular'],
+    tags: ['geral', 'popular'],
   },
   {
     name: 'gemma:7b',
-    desc: "Google's Gemma model",
+    desc: 'Modelo Gemma do Google',
     size: '4.0GB',
-    tags: ['general', 'new'],
+    tags: ['geral', 'novo'],
   },
   {
     name: 'codellama:7b',
-    desc: "Meta's Code Llama model",
+    desc: 'Modelo Code Llama da Meta',
     size: '4.1GB',
-    tags: ['coding', 'popular'],
+    tags: ['codificação', 'popular'],
   },
   {
     name: 'neural-chat:7b',
-    desc: "Intel's Neural Chat model",
+    desc: 'Modelo Neural Chat da Intel',
     size: '4.1GB',
     tags: ['chat', 'popular'],
   },
   {
     name: 'phi:latest',
-    desc: "Microsoft's Phi-2 model",
+    desc: 'Modelo Phi-2 da Microsoft',
     size: '2.7GB',
-    tags: ['small', 'fast'],
+    tags: ['pequeno', 'rápido'],
   },
   {
     name: 'qwen:7b',
-    desc: "Alibaba's Qwen model",
+    desc: 'Modelo Qwen da Alibaba',
     size: '4.1GB',
-    tags: ['general'],
+    tags: ['geral'],
   },
   {
     name: 'solar:10.7b',
-    desc: "Upstage's Solar model",
+    desc: 'Modelo Solar da Upstage',
     size: '6.1GB',
-    tags: ['large', 'powerful'],
+    tags: ['grande', 'poderoso'],
   },
   {
     name: 'openchat:7b',
-    desc: 'Open-source chat model',
+    desc: 'Modelo de chat de código aberto',
     size: '4.1GB',
     tags: ['chat', 'popular'],
   },
   {
     name: 'dolphin-phi:2.7b',
-    desc: 'Lightweight chat model',
+    desc: 'Modelo de chat leve',
     size: '1.6GB',
-    tags: ['small', 'fast'],
+    tags: ['pequeno', 'rápido'],
   },
   {
     name: 'stable-code:3b',
-    desc: 'Lightweight coding model',
+    desc: 'Modelo de codificação leve',
     size: '1.8GB',
-    tags: ['coding', 'small'],
+    tags: ['codificação', 'pequeno'],
   },
 ];
 
@@ -124,7 +124,7 @@ function formatSpeed(bytesPerSecond: number): string {
   return `${formatBytes(bytesPerSecond)}/s`;
 }
 
-// Add Ollama Icon SVG component
+// Adicionar componente do ícone Ollama SVG
 function OllamaIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 1024 1024" className={className} fill="currentColor">
@@ -144,10 +144,10 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
   const { toast } = useToast();
   const { providers } = useSettings();
 
-  // Get base URL from provider settings
+  // Obter URL base das configurações do provedor
   const baseUrl = providers?.Ollama?.settings?.baseUrl || 'http://127.0.0.1:11434';
 
-  // Function to check installed models and their versions
+  // Função para verificar modelos instalados e suas versões
   const checkInstalledModels = async () => {
     try {
       const response = await fetch(`${baseUrl}/api/tags`, {
@@ -155,13 +155,13 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch installed models');
+        throw new Error('Falha ao buscar modelos instalados');
       }
 
       const data = (await response.json()) as { models: Array<{ name: string; digest: string; latest: string }> };
       const installedModels = data.models || [];
 
-      // Update models with installed versions
+      // Atualizar modelos com versões instaladas
       setModels((prevModels) =>
         prevModels.map((model) => {
           const installed = installedModels.find((m) => m.name.toLowerCase() === model.name.toLowerCase());
@@ -183,7 +183,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
     }
   };
 
-  // Check installed models on mount and after installation
+  // Verificar modelos instalados na montagem e após instalação
   useEffect(() => {
     checkInstalledModels();
   }, [baseUrl]);
@@ -193,10 +193,10 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
 
     try {
       await checkInstalledModels();
-      toast('Model versions checked');
+      toast('Modelos verificados com sucesso!');
     } catch (err) {
       console.error('Failed to check model versions:', err);
-      toast('Failed to check model versions');
+      toast('Falha ao verificar modelos');
     } finally {
       setIsChecking(false);
     }
@@ -238,13 +238,13 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`Erro HTTP! status: ${response.status}`);
       }
 
       const reader = response.body?.getReader();
 
       if (!reader) {
-        throw new Error('Failed to get response reader');
+        throw new Error('Falha ao obter leitor de resposta');
       }
 
       let lastTime = Date.now();
@@ -287,16 +287,16 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
         }
       }
 
-      toast('Successfully installed ' + modelToInstall + '. The model list will refresh automatically.');
+      toast('Modelo instalado com sucesso!');
 
-      // Ensure we call onModelInstalled after successful installation
+      // Garantir que chamamos onModelInstalled após instalação bem-sucedida
       setTimeout(() => {
         onModelInstalled();
       }, 1000);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
       console.error(`Error installing ${modelToInstall}:`, errorMessage);
-      toast(`Failed to install ${modelToInstall}. ${errorMessage}`);
+      toast('Falha ao instalar modelo');
     } finally {
       setIsInstalling(false);
       setInstallProgress(null);
@@ -316,13 +316,13 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`Erro HTTP! status: ${response.status}`);
       }
 
       const reader = response.body?.getReader();
 
       if (!reader) {
-        throw new Error('Failed to get response reader');
+        throw new Error('Falha ao obter leitor de resposta');
       }
 
       let lastTime = Date.now();
@@ -365,14 +365,14 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
         }
       }
 
-      toast('Successfully updated ' + modelToUpdate);
+      toast('Modelos atualizados com sucesso!');
 
-      // Refresh model list after update
+      // Atualizar lista de modelos após atualização
       await checkInstalledModels();
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
       console.error(`Error updating ${modelToUpdate}:`, errorMessage);
-      toast(`Failed to update ${modelToUpdate}. ${errorMessage}`);
+      toast('Falha ao atualizar modelos');
       setModels((prev) => prev.map((m) => (m.name === modelToUpdate ? { ...m, status: 'error' } : m)));
     } finally {
       setInstallProgress(null);
@@ -387,8 +387,8 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
         <div className="flex items-center gap-3">
           <OllamaIcon className="w-8 h-8 text-purple-500" />
           <div>
-            <h3 className="text-lg font-semibold text-bolt-elements-textPrimary">Ollama Models</h3>
-            <p className="text-sm text-bolt-elements-textSecondary mt-1">Install and manage your Ollama models</p>
+            <h3 className="text-lg font-semibold text-bolt-elements-textPrimary">Modelos Ollama</h3>
+            <p className="text-sm text-bolt-elements-textSecondary mt-1">Instalar e gerenciar modelos Ollama</p>
           </div>
         </div>
         <motion.button
@@ -409,7 +409,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
           ) : (
             <div className="i-ph:arrows-clockwise" />
           )}
-          Check Updates
+          Verificar atualizações
         </motion.button>
       </div>
 
@@ -425,7 +425,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
                 'focus:outline-none focus:ring-2 focus:ring-purple-500/30',
                 'transition-all duration-200',
               )}
-              placeholder="Search models or enter custom model name..."
+              placeholder="Procurar modelos ou digite um nome de modelo personalizado..."
               value={searchQuery || modelString}
               onChange={(e) => {
                 const value = e.target.value;
@@ -435,7 +435,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
               disabled={isInstalling}
             />
             <p className="text-sm text-bolt-elements-textSecondary px-1">
-              Browse models at{' '}
+              Navegue por modelos em{' '}
               <a
                 href="https://ollama.com/library"
                 target="_blank"
@@ -445,7 +445,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
                 ollama.com/library
                 <div className="i-ph:arrow-square-out text-sm" />
               </a>{' '}
-              and copy model names to install
+              e copie os nomes dos modelos para instalar
             </p>
           </div>
         </div>
@@ -466,12 +466,12 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
           {isInstalling ? (
             <div className="flex items-center gap-2">
               <div className="i-ph:spinner-gap-bold animate-spin w-4 h-4" />
-              <span>Installing...</span>
+              <span>Instalando...</span>
             </div>
           ) : (
             <div className="flex items-center gap-2">
               <OllamaIcon className="w-4 h-4" />
-              <span>Install Model</span>
+              <span>Instalar Modelo</span>
             </div>
           )}
         </motion.button>
@@ -573,7 +573,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
                       whileTap={{ scale: 0.98 }}
                     >
                       <div className="i-ph:download text-xs" />
-                      Install
+                      Instalar
                     </motion.button>
                   )}
                 </div>

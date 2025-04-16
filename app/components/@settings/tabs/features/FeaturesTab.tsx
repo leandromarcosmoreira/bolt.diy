@@ -148,25 +148,25 @@ export default function FeaturesTab() {
       switch (id) {
         case 'latestBranch': {
           enableLatestBranch(enabled);
-          toast.success(`Main branch updates ${enabled ? 'enabled' : 'disabled'}`);
+          toast.success(`Atualizações da main ${enabled ? 'ativadas' : 'desativadas'}`);
           break;
         }
 
         case 'autoSelectTemplate': {
           setAutoSelectTemplate(enabled);
-          toast.success(`Auto select template ${enabled ? 'enabled' : 'disabled'}`);
+          toast.success(`Seleção automática de template ${enabled ? 'ativada' : 'desativada'}`);
           break;
         }
 
         case 'contextOptimization': {
           enableContextOptimization(enabled);
-          toast.success(`Context optimization ${enabled ? 'enabled' : 'disabled'}`);
+          toast.success(`Otimização de contexto ${enabled ? 'ativada' : 'desativada'}`);
           break;
         }
 
         case 'eventLogs': {
           setEventLogs(enabled);
-          toast.success(`Event logging ${enabled ? 'enabled' : 'disabled'}`);
+          toast.success(`Logs de eventos ${enabled ? 'ativados' : 'desativados'}`);
           break;
         }
 
@@ -181,35 +181,35 @@ export default function FeaturesTab() {
     stable: [
       {
         id: 'latestBranch',
-        title: 'Main Branch Updates',
-        description: 'Get the latest updates from the main branch',
+        title: 'Atualizações da Main',
+        description: 'Receba as novidades da branch principal',
         icon: 'i-ph:git-branch',
         enabled: isLatestBranch,
-        tooltip: 'Enabled by default to receive updates from the main development branch',
+        tooltip: 'Ativado por padrão para receber novidades da branch principal',
       },
       {
         id: 'autoSelectTemplate',
-        title: 'Auto Select Template',
-        description: 'Automatically select starter template',
+        title: 'Selecionar Template',
+        description: 'Seleciona template inicial automaticamente',
         icon: 'i-ph:selection',
         enabled: autoSelectTemplate,
-        tooltip: 'Enabled by default to automatically select the most appropriate starter template',
+        tooltip: 'Ativado por padrão para escolher o melhor template inicial',
       },
       {
         id: 'contextOptimization',
-        title: 'Context Optimization',
-        description: 'Optimize context for better responses',
+        title: 'Otimizar Contexto',
+        description: 'Otimiza contexto para melhores respostas',
         icon: 'i-ph:brain',
         enabled: contextOptimizationEnabled,
-        tooltip: 'Enabled by default for improved AI responses',
+        tooltip: 'Ativado por padrão para respostas de IA melhores',
       },
       {
         id: 'eventLogs',
-        title: 'Event Logging',
-        description: 'Enable detailed event logging and history',
+        title: 'Logs de Eventos',
+        description: 'Ativa logs detalhados e histórico',
         icon: 'i-ph:list-bullets',
         enabled: eventLogs,
-        tooltip: 'Enabled by default to record detailed logs of system events and user actions',
+        tooltip: 'Ativado por padrão para registrar logs detalhados do sistema',
       },
     ],
     beta: [],
@@ -218,19 +218,19 @@ export default function FeaturesTab() {
   return (
     <div className="flex flex-col gap-8">
       <FeatureSection
-        title="Core Features"
+        title="Recursos Core"
         features={features.stable}
         icon="i-ph:check-circle"
-        description="Essential features that are enabled by default for optimal performance"
+        description="Recursos essenciais que são ativados por padrão para otimizar o desempenho"
         onToggleFeature={handleToggleFeature}
       />
 
       {features.beta.length > 0 && (
         <FeatureSection
-          title="Beta Features"
+          title="Recursos Beta"
           features={features.beta}
           icon="i-ph:test-tube"
-          description="New features that are ready for testing but may have some rough edges"
+          description="Novos recursos que estão prontos para teste, mas podem ter algumas bordas agudas"
           onToggleFeature={handleToggleFeature}
         />
       )}
@@ -261,17 +261,17 @@ export default function FeaturesTab() {
           </div>
           <div className="flex-1">
             <h4 className="text-sm font-medium text-bolt-elements-textPrimary group-hover:text-purple-500 transition-colors">
-              Prompt Library
+              Biblioteca de Prompt
             </h4>
             <p className="text-xs text-bolt-elements-textSecondary mt-0.5">
-              Choose a prompt from the library to use as the system prompt
+              Escolha um prompt da biblioteca para usar como prompt do sistema
             </p>
           </div>
           <select
             value={promptId}
             onChange={(e) => {
               setPromptId(e.target.value);
-              toast.success('Prompt template updated');
+              toast.success('Prompt atualizado');
             }}
             className={classNames(
               'p-2 rounded-lg text-sm min-w-[200px]',

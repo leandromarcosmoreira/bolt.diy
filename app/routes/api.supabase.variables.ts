@@ -7,7 +7,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const { projectId, token } = body;
 
     if (!projectId || !token) {
-      return json({ error: 'Project ID and token are required' }, { status: 400 });
+      return json({ error: 'ID do projeto e token são obrigatórios' }, { status: 400 });
     }
 
     const response = await fetch(`https://api.supabase.com/v1/projects/${projectId}/api-keys`, {
@@ -19,14 +19,14 @@ export async function action({ request }: ActionFunctionArgs) {
     });
 
     if (!response.ok) {
-      return json({ error: `Failed to fetch API keys: ${response.statusText}` }, { status: response.status });
+      return json({ error: `Falha ao buscar chaves de API: ${response.statusText}` }, { status: response.status });
     }
 
     const apiKeys = await response.json();
 
     return json({ apiKeys });
   } catch (error) {
-    console.error('Error fetching project API keys:', error);
-    return json({ error: error instanceof Error ? error.message : 'Unknown error occurred' }, { status: 500 });
+    console.error('Erro ao buscar chaves de API do projeto:', error);
+    return json({ error: error instanceof Error ? error.message : 'Ocorreu um erro desconhecido' }, { status: 500 });
   }
 }

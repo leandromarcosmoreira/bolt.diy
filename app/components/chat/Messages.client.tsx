@@ -35,14 +35,14 @@ export const Messages = forwardRef<HTMLDivElement, MessagesProps>(
     const handleFork = async (messageId: string) => {
       try {
         if (!db || !chatId.get()) {
-          toast.error('Chat persistence is not available');
+          toast.error('Persistência do chat não está disponível');
           return;
         }
 
         const urlId = await forkChat(db, chatId.get()!, messageId);
         window.location.href = `/chat/${urlId}`;
       } catch (error) {
-        toast.error('Failed to fork chat: ' + (error as Error).message);
+        toast.error('Falha ao bifurcar chat: ' + (error as Error).message);
       }
     };
 
@@ -95,7 +95,7 @@ export const Messages = forwardRef<HTMLDivElement, MessagesProps>(
                   {!isUserMessage && (
                     <div className="flex gap-2 flex-col lg:flex-row">
                       {messageId && (
-                        <WithTooltip tooltip="Revert to this message">
+                        <WithTooltip tooltip="Voltar para esta mensagem">
                           <button
                             onClick={() => handleRewind(messageId)}
                             key="i-ph:arrow-u-up-left"
@@ -107,7 +107,7 @@ export const Messages = forwardRef<HTMLDivElement, MessagesProps>(
                         </WithTooltip>
                       )}
 
-                      <WithTooltip tooltip="Fork chat from this message">
+                      <WithTooltip tooltip="Bifurcar chat a partir desta mensagem">
                         <button
                           onClick={() => handleFork(messageId)}
                           key="i-ph:git-fork"

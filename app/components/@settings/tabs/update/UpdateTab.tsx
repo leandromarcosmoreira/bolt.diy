@@ -197,7 +197,7 @@ const UpdateTab = () => {
 
               if (!progress.error) {
                 // Update check completed
-                toast.success('Update check completed');
+                toast.success('Verificação de atualização concluída');
 
                 // Show update dialog only if there are changes and auto-update is disabled
                 if (progress.details?.changedFiles?.length && progress.details.updateReady) {
@@ -267,11 +267,11 @@ const UpdateTab = () => {
 
             if (progress.error) {
               setError(progress.error);
-              toast.error('Update failed');
+              toast.error('Falha na atualização');
             }
 
             if (progress.stage === 'complete' && !progress.error) {
-              toast.success('Update completed successfully');
+              toast.success('Atualização concluída com sucesso');
             }
           } catch (e) {
             console.error('Error parsing update progress:', e);
@@ -280,7 +280,7 @@ const UpdateTab = () => {
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Unknown error occurred');
-      toast.error('Update failed');
+      toast.error('Falha na atualização');
     }
   };
 
@@ -294,8 +294,8 @@ const UpdateTab = () => {
       >
         <div className="i-ph:arrow-circle-up text-xl text-purple-500" />
         <div>
-          <h3 className="text-lg font-medium text-bolt-elements-textPrimary">Updates</h3>
-          <p className="text-sm text-bolt-elements-textSecondary">Check for and manage application updates</p>
+          <h3 className="text-lg font-medium text-bolt-elements-textPrimary">Atualizações</h3>
+          <p className="text-sm text-bolt-elements-textSecondary">Verifique e gerencie atualizações do aplicativo</p>
         </div>
       </motion.div>
 
@@ -308,15 +308,15 @@ const UpdateTab = () => {
       >
         <div className="flex items-center gap-3 mb-6">
           <div className="i-ph:gear text-purple-500 w-5 h-5" />
-          <h3 className="text-lg font-medium text-bolt-elements-textPrimary">Update Settings</h3>
+          <h3 className="text-lg font-medium text-bolt-elements-textPrimary">Configurações de Atualização</h3>
         </div>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm text-bolt-elements-textPrimary">Automatic Updates</span>
+              <span className="text-sm text-bolt-elements-textPrimary">Atualizações Automáticas</span>
               <p className="text-xs text-bolt-elements-textSecondary">
-                Automatically check and apply updates when available
+                Verifica e aplica atualizações automaticamente quando disponíveis
               </p>
             </div>
             <button
@@ -337,8 +337,10 @@ const UpdateTab = () => {
 
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm text-bolt-elements-textPrimary">In-App Notifications</span>
-              <p className="text-xs text-bolt-elements-textSecondary">Show notifications when updates are available</p>
+              <span className="text-sm text-bolt-elements-textPrimary">Notificações no Aplicativo</span>
+              <p className="text-xs text-bolt-elements-textSecondary">
+                Mostra notificações quando atualizações estão disponíveis
+              </p>
             </div>
             <button
               onClick={() => setUpdateSettings((prev) => ({ ...prev, notifyInApp: !prev.notifyInApp }))}
@@ -358,8 +360,8 @@ const UpdateTab = () => {
 
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-sm text-bolt-elements-textPrimary">Check Interval</span>
-              <p className="text-xs text-bolt-elements-textSecondary">How often to check for updates</p>
+              <span className="text-sm text-bolt-elements-textPrimary">Intervalo de Verificação</span>
+              <p className="text-xs text-bolt-elements-textSecondary">Quão frequentemente verificar atualizações</p>
             </div>
             <select
               value={updateSettings.checkInterval}
@@ -373,10 +375,10 @@ const UpdateTab = () => {
                 'transition-colors duration-200',
               )}
             >
-              <option value="6">6 hours</option>
-              <option value="12">12 hours</option>
-              <option value="24">24 hours</option>
-              <option value="48">48 hours</option>
+              <option value="6">6 horas</option>
+              <option value="12">12 horas</option>
+              <option value="24">24 horas</option>
+              <option value="48">48 horas</option>
             </select>
           </div>
         </div>
@@ -392,7 +394,7 @@ const UpdateTab = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <div className="i-ph:arrows-clockwise text-purple-500 w-5 h-5" />
-            <h3 className="text-lg font-medium text-bolt-elements-textPrimary">Update Status</h3>
+            <h3 className="text-lg font-medium text-bolt-elements-textPrimary">Status de Atualização</h3>
           </div>
           <div className="flex items-center gap-2">
             {updateProgress?.details?.updateReady && !updateSettings.autoUpdate && (
@@ -406,7 +408,7 @@ const UpdateTab = () => {
                 )}
               >
                 <div className="i-ph:arrow-circle-up w-4 h-4" />
-                Update Now
+                Atualizar Agora
               </button>
             )}
             <button
@@ -432,12 +434,12 @@ const UpdateTab = () => {
                     transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                     className="i-ph:arrows-clockwise w-4 h-4"
                   />
-                  Checking...
+                  Verificando...
                 </div>
               ) : (
                 <>
                   <div className="i-ph:arrows-clockwise w-4 h-4" />
-                  Check for Updates
+                  Verificar Atualizações
                 </>
               )}
             </button>
@@ -455,7 +457,7 @@ const UpdateTab = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p>
-                  Updates are fetched from: <span className="font-mono">stackblitz-labs/bolt.diy</span> (
+                  Updates are fetched from: <span className="font-mono">leandromarcosmoreira/bolt.diy</span> (
                   {isLatestBranch ? 'main' : 'stable'} branch)
                 </p>
                 <p className="mt-1">
@@ -549,12 +551,13 @@ const UpdateTab = () => {
       {/* Update dialog */}
       <DialogRoot open={showUpdateDialog} onOpenChange={setShowUpdateDialog}>
         <Dialog>
-          <DialogTitle>Update Available</DialogTitle>
+          <DialogTitle>Atualização Disponível</DialogTitle>
           <DialogDescription>
             <div className="mt-4">
               <p className="text-sm text-bolt-elements-textSecondary mb-4">
-                A new version is available from <span className="font-mono">stackblitz-labs/bolt.diy</span> (
-                {isLatestBranch ? 'main' : 'stable'} branch)
+                Uma nova versão está disponível a partir de{' '}
+                <span className="font-mono">leandromarcosmoreira/bolt.diy</span> ({isLatestBranch ? 'main' : 'stable'}{' '}
+                branch)
               </p>
 
               {updateProgress?.details?.compareUrl && (
@@ -574,14 +577,14 @@ const UpdateTab = () => {
                     )}
                   >
                     <div className="i-ph:github-logo w-4 h-4" />
-                    View Changes on GitHub
+                    Ver Mudanças no GitHub
                   </a>
                 </div>
               )}
 
               {updateProgress?.details?.commitMessages && updateProgress.details.commitMessages.length > 0 && (
                 <div className="mb-6">
-                  <p className="font-medium mb-2">Commit Messages:</p>
+                  <p className="font-medium mb-2">Mensagens de Commit:</p>
                   <div className="bg-[#F5F5F5] dark:bg-[#1A1A1A] rounded-lg p-3 space-y-2">
                     {updateProgress.details.commitMessages.map((msg, index) => (
                       <div key={index} className="text-sm text-bolt-elements-textSecondary flex items-start gap-2">
@@ -597,13 +600,13 @@ const UpdateTab = () => {
                 <div className="flex items-center gap-4 text-sm text-bolt-elements-textSecondary">
                   <div className="flex items-center gap-2">
                     <div className="i-ph:file text-purple-500 w-4 h-4" />
-                    Total size: {updateProgress.details.totalSize}
+                    Tamanho total: {updateProgress.details.totalSize}
                   </div>
                   {updateProgress?.details?.additions !== undefined &&
                     updateProgress?.details?.deletions !== undefined && (
                       <div className="flex items-center gap-2">
                         <div className="i-ph:git-diff text-purple-500 w-4 h-4" />
-                        Changes: <span className="text-green-600">+{updateProgress.details.additions}</span>{' '}
+                        Mudanças: <span className="text-green-600">+{updateProgress.details.additions}</span>{' '}
                         <span className="text-red-600">-{updateProgress.details.deletions}</span>
                       </div>
                     )}
@@ -616,7 +619,7 @@ const UpdateTab = () => {
               Cancel
             </DialogButton>
             <DialogButton type="primary" onClick={handleUpdate}>
-              Update Now
+              Atualizar Agora
             </DialogButton>
           </div>
         </Dialog>

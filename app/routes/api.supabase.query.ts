@@ -5,7 +5,7 @@ const logger = createScopedLogger('api.supabase.query');
 
 export async function action({ request }: ActionFunctionArgs) {
   if (request.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405 });
+    return new Response('Método não permitido', { status: 405 });
   }
 
   const authHeader = request.headers.get('Authorization');

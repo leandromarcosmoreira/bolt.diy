@@ -1,57 +1,48 @@
-# Project management of bolt.diy
+# Gestão de projeto do bolt.diy
 
-First off: this sounds funny, we know. "Project management" comes from a world of enterprise stuff and this project is
-far from being enterprisy- it's still anarchy all over the place 😉
+Primeiro de tudo: sabemos que isso soa engraçado. "Gestão de projeto" vem de um mundo corporativo, e este projeto está longe de ser empresarial — ainda é anarquia por aqui 😉
 
-But we need to organize ourselves somehow, right?
+Mas precisamos nos organizar de algum jeito, certo?
 
-> tl;dr: We've got a project board with epics and features. We use PRs as change log and as materialized features. Find it [here](https://github.com/orgs/stackblitz-labs/projects/4).
+> Resumindo: Temos um quadro de projeto com épicos e funcionalidades. Usamos PRs como changelog e como funcionalidades materializadas. Veja [aqui](https://github.com/orgs/stackblitz-labs/projects/4).
 
-Here's how we structure long-term vision, mid-term capabilities of the software and short term improvements.
+Veja como estruturamos a visão de longo prazo, as capacidades de médio prazo do software e as melhorias de curto prazo.
 
-## Strategic epics (long-term)
+## Épicos estratégicos (longo prazo)
 
-Strategic epics define areas in which the product evolves. Usually, these epics don’t overlap. They shall allow the core
-team to define what they believe is most important and should be worked on with the highest priority.
+Épicos estratégicos definem áreas em que o produto evolui. Normalmente, esses épicos não se sobrepõem. Eles permitem que o time principal defina o que acredita ser mais importante e deve ser priorizado.
 
-You can find the [epics as issues](https://github.com/stackblitz-labs/bolt.diy/labels/epic) which are probably never
-going to be closed.
+Você pode encontrar os [épicos como issues](https://github.com/stackblitz-labs/bolt.diy/labels/epic), que provavelmente nunca serão fechados.
 
-What's the benefit / purpose of epics?
+Qual o benefício/propósito dos épicos?
 
-1. Prioritization
+1. Priorização
 
-E. g. we could say “managing files is currently more important that quality”. Then, we could thing about which features
-would bring “managing files” forward. It may be different features, such as “upload local files”, “import from a repo”
-or also undo/redo/commit.
+Por exemplo: podemos dizer "gerenciar arquivos é mais importante do que qualidade". Então, pensamos em quais funcionalidades avançam "gerenciar arquivos". Podem ser diferentes, como "fazer upload de arquivos locais", "importar de um repositório" ou também desfazer/refazer/commit.
 
-In a more-or-less regular meeting dedicated for that, the core team discusses which epics matter most, sketch features
-and then check who can work on them. After the meeting, they update the roadmap (at least for the next development turn)
-and this way communicate where the focus currently is.
+Em uma reunião (mais ou menos) regular dedicada a isso, o time principal discute quais épicos importam mais, esboça funcionalidades e vê quem pode trabalhar nelas. Depois da reunião, atualizam o roadmap (pelo menos para o próximo ciclo de desenvolvimento) e assim comunicam onde está o foco do momento.
 
-2. Grouping of features
+2. Agrupamento de funcionalidades
 
-By linking features with epics, we can keep them together and document _why_ we invest work into a particular thing.
+Ao vincular funcionalidades a épicos, conseguimos mantê-las juntas e documentar _por que_ estamos investindo esforço em algo específico.
 
-## Features (mid-term)
+## Funcionalidades (médio prazo)
 
-We all know probably a dozen of methodologies following which features are being described (User story, business
-function, you name it).
+Provavelmente todos conhecem dezenas de metodologias para descrever funcionalidades (User story, função de negócio, etc).
 
-However, we intentionally describe features in a more vague manner. Why? Everybody loves crisp, well-defined
-acceptance-criteria, no? Well, every product owner loves it. because he knows what he’ll get once it’s done.
+Porém, aqui descrevemos funcionalidades de forma propositalmente vaga. Por quê? Todo mundo adora critérios de aceitação bem definidos, né? Bom, todo product owner adora. Porque ele sabe o que vai receber quando estiver pronto.
 
-But: **here is no owner of this product**. Therefore, we grant _maximum flexibility to the developer contributing a feature_ – so that he can bring in his ideas and have most fun implementing it.
+Mas: **não há dono deste produto**. Por isso, damos _máxima flexibilidade ao desenvolvedor que contribui com uma funcionalidade_ — para que ele possa trazer suas ideias e se divertir implementando.
 
-The feature therefore tries to describe _what_ should be improved but not in detail _how_.
+A funcionalidade tenta descrever _o que_ deve ser melhorado, mas não em detalhes _como_.
 
-## PRs as materialized features (short-term)
+## PRs como funcionalidades materializadas (curto prazo)
 
-Once a developer starts working on a feature, a draft-PR _can_ be opened asap to share, describe and discuss, how the feature shall be implemented. But: this is not a must. It just helps to get early feedback and get other developers involved. Sometimes, the developer just wants to get started and then open a PR later.
+Quando um dev começa a trabalhar em uma funcionalidade, um draft-PR _pode_ ser aberto o quanto antes para compartilhar, descrever e discutir como ela será implementada. Mas: não é obrigatório. Só ajuda a receber feedback cedo e envolver outros devs. Às vezes, o dev só quer começar e abre o PR depois.
 
-In a loosely organized project, it may as well happen that multiple PRs are opened for the same feature. This is no real issue: Usually, peoply being passionate about a solution are willing to join forces and get it done together. And if a second developer was just faster getting the same feature realized: Be happy that it's been done, close the PR and look out for the next feature to implement 🤓
+Em um projeto pouco organizado, pode acontecer de vários PRs serem abertos para a mesma funcionalidade. Não é um grande problema: normalmente, quem está empolgado com uma solução topa juntar forças para concluir juntos. E se outro dev foi mais rápido e já fez a mesma funcionalidade: comemore que está pronto, feche o PR e procure a próxima coisa legal para implementar 🤓
 
-## PRs as change log
+## PRs como changelog
 
-Once a PR is merged, a squashed commit contains the whole PR description which allows for a good change log.
-All authors of commits in the PR are mentioned in the squashed commit message and become contributors 🙌
+Quando um PR é mesclado, um commit squash contém toda a descrição do PR, o que permite um bom changelog.
+Todos os autores dos commits do PR são mencionados na mensagem do commit squash e viram contribuidores 🙌
